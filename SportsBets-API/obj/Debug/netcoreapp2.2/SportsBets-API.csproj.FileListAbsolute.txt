@@ -1,0 +1,14 @@
+C:\Users\david\Documents\Projects\SportsBets\SportsBets-API\bin\Debug\netcoreapp2.2\SportsBets-API.deps.json
+C:\Users\david\Documents\Projects\SportsBets\SportsBets-API\bin\Debug\netcoreapp2.2\SportsBets-API.runtimeconfig.json
+C:\Users\david\Documents\Projects\SportsBets\SportsBets-API\bin\Debug\netcoreapp2.2\SportsBets-API.runtimeconfig.dev.json
+C:\Users\david\Documents\Projects\SportsBets\SportsBets-API\bin\Debug\netcoreapp2.2\SportsBets-API.dll
+C:\Users\david\Documents\Projects\SportsBets\SportsBets-API\bin\Debug\netcoreapp2.2\SportsBets-API.pdb
+C:\Users\david\Documents\Projects\SportsBets\SportsBets-API\obj\Debug\netcoreapp2.2\SportsBets-API.csprojAssemblyReference.cache
+C:\Users\david\Documents\Projects\SportsBets\SportsBets-API\obj\Debug\netcoreapp2.2\SportsBets-API.csproj.CoreCompileInputs.cache
+C:\Users\david\Documents\Projects\SportsBets\SportsBets-API\obj\Debug\netcoreapp2.2\SportsBets-API.RazorAssemblyInfo.cache
+C:\Users\david\Documents\Projects\SportsBets\SportsBets-API\obj\Debug\netcoreapp2.2\SportsBets-API.RazorAssemblyInfo.cs
+C:\Users\david\Documents\Projects\SportsBets\SportsBets-API\obj\Debug\netcoreapp2.2\SportsBets-API.AssemblyInfoInputs.cache
+C:\Users\david\Documents\Projects\SportsBets\SportsBets-API\obj\Debug\netcoreapp2.2\SportsBets-API.AssemblyInfo.cs
+C:\Users\david\Documents\Projects\SportsBets\SportsBets-API\obj\Debug\netcoreapp2.2\SportsBets-API.RazorTargetAssemblyInfo.cache
+C:\Users\david\Documents\Projects\SportsBets\SportsBets-API\obj\Debug\netcoreapp2.2\SportsBets-API.dll
+C:\Users\david\Documents\Projects\SportsBets\SportsBets-API\obj\Debug\netcoreapp2.2\SportsBets-API.pdb

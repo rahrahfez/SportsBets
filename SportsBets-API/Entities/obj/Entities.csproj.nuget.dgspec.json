@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\david\\Documents\\Projects\\SportsBets\\SportsBets-API\\SportsBets-API.csproj": {}
+    "C:\\Users\\david\\Documents\\Projects\\SportsBets\\SportsBets-API\\Entities\\Entities.csproj": {}
   },
   "projects": {
-    "C:\\Users\\david\\Documents\\Projects\\SportsBets\\SportsBets-API\\SportsBets-API.csproj": {
+    "C:\\Users\\david\\Documents\\Projects\\SportsBets\\SportsBets-API\\Entities\\Entities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\david\\Documents\\Projects\\SportsBets\\SportsBets-API\\SportsBets-API.csproj",
-        "projectName": "SportsBets-API",
-        "projectPath": "C:\\Users\\david\\Documents\\Projects\\SportsBets\\SportsBets-API\\SportsBets-API.csproj",
+        "projectUniqueName": "C:\\Users\\david\\Documents\\Projects\\SportsBets\\SportsBets-API\\Entities\\Entities.csproj",
+        "projectName": "Entities",
+        "projectPath": "C:\\Users\\david\\Documents\\Projects\\SportsBets\\SportsBets-API\\Entities\\Entities.csproj",
         "packagesPath": "C:\\Users\\david\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\david\\Documents\\Projects\\SportsBets\\SportsBets-API\\obj\\",
+        "outputPath": "C:\\Users\\david\\Documents\\Projects\\SportsBets\\SportsBets-API\\Entities\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -39,11 +39,9 @@
       "frameworks": {
         "netcoreapp2.2": {
           "dependencies": {
-            "Microsoft.AspNetCore.App": {
-              "suppressParent": "All",
+            "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[2.2.0, )",
-              "autoReferenced": true
+              "version": "[2.2.4, )"
             },
             "Microsoft.NETCore.App": {
               "suppressParent": "All",
@@ -51,7 +49,7 @@
               "version": "[2.2.0, )",
               "autoReferenced": true
             },
-            "Pomelo.EntityframeworkCore.MySql": {
+            "Pomelo.EntityFrameworkCore.MySql": {
               "target": "Package",
               "version": "[2.2.0, )"
             }
