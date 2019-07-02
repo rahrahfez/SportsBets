@@ -1,9 +1,10 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace SportsBets_API.Migrations.Repository
+namespace SportsBets_API.Migrations
 {
-    public partial class Entities : Migration
+    public partial class InitalCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,10 +12,11 @@ namespace SportsBets_API.Migrations.Repository
                 name: "account",
                 columns: table => new
                 {
-                    AccountId = table.Column<Guid>(nullable: false),
+                    AccountId = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     DateCreated = table.Column<DateTime>(nullable: false),
                     AccountType = table.Column<string>(nullable: false),
-                    OwnerId = table.Column<Guid>(nullable: false)
+                    OwnerId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -25,14 +27,15 @@ namespace SportsBets_API.Migrations.Repository
                 name: "owner",
                 columns: table => new
                 {
-                    OnwerId = table.Column<Guid>(nullable: false),
+                    OwnerId = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(maxLength: 60, nullable: false),
                     DateOfBirth = table.Column<DateTime>(nullable: false),
                     Address = table.Column<string>(maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_owner", x => x.OnwerId);
+                    table.PrimaryKey("PK_owner", x => x.OwnerId);
                 });
         }
 

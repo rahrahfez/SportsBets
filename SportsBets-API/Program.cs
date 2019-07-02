@@ -7,8 +7,6 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using SportsBets_API.Data;
-using SportsBets_API.Models;
 
 namespace SportsBets_API
 {

@@ -10,20 +10,11 @@ import { Observable } from 'rxjs';
 export class AppComponent implements OnInit {
   title = 'SportsBets-SPA';
 
-  points$: Observable<number>;
-  points: number;
+  owner$: Observable<any>;
 
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    this.points = 0;
-  }
-
-  add() {
-    this.points++;
-  }
-
-  subtract() {
-    this.points--;
+    this.owner$ = this.http.get('http://localhost:5000/api/owner');
   }
 }

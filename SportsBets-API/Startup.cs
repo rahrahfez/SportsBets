@@ -12,9 +12,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using SportsBets_API.Data;
-using SportsBets_API.Models;
 using SportsBets_API.Extensions;
+using Microsoft.AspNetCore.HttpOverrides;
 
 namespace SportsBets_API
 {
@@ -32,7 +31,13 @@ namespace SportsBets_API
             services.ConfigureCors();
             services.ConfigureIISIntegration();
             services.ConfigureMySqlContext(Configuration);
+            services.ConfigureRepositoryWrapper();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.Configure<ForwardedHeadersOptions>(options =>
+            {
+                options.ForwardedHeaders = 
+                    ForwardedHeaders.All;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,11 +53,11 @@ namespace SportsBets_API
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
             app.UseCors("CorsPolicy");
             // app.UseForwardedHeaders(new ForwardedHeadersOptions
             // {
-            //     ForwardedHeaders = FowardedHeaders.ALL
+            //     ForwardedHeaders = FowardedHeaders.All
             // });
             app.UseStaticFiles();
             app.UseMvc();

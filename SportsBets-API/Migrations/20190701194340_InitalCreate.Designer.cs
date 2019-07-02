@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace SportsBets_API.Migrations.Repository
+namespace SportsBets_API.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20190624221803_Entities")]
-    partial class Entities
+    [Migration("20190701194340_InitalCreate")]
+    partial class InitalCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,7 +21,7 @@ namespace SportsBets_API.Migrations.Repository
 
             modelBuilder.Entity("Entities.Models.Account", b =>
                 {
-                    b.Property<Guid>("AccountId")
+                    b.Property<int>("AccountId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("AccountType")
@@ -29,7 +29,7 @@ namespace SportsBets_API.Migrations.Repository
 
                     b.Property<DateTime>("DateCreated");
 
-                    b.Property<Guid>("OwnerId");
+                    b.Property<int>("OwnerId");
 
                     b.HasKey("AccountId");
 
@@ -38,7 +38,7 @@ namespace SportsBets_API.Migrations.Repository
 
             modelBuilder.Entity("Entities.Models.Owner", b =>
                 {
-                    b.Property<Guid>("OnwerId")
+                    b.Property<int>("OwnerId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Address")
@@ -51,7 +51,7 @@ namespace SportsBets_API.Migrations.Repository
                         .IsRequired()
                         .HasMaxLength(60);
 
-                    b.HasKey("OnwerId");
+                    b.HasKey("OwnerId");
 
                     b.ToTable("owner");
                 });
