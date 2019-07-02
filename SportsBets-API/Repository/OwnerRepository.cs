@@ -1,7 +1,11 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Entities;
 using Entities.Models;
+using Entities.ExtendedModels;
+using Entities.Extensions;
+using Contracts;
 
 namespace SportsBets_API.Repository
 {
@@ -17,11 +21,34 @@ namespace SportsBets_API.Repository
             .OrderBy(ow => ow.Name)
             .ToList();
         }
-        public Owner  GetOwnerById(int ownerId) 
+        public Owner GetOwnerById(Guid ownerId) 
         {
             return FindByCondition(owner => owner.OwnerId.Equals(ownerId))
                 .DefaultIfEmpty(new Owner())
                 .FirstOrDefault();
+        }
+        public OwnerExtended GetOwnerWithDetails(Guid ownerId)
+        {
+            return new OwnerExtended(GetOwnerById(ownerId))
+            {
+                Accounts = RepositoryContext.Accounts  
+                    .Where(a => a.OwnerId == ownerId)
+            };
+        }
+        public void CreateOwner(Owner owner)
+        {
+            owner.OwnerId = Guid.NewGuid();
+
+            Create(owner);
+        }
+        public void UpdateOwner(Owner dbOwner, Owner owner)
+        {
+            dbOwner.Map(owner);
+            Update(dbOwner);
+        }
+        public void DeleteOwner(Owner owner)
+        {
+            Delete(owner);
         }
     }
 }

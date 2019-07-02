@@ -1,4 +1,4 @@
-namespace SportsBets_API
+namespace Contracts
 {
   public interface IRepositoryWrapper
   {

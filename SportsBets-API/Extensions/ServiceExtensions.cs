@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Entities;
 using SportsBets_API.Repository;
+using Contracts;
 
 namespace SportsBets_API.Extensions
 {

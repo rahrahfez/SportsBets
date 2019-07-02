@@ -1,10 +1,11 @@
+using System;
+using System.Collections.Generic;
 using Entities.Models;
-using SportsBets_API.Data;
 
-namespace SportsBets_API
+namespace Contracts
 {
   public interface IAccountRepository : IRepositoryBase<Account>
   {
-    
+    IEnumerable<Account> AccountsByOwner(Guid ownerId);
   }
 }

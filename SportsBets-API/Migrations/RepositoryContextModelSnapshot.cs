@@ -19,7 +19,7 @@ namespace SportsBets_API.Migrations
 
             modelBuilder.Entity("Entities.Models.Account", b =>
                 {
-                    b.Property<int>("AccountId")
+                    b.Property<Guid>("AccountId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("AccountType")
@@ -27,7 +27,7 @@ namespace SportsBets_API.Migrations
 
                     b.Property<DateTime>("DateCreated");
 
-                    b.Property<int>("OwnerId");
+                    b.Property<Guid>("OwnerId");
 
                     b.HasKey("AccountId");
 
@@ -36,7 +36,7 @@ namespace SportsBets_API.Migrations
 
             modelBuilder.Entity("Entities.Models.Owner", b =>
                 {
-                    b.Property<int>("OwnerId")
+                    b.Property<Guid>("OwnerId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Address")

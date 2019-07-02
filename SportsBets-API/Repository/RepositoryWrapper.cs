@@ -1,4 +1,5 @@
 using Entities;
+using Contracts;
 
 namespace SportsBets_API.Repository
 {

@@ -1,12 +1,17 @@
+using System;
 using System.Collections.Generic;
 using Entities.Models;
-using SportsBets_API.Data;
+using Entities.ExtendedModels;
 
-namespace SportsBets_API
+namespace Contracts
 {
   public interface IOwnerRepository : IRepositoryBase<Owner>
   {
     IEnumerable<Owner> GetAllOwners();
-    Owner GetOwnerById(int ownerId);
+    Owner GetOwnerById(Guid ownerId);
+    OwnerExtended GetOwnerWithDetails(Guid ownerId);
+    void CreateOwner(Owner owner);
+    void UpdateOwner(Owner dbOwner, Owner owner);
+    void DeleteOwner(Owner owner);
   }
 }

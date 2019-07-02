@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace SportsBets_API.Data
+namespace Contracts
 {
     public interface IRepositoryBase<T>
     {

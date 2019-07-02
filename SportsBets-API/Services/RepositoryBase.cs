@@ -3,7 +3,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using Entities;
 using Microsoft.EntityFrameworkCore;
-using SportsBets_API.Data;
+using Contracts;
 
 namespace SportsBets_API
 {
