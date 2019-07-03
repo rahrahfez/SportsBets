@@ -3,7 +3,7 @@ A project that allows peer to peer sports wagering.
 
 - Allows users to create/open a bet.
 - Allows users to accept the bet from another user.
-- Current implementation will use a randomly generate a number between 1-100 every 15 mins.
+- Current implementation will randomly generate a number between 1-100 every 15 mins.
 - A user can open a bet of higher/lower of a number of their choosing.
 - Another user can accept that bet, whoever wins will recieve the winnings from the wager.
 - All bets are removed once the number is generated and a new bet will need to be created.
