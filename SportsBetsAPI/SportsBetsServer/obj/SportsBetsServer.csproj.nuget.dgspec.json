@@ -54,6 +54,64 @@
         }
       }
     },
+    "C:\\Users\\david\\Documents\\Projects\\SportsBets\\SportsBetsAPI\\Entities\\Entities.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\david\\Documents\\Projects\\SportsBets\\SportsBetsAPI\\Entities\\Entities.csproj",
+        "projectName": "Entities",
+        "projectPath": "C:\\Users\\david\\Documents\\Projects\\SportsBets\\SportsBetsAPI\\Entities\\Entities.csproj",
+        "packagesPath": "C:\\Users\\david\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\david\\Documents\\Projects\\SportsBets\\SportsBetsAPI\\Entities\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\david\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[2.2.4, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "target": "Package",
+              "version": "[2.2.4, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    },
     "C:\\Users\\david\\Documents\\Projects\\SportsBets\\SportsBetsAPI\\LoggerService\\LoggerService.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -143,6 +201,9 @@
               "C:\\Users\\david\\Documents\\Projects\\SportsBets\\SportsBetsAPI\\Contracts\\Contracts.csproj": {
                 "projectPath": "C:\\Users\\david\\Documents\\Projects\\SportsBets\\SportsBetsAPI\\Contracts\\Contracts.csproj"
               },
+              "C:\\Users\\david\\Documents\\Projects\\SportsBets\\SportsBetsAPI\\Entities\\Entities.csproj": {
+                "projectPath": "C:\\Users\\david\\Documents\\Projects\\SportsBets\\SportsBetsAPI\\Entities\\Entities.csproj"
+              },
               "C:\\Users\\david\\Documents\\Projects\\SportsBets\\SportsBetsAPI\\LoggerService\\LoggerService.csproj": {
                 "projectPath": "C:\\Users\\david\\Documents\\Projects\\SportsBets\\SportsBetsAPI\\LoggerService\\LoggerService.csproj"
               }
@@ -164,6 +225,10 @@
               "version": "[2.2.0, )",
               "autoReferenced": true
             },
+            "Microsoft.EntityframeworkCore": {
+              "target": "Package",
+              "version": "[2.2.4, )"
+            },
             "Microsoft.NETCore.App": {
               "suppressParent": "All",
               "target": "Package",
@@ -177,6 +242,10 @@
             "NLog.Web.AspNetCore": {
               "target": "Package",
               "version": "[4.8.4, )"
+            },
+            "Pomelo.EntityFrameworkCore.MySql": {
+              "target": "Package",
+              "version": "[2.2.0, )"
             }
           },
           "imports": [
