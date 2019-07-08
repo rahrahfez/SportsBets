@@ -8,7 +8,8 @@ namespace Entities.Models
     public class User
     {
         [Key]
-        public Guid UserId { get; set; }
+        [Column("UserId")]
+        public Guid Id { get; set; }
         [Required(ErrorMessage="Username is required")]
         [StringLength(30, ErrorMessage="Username cannot be longer than 30 characters")]
         public string Username { get; set; }
