@@ -12,9 +12,11 @@ namespace SportsBetsServer.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        private IRepositoryWrapper _repo;
         private ILoggerManager _logger;
-        public ValuesController(ILoggerManager logger)
+        public ValuesController(ILoggerManager logger, IRepositoryWrapper repo)
         {
+            _repo = repo;
             _logger = logger;
         }
         // GET api/values

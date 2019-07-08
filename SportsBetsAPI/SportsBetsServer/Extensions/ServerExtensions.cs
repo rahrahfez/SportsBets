@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Contracts;
 using LoggerService;
 using Entities;
+using Repository;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 
@@ -36,6 +37,10 @@ namespace SportsBetsServer.Extensions
 
             services.AddDbContext<RepositoryContext>(options => 
                 options.UseMySql(connectionString));
+        }
+        public static void ConfigureRepositoryWrapper(this IServiceCollection services)
+        {
+            services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
         }
     }
 }
