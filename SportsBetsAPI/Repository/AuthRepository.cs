@@ -2,6 +2,7 @@ using System;
 using Entities.Models;
 using Contracts;
 using Entities;
+using System.Linq;
 
 namespace Repository
 {
@@ -33,11 +34,41 @@ namespace Repository
         }
         public User Login(string username, string password)
         {
-            throw new NotImplementedException();
+            var user = _repoContext.Users.FirstOrDefault(u => u.Username == username);
+
+            if (user == null)
+            {
+                return null;
+            }
+            if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
+            {
+                return null;
+            }
+
+            return user;
+        }
+        public bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
+        {
+            using (var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt))
+            {
+                var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+                for (int i = 0; i < computedHash.Length; i++)
+                {
+                    if (computedHash[i] != passwordHash[i])
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
         }
         public bool UserExists(string username)
         {
-            throw new NotImplementedException();
+            if (_repoContext.Users.Any(x => x.Username == username))
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

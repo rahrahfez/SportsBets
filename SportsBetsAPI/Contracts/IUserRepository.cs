@@ -11,5 +11,6 @@ namespace Contracts
         IEnumerable<User> GetAllUsers();
         User GetUserById(Guid id);
         UserExtended GetUserWithDetails(Guid id);
+        void CreateUser(User user);
     }
 }

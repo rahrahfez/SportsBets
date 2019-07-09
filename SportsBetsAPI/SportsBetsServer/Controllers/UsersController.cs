@@ -37,7 +37,7 @@ namespace SportsBetsServer.Controllers
                 return StatusCode(500, "Internal Server Error");
             }
         }
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "UserById")]
         public IActionResult GetUserById(Guid id) 
         {
             try
@@ -58,6 +58,57 @@ namespace SportsBetsServer.Controllers
             catch (Exception ex)
             {
                 _logger.LogError($"Something went wrong inside GetOwnerById() action {ex.Message}");
+                return StatusCode(500, "Internal server error");
+            }
+        }
+        [HttpGet("{id}/wagers")]
+        public IActionResult GetOwnerWithDetails(Guid id)
+        {
+            try
+            {
+                var user = _repo.User.GetUserWithDetails(id);
+
+                if (user.Id.Equals(Guid.Empty))
+                {
+                    _logger.LogError($"User with id {id} was not found.");
+                    return NotFound();
+                }
+                else
+                {
+                    _logger.LogInfo($"Returned user with details for id: {id}");
+                    return Ok(user);
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong inside GetOwnerWithDetails action: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+            }
+        }
+        [HttpPost]
+        public IActionResult CreateUser([FromBody] User user)
+        {
+            try
+            {
+                if (user == null)
+                {
+                    _logger.LogError("User is null.");
+                    return BadRequest("User object is null");
+                }
+                if (!ModelState.IsValid)
+                {
+                    _logger.LogError("Invalid user sent from client.");
+                    return BadRequest("Invalid user object sent from client");
+                }
+
+                _repo.User.CreateUser(user);
+                _repo.Save();
+
+                return CreatedAtRoute("UserById", new { id = user.Id }, user);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong inside CreateUser action: {ex.Message}");
                 return StatusCode(500, "Internal server error");
             }
         }

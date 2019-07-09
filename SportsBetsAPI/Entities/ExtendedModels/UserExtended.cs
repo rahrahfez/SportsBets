@@ -11,6 +11,8 @@ namespace Entities.ExtendedModels
         public string Email { get; set; }
         public int AvailableBalance { get; set; }
         public DateTime DateCreated { get; set; }
+        public byte[] PasswordHash { get; set; }
+        public byte[] PasswordSalt { get; set; }
         public IEnumerable<Wager> Wagers { get; set; }
         public UserExtended()
         {
@@ -23,6 +25,8 @@ namespace Entities.ExtendedModels
             Email = user.Email;
             AvailableBalance = user.AvailableBalance;
             DateCreated = user.DateCreated;
+            PasswordHash = user.PasswordHash;
+            PasswordSalt = user.PasswordSalt;
         }
     }
 }

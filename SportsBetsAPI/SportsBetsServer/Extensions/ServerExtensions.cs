@@ -42,5 +42,9 @@ namespace SportsBetsServer.Extensions
         {
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
         }
+        public static void ConfigureAuthentication(this IServiceCollection services)
+        {
+            services.AddScoped<IAuthRepository, AuthRepository>();
+        }
     }
 }

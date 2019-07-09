@@ -32,5 +32,10 @@ namespace Repository
                 Wagers = RepositoryContext.Wagers.Where(wager => wager.WagerId == id)
             };
         }
+        public void CreateUser(User user)
+        {
+            user.Id = Guid.NewGuid();
+            Create(user);
+        }
     }
 }
