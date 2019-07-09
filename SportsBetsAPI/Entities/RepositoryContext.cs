@@ -18,7 +18,7 @@ namespace Entities
 
 /*
 *
-* REMINDER: Use -s flag to target SportsBetsServer as startup-project during
+* REMINDER: Use -s flag to target ..\SportsBetsServer as startup-project during
 * migrations and database updates
 *
 */

@@ -4,6 +4,7 @@ namespace Contracts
     {
          IUserRepository User { get; }
          IWagerRepository Wager { get; }
+         IAuthRepository Auth { get; }
          void Save();
     }
 }

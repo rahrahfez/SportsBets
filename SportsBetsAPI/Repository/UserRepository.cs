@@ -4,6 +4,7 @@ using System.Linq;
 using Contracts;
 using Entities;
 using Entities.Models;
+using Entities.ExtendedModels;
 
 namespace Repository
 {
@@ -23,6 +24,13 @@ namespace Repository
             return FindByCondition(user => user.Id.Equals(id))
             .DefaultIfEmpty(new User())
             .FirstOrDefault();
+        }
+        public UserExtended GetUserWithDetails(Guid id)
+        {
+            return new UserExtended(GetUserById(id))
+            {
+                Wagers = RepositoryContext.Wagers.Where(wager => wager.WagerId == id)
+            };
         }
     }
 }

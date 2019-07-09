@@ -8,6 +8,7 @@ namespace Repository
         private RepositoryContext _repoContext;
         private IUserRepository _user;
         private IWagerRepository _wager;
+        private IAuthRepository _auth;
         public RepositoryWrapper(RepositoryContext repositoryContext) 
         {
             _repoContext = repositoryContext;
@@ -34,6 +35,18 @@ namespace Repository
                 }
 
                 return _wager;
+            }
+        }
+        public IAuthRepository Auth
+        {
+            get
+            {
+                if (_auth == null)
+                {
+                    _auth = new AuthRepository(_repoContext);
+                }
+                
+                return _auth;
             }
         }
         public void Save()
