@@ -2,6 +2,10 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Contracts;
 using LoggerService;
+using Entities;
+using Repository;
+using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
 
 namespace SportsBetsServer.Extensions
 {
@@ -26,6 +30,21 @@ namespace SportsBetsServer.Extensions
         public static void ConfigureLoggerService(this IServiceCollection services)
         {
             services.AddSingleton<ILoggerManager, LoggerManager>();
+        }
+        public static void ConfigureMySql(this IServiceCollection services, IConfiguration config)
+        {
+            var connectionString = config["mysqlconnection:connectionString"];
+
+            services.AddDbContext<RepositoryContext>(options => 
+                options.UseMySql(connectionString));
+        }
+        public static void ConfigureRepositoryWrapper(this IServiceCollection services)
+        {
+            services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
+        }
+        public static void ConfigureAuthentication(this IServiceCollection services)
+        {
+            services.AddScoped<IAuthRepository, AuthRepository>();
         }
     }
 }

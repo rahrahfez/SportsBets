@@ -7,3 +7,6 @@ C:\Users\david\Documents\Projects\SportsBets\SportsBetsAPI\Contracts\obj\Debug\n
 C:\Users\david\Documents\Projects\SportsBets\SportsBetsAPI\Contracts\obj\Debug\netcoreapp2.2\Contracts.AssemblyInfo.cs
 C:\Users\david\Documents\Projects\SportsBets\SportsBetsAPI\Contracts\obj\Debug\netcoreapp2.2\Contracts.dll
 C:\Users\david\Documents\Projects\SportsBets\SportsBetsAPI\Contracts\obj\Debug\netcoreapp2.2\Contracts.pdb
+C:\Users\david\Documents\Projects\SportsBets\SportsBetsAPI\Contracts\bin\Debug\netcoreapp2.2\Entities.dll
+C:\Users\david\Documents\Projects\SportsBets\SportsBetsAPI\Contracts\bin\Debug\netcoreapp2.2\Entities.pdb
+C:\Users\david\Documents\Projects\SportsBets\SportsBetsAPI\Contracts\obj\Debug\netcoreapp2.2\Contracts.csproj.CopyComplete
