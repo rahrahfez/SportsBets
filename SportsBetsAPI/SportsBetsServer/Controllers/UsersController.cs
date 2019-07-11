@@ -100,7 +100,7 @@ namespace SportsBetsServer.Controllers
                     _logger.LogError("Invalid user sent from client.");
                     return BadRequest("Invalid user object sent from client");
                 }
-
+                
                 _repo.User.CreateUser(user);
                 _repo.Save();
 

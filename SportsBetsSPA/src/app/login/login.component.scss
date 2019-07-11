@@ -1,0 +1,50 @@
+.login-form {
+  width: 20rem;
+}
+
+.login-header {
+  font-weight: 400;
+}
+
+.link {
+  font-weight: 300;
+  color: darkblue;
+  cursor: pointer;
+}
+
+.sign-up-link {
+  font-size: .7rem;
+  border: 1px solid gold;
+  padding: .5rem;
+  border-radius: 3px;
+}
+
+.login-btn {
+  font-size: 1.1rem;
+  padding: .2rem;
+  width: 5rem;
+}
+
+.background-img {
+  background: linear-gradient(rgba(0, 0, 0, 0.9)),
+    url("../../assets/chuttersnap-u-Qgv9qY48Q-unsplash.jpg"),
+    no-repeat;
+  background-size: cover;
+  background-position: center;
+  width: 100vw;
+  position: fixed;
+  min-height: 100vh;
+}
+
+.line-break {
+  height: .1rem;
+  width: 15rem;
+  border-bottom: 1px solid grey;
+}
+
+p {
+  font-size: .9rem;
+  margin: 1rem;
+}
+
+

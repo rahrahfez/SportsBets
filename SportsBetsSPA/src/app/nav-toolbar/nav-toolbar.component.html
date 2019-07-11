@@ -1,5 +1,7 @@
-<mat-toolbar color="primary" class="mat-elevation-z5 nav-toolbar">
-  <mat-toolbar-row class="header-brand">
-    <span class="header-brand-logo">SportsBets</span>
-  </mat-toolbar-row>
-</mat-toolbar>
+<div class="nav-links-container">
+  <ul class="nav nav-links-toolbar" fxLayout="row" fxLayoutGap="auto">
+    <li class="nav-links"><a (click)="toDashboard()">Home</a></li>
+    <li class="nav-links"><a (click)="toView()">View Bets</a></li>
+    <li class="nav-links"><a (click)="toCreate()">Create A Bet</a></li>
+  </ul>
+</div>

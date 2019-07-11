@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-nav-toolbar',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavToolbarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
   }
 
+  toDashboard() {
+    this.router.navigate(['dashboard'], { relativeTo: this.route });
+  }
+  toView() {
+    this.router.navigate(['view'], { relativeTo: this.route });
+  }
+  toCreate() {
+    this.router.navigate(['create'], { relativeTo: this.route });
+  }
 }

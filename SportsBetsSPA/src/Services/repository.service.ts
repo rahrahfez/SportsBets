@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable()
 export class RepositoryService {
@@ -9,5 +9,13 @@ export class RepositoryService {
 
   public getData(endpoint: string) {
     return this.http.get(this.url + endpoint);
+  }
+  public create(endpoint: string, body: any) {
+    return this.http.post(this.url + endpoint, body, this.generateHeaders());
+  }
+  private generateHeaders() {
+    return {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    };
   }
 }

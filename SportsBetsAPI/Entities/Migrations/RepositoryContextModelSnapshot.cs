@@ -27,6 +27,8 @@ namespace Entities.Migrations
 
                     b.Property<DateTime>("DateCreated");
 
+                    b.Property<DateTime>("DateOfBirth");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(60);

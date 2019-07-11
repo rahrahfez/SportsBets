@@ -21,7 +21,7 @@ namespace Repository
 
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
-            
+
             return user;
         }
         private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)

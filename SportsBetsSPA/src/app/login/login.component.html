@@ -1,0 +1,23 @@
+<div fxLayoutAlign="center center" class="background-img">
+    <mat-card class="login-form-card">
+        <form 
+          class="login-form"
+          [formGroup]="loginForm"
+          fxLayout="column"
+          fxLayoutAlign="center center">
+          <h1 class="login-header">SportsBets</h1>
+          <mat-form-field>
+            <input matInput placeholder="Username" formControlName="Username">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Password" formControlname="Password">
+          </mat-form-field>
+          <button mat-raised-button type="submit" (click)="onLogin()" class="login-btn" color="primary">Login</button>
+          <p class="link">Forgot Password?</p>
+          <div class="line-break"></div>
+          <p>Don't have an account?</p>
+          <a class="link sign-up-link">SIGN UP FOR FREE</a>
+        </form>
+      </mat-card>      
+</div>
+

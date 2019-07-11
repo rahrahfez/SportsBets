@@ -1,1 +1,23 @@
-<p>register works!</p>
+<form 
+  [formGroup]="registrationForm" 
+  class="registration-form" 
+  (ngSubmit)="onSubmitForm()"
+  fxLayout="column">
+  <h1>Register</h1>
+  <mat-form-field>
+    <input matInput placeholder="Username" formControlName="Username">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Email" formControlName="Email">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Password" formControlName="Password">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput [matDatepicker]="birthdayPicker" placeholder="Enter your birthday" formControlName="DateOfBirth">
+    <mat-datepicker-toggle matSuffix [for]="birthdayPicker"></mat-datepicker-toggle>
+    <mat-datepicker #birthdayPicker></mat-datepicker>
+  </mat-form-field>
+  <button mat-raised-button type="submit" color="primary">Submit</button>
+</form>
+

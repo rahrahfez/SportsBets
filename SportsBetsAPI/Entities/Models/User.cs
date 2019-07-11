@@ -18,6 +18,7 @@ namespace Entities.Models
         public string Email { get; set; }
         public int AvailableBalance { get; set; } = 100;
         public DateTime DateCreated { get; set; }
+        public DateTime DateOfBirth { get; set; }
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
     }
