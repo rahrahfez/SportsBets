@@ -11,11 +11,11 @@ namespace SportsBetsServer.Controllers
     public class AuthController : ControllerBase
     {
         private ILoggerManager _logger;
-        private IAuthRepository _authRepo;
-        public AuthController(IAuthRepository authRepo, ILoggerManager logger)
+        private IRepositoryWrapper _repo;
+        public AuthController(IRepositoryWrapper repo, ILoggerManager logger)
         {
             _logger = logger;
-            _authRepo = authRepo;
+            _repo = repo;
         }
         [HttpPost("register")]
         public IActionResult Register(UserToRegister newUser)
@@ -24,7 +24,7 @@ namespace SportsBetsServer.Controllers
             {
                 newUser.Username = newUser.Username.ToLower();
 
-                if (_authRepo.UserExists(newUser.Username))
+                if (_repo.Auth.UserExists(newUser.Username))
                 {
                     return BadRequest("Username already exists");
                 }
@@ -33,11 +33,11 @@ namespace SportsBetsServer.Controllers
                     Username = newUser.Username
                 };
 
-                var createdUser = _authRepo.Register(userToCreate, newUser.Password);
+                var createdUser = _repo.Auth.Register(userToCreate, newUser.Password);
+                _repo.User.CreateUser(createdUser);
+                _repo.Save();
 
                 _logger.LogInfo($"{newUser.Username} has successfully registered.");
-
-                
 
                 return Ok(newUser);
             }

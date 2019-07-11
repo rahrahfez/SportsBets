@@ -2,5 +2,5 @@ export interface User {
   Username: string;
   Email: string;
   AvailableBalance: number;
-  DateOfBirth: string;
+  DateOfBirth: Date;
 }
