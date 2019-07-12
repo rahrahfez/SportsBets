@@ -4,6 +4,7 @@ using Contracts;
 using LoggerService;
 using Entities;
 using Repository;
+using SportsBetsServer.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 
@@ -42,9 +43,13 @@ namespace SportsBetsServer.Extensions
         {
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
         }
-        public static void ConfigureAuthentication(this IServiceCollection services)
+        public static void ConfigureAuthService(this IServiceCollection services)
         {
-            services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddScoped<IAuthService, AuthService>();
+        }
+        public static void ConfigureDateTime(this IServiceCollection services) 
+        {
+            services.AddSingleton<IDateTime, SystemDateTime>();
         }
     }
 }
