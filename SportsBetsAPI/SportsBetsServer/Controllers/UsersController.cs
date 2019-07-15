@@ -4,8 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Contracts;
 using Entities.Models;
+using Entities.ExtendedModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace SportsBetsServer.Controllers
 {
@@ -13,10 +13,12 @@ namespace SportsBetsServer.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private IRepositoryWrapper _repo;    
-        private ILoggerManager _logger;
-        public UsersController(IRepositoryWrapper repo, ILoggerManager logger)
+        private readonly IRepositoryWrapper _repo;    
+        private readonly ILoggerManager _logger;
+        private readonly IAuthService _auth;
+        public UsersController(IRepositoryWrapper repo, ILoggerManager logger, IAuthService auth)
         {
+            _auth = auth;
             _logger = logger;
             _repo = repo;
         }
@@ -86,7 +88,7 @@ namespace SportsBetsServer.Controllers
             }
         }
         [HttpPost]
-        public IActionResult CreateUser([FromBody] User user)
+        public IActionResult CreateUser([FromBody]UserToRegister user)
         {
             try
             {
@@ -101,10 +103,12 @@ namespace SportsBetsServer.Controllers
                     return BadRequest("Invalid user object sent from client");
                 }
                 
-                _repo.User.CreateUser(user);
+                var registeredUser = _auth.RegisterNewUser(user);
+
+                _repo.User.CreateUser(registeredUser);
                 _repo.Save();
 
-                return CreatedAtRoute("UserById", new { id = user.Id }, user);
+                return CreatedAtRoute("UserById", new { id = registeredUser.Id }, registeredUser);
             }
             catch (Exception ex)
             {

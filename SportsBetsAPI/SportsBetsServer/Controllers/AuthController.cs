@@ -29,14 +29,6 @@ namespace SportsBetsServer.Controllers
                     return BadRequest("Username already exists");
                 }
 
-                var userToCreate = new User {
-                    Username = newUser.Username
-                };
-
-                var createdUser = _repo.Auth.Register(userToCreate, newUser.Password);
-                _repo.User.CreateUser(createdUser);
-                _repo.Save();
-
                 _logger.LogInfo($"{newUser.Username} has successfully registered.");
 
                 return Ok(newUser);

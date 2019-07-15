@@ -35,7 +35,8 @@ namespace SportsBetsServer
             services.ConfigureLoggerService();
             services.ConfigureMySql(Configuration);
             services.ConfigureRepositoryWrapper();
-            services.ConfigureAuthentication();
+            services.ConfigureAuthService();
+            services.ConfigureDateTime();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
