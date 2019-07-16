@@ -37,6 +37,7 @@ namespace SportsBetsServer
             services.ConfigureRepositoryWrapper();
             services.ConfigureAuthService();
             services.ConfigureDateTime();
+            services.ConfigureJwtAuthentication(Configuration);
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
@@ -60,6 +61,7 @@ namespace SportsBetsServer
                 ForwardedHeaders = ForwardedHeaders.All
             });
             app.UseStaticFiles();
+            app.UseAuthentication();
             app.UseMvc();
         }
     }

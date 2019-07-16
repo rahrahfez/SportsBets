@@ -3,6 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using Contracts;
 using Entities.Models;
 using Entities.ExtendedModels;
+using System.Security.Claims;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.Extensions.Configuration;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace SportsBetsServer.Controllers
 {
@@ -10,34 +15,59 @@ namespace SportsBetsServer.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private ILoggerManager _logger;
-        private IRepositoryWrapper _repo;
-        public AuthController(IRepositoryWrapper repo, ILoggerManager logger)
+        private readonly ILoggerManager _logger;
+        private readonly IRepositoryWrapper _repo;
+        private readonly IConfiguration _config;
+        public AuthController(IRepositoryWrapper repo, ILoggerManager logger, IConfiguration config)
         {
             _logger = logger;
             _repo = repo;
+            _config = config;
         }
-        [HttpPost("register")]
-        public IActionResult Register(UserToRegister newUser)
+        [HttpPost("login")]
+        public IActionResult Login([FromBody]UserToLogin userToLogin)
         {
+            var user = _repo.Auth.Login(userToLogin.Username.ToLower(), userToLogin.Password);
+
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+
             try
             {
-                newUser.Username = newUser.Username.ToLower();
-
-                if (_repo.Auth.UserExists(newUser.Username))
+                var claims = new[]
                 {
-                    return BadRequest("Username already exists");
-                }
+                    new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                    new Claim(ClaimTypes.Name, user.Username)
+                };
 
-                _logger.LogInfo($"{newUser.Username} has successfully registered.");
+                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetSection("AppSettings:Token").Value));
 
-                return Ok(newUser);
+                var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+
+                var tokenDescriptor = new SecurityTokenDescriptor
+                {
+                    Subject = new ClaimsIdentity(claims),
+                    Expires = DateTime.Now.AddDays(1),
+                    SigningCredentials = creds
+                };
+
+                var tokenHandler = new JwtSecurityTokenHandler();
+
+                var token = tokenHandler.CreateToken(tokenDescriptor);
+
+                _logger.LogInfo("Token successfully created.");
+                return Ok(new {
+                    token = tokenHandler.WriteToken(token)
+                });
             }
             catch (Exception ex)
             {
-                _logger.LogError($"{newUser.Username} unsuccessfully tried to register. {ex.Message}");
+                _logger.LogError($"Login error {ex.Message}");
                 return StatusCode(500, "Internal server error");
             }
         }
     }
+    
 }
