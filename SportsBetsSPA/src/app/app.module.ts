@@ -50,6 +50,9 @@ import { CreateBetsComponent } from './create-bets/create-bets.component';
   providers: [
     RepositoryService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    RegisterComponent
+  ]
 })
 export class AppModule { }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material/dialog';
+import { RegisterComponent } from '../register/register.component';
 
 @Component({
   selector: 'app-login',
@@ -9,8 +11,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
+  registrationFormRef: MatDialogRef<RegisterComponent>;
 
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute) { }
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private dialog: MatDialog) { }
 
   ngOnInit() {
     this.loginForm = this.fb.group({
@@ -23,4 +26,7 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['_/dashboard']);
   }
 
+  openRegistrationForm() {
+    this.registrationFormRef = this.dialog.open(RegisterComponent);
+  }
 }
