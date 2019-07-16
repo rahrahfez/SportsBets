@@ -14,6 +14,9 @@
     <input matInput placeholder="Password" formControlName="Password">
   </mat-form-field>
   <mat-form-field>
+    <input matInput placeholder="Confirm Password" formControlName="PasswordConfirmation">
+  </mat-form-field>
+  <mat-form-field>
     <input matInput [matDatepicker]="birthdayPicker" placeholder="Enter your birthday" formControlName="DateOfBirth">
     <mat-datepicker-toggle matSuffix [for]="birthdayPicker"></mat-datepicker-toggle>
     <mat-datepicker #birthdayPicker></mat-datepicker>

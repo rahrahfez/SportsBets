@@ -7,6 +7,9 @@ using Repository;
 using SportsBetsServer.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace SportsBetsServer.Extensions
 {
@@ -50,6 +53,19 @@ namespace SportsBetsServer.Extensions
         public static void ConfigureDateTime(this IServiceCollection services) 
         {
             services.AddSingleton<IDateTime, SystemDateTime>();
+        }
+        public static void ConfigureJwtAuthentication(this IServiceCollection services, IConfiguration config)
+        {
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options => {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(config.GetSection("AppSettings:Token").Value)),
+                        ValidateIssuer = false,
+                        ValidateAudience = false
+                    };
+                });
         }
     }
 }

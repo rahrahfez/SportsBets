@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material/dialog';
+
 import { RegisterComponent } from '../register/register.component';
+import { AuthService } from 'src/Services/auth.service';
+
 
 @Component({
   selector: 'app-login',
@@ -13,7 +16,11 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   registrationFormRef: MatDialogRef<RegisterComponent>;
 
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private dialog: MatDialog) { }
+  constructor(private fb: FormBuilder,
+              private router: Router,
+              private route: ActivatedRoute,
+              private dialog: MatDialog,
+              private authService: AuthService) { }
 
   ngOnInit() {
     this.loginForm = this.fb.group({
@@ -23,7 +30,12 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin() {
-    this.router.navigate(['_/dashboard']);
+
+    this.authService.login({
+      Username: this.loginForm.controls.Username.value,
+      Password: this.loginForm.controls.Password.value
+    }).subscribe(val => console.log(val));
+    // this.router.navigate(['_/dashboard']);
   }
 
   openRegistrationForm() {

@@ -15,10 +15,10 @@ namespace SportsBetsServer.Controllers
     {
         private readonly IRepositoryWrapper _repo;    
         private readonly ILoggerManager _logger;
-        private readonly IAuthService _auth;
-        public UsersController(IRepositoryWrapper repo, ILoggerManager logger, IAuthService auth)
+        private readonly IAuthService _authService;
+        public UsersController(IRepositoryWrapper repo, ILoggerManager logger, IAuthService authService)
         {
-            _auth = auth;
+            _authService = authService;
             _logger = logger;
             _repo = repo;
         }
@@ -93,16 +93,11 @@ namespace SportsBetsServer.Controllers
             try
             {
                 user.Username = user.Username.ToLower();
-                
+
                 if (user == null)
                 {
                     _logger.LogError("User is null.");
                     return BadRequest("User object is null");
-                }
-                if (!ModelState.IsValid)
-                {
-                    _logger.LogError("Invalid user sent from client.");
-                    return BadRequest("Invalid user object sent from client");
                 }
                 if (_repo.Auth.UserExists(user.Username))
                 {
@@ -110,7 +105,7 @@ namespace SportsBetsServer.Controllers
                     return BadRequest("Username already exists.");
                 }
                 
-                var registeredUser = _auth.RegisterNewUser(user);
+                var registeredUser = _authService.RegisterNewUser(user);
 
                 _repo.User.CreateUser(registeredUser);
                 _repo.Save();
