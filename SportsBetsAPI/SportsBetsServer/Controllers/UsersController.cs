@@ -92,6 +92,8 @@ namespace SportsBetsServer.Controllers
         {
             try
             {
+                user.Username = user.Username.ToLower();
+                
                 if (user == null)
                 {
                     _logger.LogError("User is null.");
@@ -101,6 +103,11 @@ namespace SportsBetsServer.Controllers
                 {
                     _logger.LogError("Invalid user sent from client.");
                     return BadRequest("Invalid user object sent from client");
+                }
+                if (_repo.Auth.UserExists(user.Username))
+                {
+                    _logger.LogError("Username already exists.");
+                    return BadRequest("Username already exists.");
                 }
                 
                 var registeredUser = _auth.RegisterNewUser(user);

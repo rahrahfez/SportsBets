@@ -23,10 +23,10 @@ namespace SportsBetsServer.Services
                 DateOfBirth = user.DateOfBirth,
                 DateCreated = creationTime
             };
-
             var registeredUser = _repo.Auth.Register(userToBeCreated, user.Password);
   
             return registeredUser;
+
         }
     }
 }
