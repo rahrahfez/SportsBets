@@ -21,6 +21,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeaderComponent } from './header/header.component';
 import { ViewBetsComponent } from './view-bets/view-bets.component';
 import { CreateBetsComponent } from './create-bets/create-bets.component';
+import { AuthService } from 'src/Services/auth.service';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { CreateBetsComponent } from './create-bets/create-bets.component';
     ReactiveFormsModule
   ],
   providers: [
-    RepositoryService
+    RepositoryService,
+    AuthService
   ],
   bootstrap: [AppComponent],
   entryComponents: [
