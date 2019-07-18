@@ -7,5 +7,6 @@ namespace Contracts
         User Register(User user, string password);
         User Login(string username, string password);
         bool UserExists(string username);
+        bool EmailExists(string email);
     }
 }

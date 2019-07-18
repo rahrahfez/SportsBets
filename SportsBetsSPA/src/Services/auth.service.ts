@@ -25,7 +25,7 @@ export class AuthService {
       map((response: any) => {
         const res = response;
         if (res) {
-          localStorage.setItem('token', res.token);
+          // localStorage.setItem('token', res.Token);
         }
       })
     );

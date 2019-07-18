@@ -58,10 +58,15 @@ namespace SportsBetsServer.Controllers
 
                 var token = tokenHandler.CreateToken(tokenDescriptor);
 
+                var userAndToken = new UserAndToken {
+                  Username = user.Username,
+                  Email = user.Email,
+                  AvailableBalance = user.AvailableBalance,
+                  Token =  tokenHandler.WriteToken(token) 
+                };
+
                 _logger.LogInfo($"{user.Username} successfully created a token.");
-                return Ok(new {
-                    token = tokenHandler.WriteToken(token)
-                });
+                return Ok(userAndToken);
             }
             catch (Exception ex)
             {
