@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material/dialog';
+import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 
 import { RegisterComponent } from '../register/register.component';
 import { AuthService } from 'src/Services/auth.service';
+import { AppState } from '../store/app.state';
+import { Store } from '@ngrx/store';
+import { Login } from 'src/Auth/store/auth.action';
+import { User } from 'src/Models/user.model';
 
 
 @Component({
@@ -17,10 +20,9 @@ export class LoginComponent implements OnInit {
   registrationFormRef: MatDialogRef<RegisterComponent>;
 
   constructor(private fb: FormBuilder,
-              private router: Router,
-              private route: ActivatedRoute,
               private dialog: MatDialog,
-              private authService: AuthService) { }
+              private authService: AuthService,
+              private store: Store<AppState>) { }
 
   ngOnInit() {
     this.loginForm = this.fb.group({
@@ -30,12 +32,12 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin() {
-
-    this.authService.login({
+    const payload = {
       Username: this.loginForm.controls.Username.value,
       Password: this.loginForm.controls.Password.value
-    }).subscribe(val => console.log(val));
-    // this.router.navigate(['_/dashboard']);
+    };
+    this.store.dispatch(new Login(payload.Username));
+    this.authService.login(payload).subscribe();
   }
 
   openRegistrationForm() {

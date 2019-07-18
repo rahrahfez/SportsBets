@@ -25,8 +25,6 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmitForm() {
-    this.repository.create('users', this.registrationForm.value).subscribe(
-      val => console.log(val)
-    );
+    this.repository.create('users', this.registrationForm.value).subscribe();
   }
 }
