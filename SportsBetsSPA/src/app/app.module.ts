@@ -22,6 +22,13 @@ import { HeaderComponent } from './header/header.component';
 import { ViewBetsComponent } from './view-bets/view-bets.component';
 import { CreateBetsComponent } from './create-bets/create-bets.component';
 import { AuthService } from 'src/Services/auth.service';
+import { JwtModule } from '@auth0/angular-jwt';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthEffects } from 'src/Auth/store/auth.effect';
+import { reducers } from './store/app.state';
+import { AuthGuard } from 'src/Auth/auth.guard';
 
 @NgModule({
   declarations: [
@@ -46,11 +53,26 @@ import { AuthService } from 'src/Services/auth.service';
     AppRoutesModule,
     MaterialModule,
     FlexLayoutModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          return localStorage.getItem('token');
+        },
+        whitelistedDomains: ['localhost:5000'],
+        blacklistedRoutes: []
+      }
+    }),
+    StoreModule.forRoot(reducers, {}),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25
+    }),
+    EffectsModule.forRoot([AuthEffects])
   ],
   providers: [
     RepositoryService,
-    AuthService
+    AuthService,
+    AuthGuard
   ],
   bootstrap: [AppComponent],
   entryComponents: [

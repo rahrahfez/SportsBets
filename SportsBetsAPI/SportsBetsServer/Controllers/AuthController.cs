@@ -49,7 +49,8 @@ namespace SportsBetsServer.Controllers
                 var tokenDescriptor = new SecurityTokenDescriptor
                 {
                     Subject = new ClaimsIdentity(claims),
-                    Expires = DateTime.Now.AddDays(1),
+                    NotBefore = DateTime.UtcNow,
+                    Expires = DateTime.UtcNow.AddMinutes(10),
                     SigningCredentials = creds
                 };
 
@@ -57,7 +58,7 @@ namespace SportsBetsServer.Controllers
 
                 var token = tokenHandler.CreateToken(tokenDescriptor);
 
-                _logger.LogInfo("Token successfully created.");
+                _logger.LogInfo($"{user.Username} successfully created a token.");
                 return Ok(new {
                     token = tokenHandler.WriteToken(token)
                 });
