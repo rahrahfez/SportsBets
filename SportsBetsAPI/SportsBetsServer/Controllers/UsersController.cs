@@ -104,6 +104,11 @@ namespace SportsBetsServer.Controllers
                     _logger.LogError("Username already exists.");
                     return BadRequest("Username already exists.");
                 }
+                if (_repo.Auth.EmailExists(user.Email))
+                {
+                    _logger.LogError("Email already exists.");
+                    return BadRequest("Email already exists.");
+                }
                 
                 var registeredUser = _authService.RegisterNewUser(user);
 

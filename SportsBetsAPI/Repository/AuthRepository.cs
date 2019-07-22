@@ -70,5 +70,13 @@ namespace Repository
             }
             return false;
         }
+        public bool EmailExists(string email)
+        {
+            if (_repoContext.Users.Any(x => x.Email == email))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

@@ -15,7 +15,7 @@ namespace Entities.ExtendedModels
         public string Password { get; set; }
         [Required]
         [StringLength(12), MinLength(4, ErrorMessage = "Password must be at least 4 characters.")]
-        [Compare("UserToRegister.Password", ErrorMessage = "Passwords do not match.")]
+        [Compare("Password", ErrorMessage = "Passwords do not match.")]
         public string PasswordConfirmation { get; set ;}
         public DateTime DateOfBirth { get; set; }
         public DateTime DateCreated { get; set; }
