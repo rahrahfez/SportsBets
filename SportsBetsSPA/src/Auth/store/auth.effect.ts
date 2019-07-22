@@ -4,6 +4,7 @@ import { tap } from 'rxjs/operators';
 
 import { Login, AuthActions, Logout } from './auth.action';
 import { Router } from '@angular/router';
+import { TokenService } from 'src/Services/token.service';
 
 @Injectable()
 export class AuthEffects {
@@ -11,7 +12,7 @@ export class AuthEffects {
   login$ = this.action$.pipe(
     ofType<Login>(AuthActions.LOGIN),
     tap(action => {
-      localStorage.setItem('user', JSON.stringify(action.payload));
+      this.tokenService.setTokenKey('user', JSON.stringify(action.payload));
       this.router.navigate(['_/dashboard']);
     })
   );
@@ -20,11 +21,12 @@ export class AuthEffects {
   logout$ = this.action$.pipe(
     ofType<Logout>(AuthActions.LOGOUT),
     tap(() => {
-      localStorage.removeItem('user');
-      localStorage.removeItem('token');
+      this.tokenService.removeTokenKey('user');
       this.router.navigate(['/login']);
     })
   );
 
-  constructor(private action$: Actions, private router: Router) {}
+  constructor(private action$: Actions,
+              private router: Router,
+              private tokenService: TokenService) {}
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { TokenService } from './token.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,25 +9,20 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class AuthService {
   readonly url = 'http://localhost:5000/api/auth/';
 
-  constructor(private http: HttpClient, public jwtHelper: JwtHelperService) {}
+  constructor(private http: HttpClient,
+              public jwtHelper: JwtHelperService,
+              public tokenService: TokenService) {}
 
-  public getToken() {
-    return localStorage.getItem('token');
+  public getToken(): string {
+    return this.tokenService.getTokenKey('token');
   }
 
   public isAuthenticated(): boolean {
-    const token = localStorage.getItem('token');
+    const token = this.getToken();
     return !this.jwtHelper.isTokenExpired(token);
   }
 
   login(credentials: any) {
-    return this.http.post(this.url + 'login', credentials).pipe(
-      map((response: any) => {
-        const res = response;
-        if (res) {
-          // localStorage.setItem('token', res.Token);
-        }
-      })
-    );
+    return this.http.post(this.url + 'login', credentials);
   }
 }
