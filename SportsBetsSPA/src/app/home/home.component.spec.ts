@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HomeComponent } from './home.component';
 import { HeaderComponent } from '../header/header.component';
-import { NavToolbarComponent } from '../nav-toolbar/nav-toolbar.component';
+import { NavToolbarComponent } from './nav-toolbar/nav-toolbar.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MaterialModule } from '../material/material.module';
 
