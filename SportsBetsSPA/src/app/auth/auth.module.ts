@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { JwtModule } from '@auth0/angular-jwt';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -10,6 +11,7 @@ import { JwtModule } from '@auth0/angular-jwt';
     RegisterComponent
   ],
   imports: [
+    SharedModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: () => {

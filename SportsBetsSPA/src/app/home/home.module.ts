@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { MaterialModule } from '../material/material.module';
-import { RouterModule } from '@angular/router';
+import { SharedModule } from '../shared/shared.module';
 
 import { NavToolbarComponent } from './nav-toolbar/nav-toolbar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -10,6 +8,7 @@ import { ViewBetsComponent } from './view-bets/view-bets.component';
 import { WelcomeCardComponent } from './welcome-card/welcome-card.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home.component';
+import { HomeRoutesModule } from './home.routes.module';
 
 @NgModule({
   declarations: [
@@ -22,9 +21,8 @@ import { HomeComponent } from './home.component';
     HomeComponent
   ],
   imports: [
-    MaterialModule,
-    CommonModule,
-    RouterModule
+    SharedModule,
+    HomeRoutesModule
   ]
 })
 export class HomeModule { }

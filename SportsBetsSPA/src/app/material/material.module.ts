@@ -37,9 +37,6 @@ import {
     MatTableModule,
     MatCardModule,
     MatSidenavModule
-  ],
-  providers: [
-
   ]
 })
 export class MaterialModule { }

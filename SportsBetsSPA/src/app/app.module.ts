@@ -3,14 +3,10 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutesModule } from './app.routes.module';
-import { MaterialModule } from './material/material.module';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { RepositoryService } from 'src/Services/repository.service';
 import { AuthService } from 'src/Services/auth.service';
-import { JwtModule } from '@auth0/angular-jwt';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
@@ -19,6 +15,7 @@ import { reducers } from './store/app.state';
 import { AuthGuard } from 'src/app/auth/auth.guard';
 import { TokenService } from 'src/Services/token.service';
 import { RegisterComponent } from './auth/register/register.component';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -29,6 +26,7 @@ import { RegisterComponent } from './auth/register/register.component';
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutesModule,
+    AuthModule,
     StoreModule.forRoot(reducers, {}),
     StoreDevtoolsModule.instrument({
       maxAge: 25
