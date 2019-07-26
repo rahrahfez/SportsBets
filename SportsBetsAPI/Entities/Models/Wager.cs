@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities.Models
@@ -6,12 +7,17 @@ namespace Entities.Models
     [Table("wagers")]
     public class Wager
     {
-        public Guid WagerId { get; set; }
+        [Key]
+        [Column("WagerId")]
+        public Guid Id { get; set; }
+        public Guid CreatedById { get; set; }
+        public Guid AcceptedById { get; set; }
         public int WagerAmount { get; set; }
-        [Column("Bookmaker")]
-        public Guid Bookmaker { get; set; }
-        [Column("Bettor")]
-        public Guid Bettor { get; set; }
-        public DateTime TimeCreated { get; set; }
+        public DateTime CreatedAt { get; set; }
+        [ForeignKey("CreatedById")]
+        public User CreatedBy { get; set; }
+        [ForeignKey("AcceptedById")]
+        
+        public User AcceptedBy { get; set; }
     }
 }
