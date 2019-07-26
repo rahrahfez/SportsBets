@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MatDialog } from '@angular/material/dialog';
+import { Store } from '@ngrx/store';
 
 import { RegisterComponent } from '../register/register.component';
 import { AuthService } from 'src/Services/auth.service';
-import { AppState } from '../store/app.state';
-import { Store } from '@ngrx/store';
-import { Login } from 'src/Auth/store/auth.action';
-import { User } from 'src/Models/user.model';
-
+import { AppState } from '../../store/app.state';
+import { Login } from '../store/auth.action';
+import { User } from '../../../Models/user.model';
 
 @Component({
   selector: 'app-login',
@@ -26,8 +25,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.fb.group({
-      Username: this.fb.control(''),
-      Password: this.fb.control('')
+      Username: this.fb.control('', Validators.required),
+      Password: this.fb.control('', Validators.required)
     });
   }
 
@@ -36,8 +35,13 @@ export class LoginComponent implements OnInit {
       Username: this.loginForm.controls.Username.value,
       Password: this.loginForm.controls.Password.value
     };
-    this.store.dispatch(new Login(payload.Username));
-    this.authService.login(payload).subscribe();
+    this.authService.login(payload)
+      .subscribe((user: User) => {
+        this.store.dispatch(new Login({ user }));
+      },
+      err => {
+        console.log(err);
+      });
   }
 
   openRegistrationForm() {

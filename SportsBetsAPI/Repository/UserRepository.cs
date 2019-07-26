@@ -29,7 +29,7 @@ namespace Repository
         {
             return new UserExtended(GetUserById(id))
             {
-                Wagers = RepositoryContext.Wagers.Where(wager => wager.WagerId == id)
+                Wagers = RepositoryContext.Wagers.Where(wager => wager.Id == id)
             };
         }
         public void CreateUser(User user)

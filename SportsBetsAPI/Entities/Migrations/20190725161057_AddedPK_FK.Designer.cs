@@ -3,14 +3,16 @@ using System;
 using Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Entities.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    partial class RepositoryContextModelSnapshot : ModelSnapshot
+    [Migration("20190725161057_AddedPK_FK")]
+    partial class AddedPK_FK
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,34 +54,17 @@ namespace Entities.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnName("WagerId");
 
-                    b.Property<Guid>("AcceptedById");
+                    b.Property<Guid>("AcceptedBy");
 
                     b.Property<DateTime>("CreatedAt");
 
-                    b.Property<Guid>("CreatedById");
+                    b.Property<Guid>("CreatedBy");
 
                     b.Property<int>("WagerAmount");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AcceptedById");
-
-                    b.HasIndex("CreatedById");
-
                     b.ToTable("wagers");
-                });
-
-            modelBuilder.Entity("Entities.Models.Wager", b =>
-                {
-                    b.HasOne("Entities.Models.User", "AcceptedBy")
-                        .WithMany()
-                        .HasForeignKey("AcceptedById")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Entities.Models.User", "CreatedBy")
-                        .WithMany()
-                        .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

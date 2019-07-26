@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -21,5 +22,10 @@ namespace Entities.Models
         public DateTime DateOfBirth { get; set; }
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
+        [InverseProperty("CreatedBy")]
+        public virtual ICollection<Wager> CreatedWagers { get; set; }
+        [InverseProperty("AcceptedBy")]
+
+        public virtual ICollection<Wager> AcceptedWagers { get; set; }
     }
 }
