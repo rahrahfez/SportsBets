@@ -11,7 +11,7 @@ namespace Entities.Models
         [Column("WagerId")]
         public Guid Id { get; set; }
         public Guid CreatedById { get; set; }
-        public Guid AcceptedById { get; set; }
+        public Nullable<Guid> AcceptedById { get; set; }
         public int WagerAmount { get; set; }
         public DateTime CreatedAt { get; set; }
         [ForeignKey("CreatedById")]

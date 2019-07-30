@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Contracts;
 using Entities;
 using Entities.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Repository
 {
@@ -14,28 +16,32 @@ namespace Repository
             {
 
             }
+    public async Task<IEnumerable<Wager>> GetAllWagersAsync()
+    {
+      return await FindAll().ToListAsync();
+    }
 
-    public void CreateWager(Wager wager)
+    public async Task<Wager> GetWagerAsync(Guid id)
+    {
+      return await FindByCondition(wager => wager.Id.Equals(id))
+        .SingleOrDefaultAsync();
+    }
+    public async Task CreateWagerAsync(Wager wager)
     {
       wager.Id = Guid.NewGuid();
       Create(wager);
+      await SaveAsync();
     }
-
-    public void DeleteWager(Guid id)
+    public async Task UpdateWagerAsync(Wager dbWager, Wager wager)
+    {
+      Update(wager);
+      await SaveAsync();
+    }
+    public async Task DeleteWagerAsync(Guid id)
     {
       var wager = FindByCondition(w => w.Id.Equals(id)).FirstOrDefault();
       Delete(wager);
-    }
-
-    public IEnumerable<Wager> GetAllWagers()
-    {
-      return FindAll().ToList();
-    }
-
-    public Wager GetWager(Guid id)
-    {
-      return FindByCondition(wager => wager.Id.Equals(id))
-        .FirstOrDefault();
+      await SaveAsync();
     }
   }
 }

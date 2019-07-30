@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Contracts;
 using Entities.Models;
@@ -25,7 +26,7 @@ namespace SportsBetsServer.Controllers
             _config = config;
         }
         [HttpPost("login")]
-        public IActionResult Login([FromBody]UserToLogin userToLogin)
+        public async Task<IActionResult> Login([FromBody]UserToLogin userToLogin)
         {
             var user = _repo.Auth.Login(userToLogin.Username.ToLower(), userToLogin.Password);
 

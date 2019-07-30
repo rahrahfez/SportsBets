@@ -1,0 +1,1 @@
+2019-07-30 07:10:14.8036 INFO Successfully created wager with id 3e8811c8-8219-4d84-bc2a-5f3c9ed8300a

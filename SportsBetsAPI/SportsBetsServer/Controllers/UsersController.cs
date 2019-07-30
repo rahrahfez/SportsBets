@@ -23,11 +23,11 @@ namespace SportsBetsServer.Controllers
             _repo = repo;
         }
         [HttpGet]
-        public IActionResult GetAllUsers()
+        public async Task<IActionResult> GetAllUsers()
         {
             try
             {
-                var users = _repo.User.GetAllUsers();
+                var users = await _repo.User.GetAllUsersAsync();
 
                 _logger.LogInfo($"Returned all users from database.");
 
@@ -40,11 +40,11 @@ namespace SportsBetsServer.Controllers
             }
         }
         [HttpGet("{id}", Name = "UserById")]
-        public IActionResult GetUserById(Guid id) 
+        public async Task<IActionResult> GetUserById(Guid id) 
         {
             try
             {
-                var user = _repo.User.GetUserById(id);
+                var user = await _repo.User.GetUserByIdAsync(id);
                 
                 if (user.Id.Equals(Guid.Empty)) 
                 {
@@ -64,11 +64,11 @@ namespace SportsBetsServer.Controllers
             }
         }
         [HttpGet("{id}/wagers")]
-        public IActionResult GetOwnerWithDetails(Guid id)
+        public async Task<IActionResult> GetOwnerWithDetails(Guid id)
         {
             try
             {
-                var user = _repo.User.GetUserWithDetails(id);
+                var user = await _repo.User.GetUserWithDetailsAsync(id);
 
                 if (user.Id.Equals(Guid.Empty))
                 {
@@ -88,7 +88,7 @@ namespace SportsBetsServer.Controllers
             }
         }
         [HttpPost]
-        public IActionResult CreateUser([FromBody]UserToRegister user)
+        public async Task<IActionResult> CreateUser([FromBody]UserToRegister user)
         {
             try
             {
@@ -112,8 +112,7 @@ namespace SportsBetsServer.Controllers
                 
                 var registeredUser = _authService.RegisterNewUser(user);
 
-                _repo.User.CreateUser(registeredUser);
-                _repo.Save();
+                await _repo.User.CreateUserAsync(registeredUser);
 
                 return CreatedAtRoute("UserById", new { id = registeredUser.Id }, registeredUser);
             }
