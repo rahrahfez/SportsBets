@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Contracts;
 using Entities;
 using Entities.Models;
+using Entities.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace Repository
@@ -24,6 +25,7 @@ namespace Repository
     public async Task<Wager> GetWagerAsync(Guid id)
     {
       return await FindByCondition(wager => wager.Id.Equals(id))
+        .AsNoTracking()
         .SingleOrDefaultAsync();
     }
     public async Task CreateWagerAsync(Wager wager)
@@ -34,12 +36,12 @@ namespace Repository
     }
     public async Task UpdateWagerAsync(Wager dbWager, Wager wager)
     {
-      Update(wager);
+      dbWager.Map(wager);
+      Update(dbWager);
       await SaveAsync();
     }
-    public async Task DeleteWagerAsync(Guid id)
+    public async Task DeleteWagerAsync(Wager wager)
     {
-      var wager = FindByCondition(w => w.Id.Equals(id)).FirstOrDefault();
       Delete(wager);
       await SaveAsync();
     }

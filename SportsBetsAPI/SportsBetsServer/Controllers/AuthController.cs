@@ -26,7 +26,7 @@ namespace SportsBetsServer.Controllers
             _config = config;
         }
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody]UserToLogin userToLogin)
+        public IActionResult Login([FromBody]UserToLogin userToLogin)
         {
             var user = _repo.Auth.Login(userToLogin.Username.ToLower(), userToLogin.Password);
 
@@ -60,6 +60,7 @@ namespace SportsBetsServer.Controllers
                 var token = tokenHandler.CreateToken(tokenDescriptor);
 
                 var userAndToken = new UserAndToken {
+                  Id = user.Id,
                   Username = user.Username,
                   Email = user.Email,
                   AvailableBalance = user.AvailableBalance,

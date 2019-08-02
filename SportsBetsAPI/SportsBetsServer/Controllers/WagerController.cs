@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Contracts;
+using Entities.ExtendedModels;
 using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -61,6 +62,47 @@ namespace SportsBetsServer.Controllers
             catch (Exception ex)
             {
                 _logger.LogError($"Error occurred in CreateWager(): {ex.Message}");
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateWager(Guid id, [FromBody]Wager wager)
+        {
+            try
+            {
+                if (id == Guid.Empty)
+                {
+                    return NotFound();
+                }
+                var wagerToBeUpdated = await _repo.Wager.GetWagerAsync(id);
+
+                await _repo.Wager.UpdateWagerAsync(wagerToBeUpdated, wager);
+
+                return Ok(wager);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error occurred in UpdateWager(): {ex.Message}");
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteWager([FromBody]Wager wager)
+        {
+            if (wager.Id == Guid.Empty)
+            {
+                return NotFound();
+            }
+            try
+            {
+                var wagerToBeDeleted = await _repo.Wager.GetWagerAsync(wager.Id);
+                await _repo.Wager.DeleteWagerAsync(wagerToBeDeleted);
+                _logger.LogInfo($"Successfully deleted wager with id {wager.Id}");
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error occurred in DeleteWager(): {ex.Message}");
                 return StatusCode(500, "Internal Server Error");
             }
         }
