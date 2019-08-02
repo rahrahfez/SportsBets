@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder } from '@angular/forms';
+
+export interface BetCondition {
+  condition: string;
+  viewValue: string;
+}
 
 @Component({
   selector: 'app-create-bets',
@@ -6,10 +12,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./create-bets.component.scss']
 })
 export class CreateBetsComponent implements OnInit {
-
-  constructor() { }
+  conditions: BetCondition[] = [
+    { condition: 'greater-than', viewValue: 'Greater Than' },
+    { condition: 'lesser-than', viewValue: 'Lesser Than'}
+  ];
+  createBetForm: FormGroup;
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
+    this.createBetForm = this.fb.group({
+      Amount: this.fb.control('')
+    });
   }
 
+  CreateBet() {
+    // submit form
+  }
 }
