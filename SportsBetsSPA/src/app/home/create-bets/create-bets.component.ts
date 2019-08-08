@@ -1,9 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { RepositoryService } from 'src/Services/repository.service';
 
 export interface BetCondition {
   condition: string;
   viewValue: string;
+}
+
+export interface Wager {
+  CreatedById: string;
+  Amount: number;
 }
 
 @Component({
@@ -17,7 +23,7 @@ export class CreateBetsComponent implements OnInit {
     { condition: 'lesser-than', viewValue: 'Lesser Than'}
   ];
   createBetForm: FormGroup;
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private repo: RepositoryService) {}
 
   ngOnInit() {
     this.createBetForm = this.fb.group({
@@ -26,6 +32,9 @@ export class CreateBetsComponent implements OnInit {
   }
 
   CreateBet() {
-    // submit form
+    let wagerToBeCreated: Wager = {
+      CreatedById: '',
+      Amount: this.createBetForm.controls.Amount.value,
+    };
   }
 }

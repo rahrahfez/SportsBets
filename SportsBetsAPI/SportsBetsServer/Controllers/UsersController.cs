@@ -63,6 +63,7 @@ namespace SportsBetsServer.Controllers
                 return StatusCode(500, "Internal server error");
             }
         }
+        
         [HttpGet("{id}/wagers")]
         public async Task<IActionResult> GetOwnerWithDetails(Guid id)
         {

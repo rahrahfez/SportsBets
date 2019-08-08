@@ -9,13 +9,13 @@ export class RepositoryService {
 
   constructor(private http: HttpClient) {}
 
-  public getData(endpoint: string) {
+  getData(endpoint: string) {
     return this.http.get(this.url + endpoint);
   }
-  public create(endpoint: string, body: any) {
+  create(endpoint: string, body: any) {
     return this.http.post(this.url + endpoint, body, this.generateHeaders());
   }
-  private generateHeaders() {
+  generateHeaders() {
     return {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     };

@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 
 import { Login, AuthActions, Logout } from './auth.action';
 import { TokenService } from 'src/Services/token.service';
-import { RepositoryService } from 'src/Services/repository.service';
 
 @Injectable()
 export class AuthEffects {
@@ -13,7 +12,7 @@ export class AuthEffects {
   login$ = this.action$.pipe(
     ofType<Login>(AuthActions.LOGIN),
     tap(action => {
-      this.tokenService.setTokenKey('token', JSON.stringify(action.payload.user['token']));
+      this.tokenService.setTokenKey('user', JSON.stringify(action.payload));
       this.router.navigate(['/dashboard']);
     })
   );
@@ -29,6 +28,5 @@ export class AuthEffects {
 
   constructor(private action$: Actions,
               private router: Router,
-              private tokenService: TokenService,
-              private repositoryService: RepositoryService) {}
+              private tokenService: TokenService) {}
 }

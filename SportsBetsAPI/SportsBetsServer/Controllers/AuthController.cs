@@ -28,6 +28,11 @@ namespace SportsBetsServer.Controllers
         [HttpPost("login")]
         public IActionResult Login([FromBody]UserToLogin userToLogin)
         {
+            /*
+            * Only returns token.
+            * Token is then stored into local storage,
+            * then user information is retrieved in separate http call.
+            */
             var user = _repo.Auth.Login(userToLogin.Username.ToLower(), userToLogin.Password);
 
             if (user == null)
@@ -59,16 +64,11 @@ namespace SportsBetsServer.Controllers
 
                 var token = tokenHandler.CreateToken(tokenDescriptor);
 
-                var userAndToken = new UserAndToken {
-                  Id = user.Id,
-                  Username = user.Username,
-                  Email = user.Email,
-                  AvailableBalance = user.AvailableBalance,
-                  Token =  tokenHandler.WriteToken(token) 
-                };
+                var signedAndEncodedToken = tokenHandler.WriteToken(token);
 
-                _logger.LogInfo($"{user.Username} successfully created a token.");
-                return Ok(userAndToken);
+
+                _logger.LogInfo($"{token} successfully created. Encoded as {signedAndEncodedToken}");
+                return Ok(signedAndEncodedToken);
             }
             catch (Exception ex)
             {
