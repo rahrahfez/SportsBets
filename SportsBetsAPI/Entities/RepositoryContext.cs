@@ -11,8 +11,9 @@ namespace Entities
 
         }
 
-        public DbSet<User> Users { get; set; } 
-        public DbSet<Wager> Wagers { get; set; }
+        public DbSet<User> User { get; set; } 
+        public DbSet<Wager> Wager { get; set; }
+        public DbSet<NumberGeneratorWager> NumberGeneratorWager { get; set; }
     }
 }
 

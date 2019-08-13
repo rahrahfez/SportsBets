@@ -32,7 +32,7 @@ namespace Repository
             return await FindByCondition(u => u.Id.Equals(id))
             .Select(user => new UserExtended(user)
             {
-                Wagers = RepositoryContext.Wagers
+                Wagers = RepositoryContext.Wager
                     .Where(wager => wager.Id == id)
                     .ToList()
             })

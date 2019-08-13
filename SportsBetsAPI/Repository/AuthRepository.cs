@@ -34,7 +34,7 @@ namespace Repository
         }
         public User Login(string username, string password)
         {
-            var user = _repoContext.Users.FirstOrDefault(u => u.Username == username);
+            var user = _repoContext.User.FirstOrDefault(u => u.Username == username);
 
             if (user == null)
             {
@@ -64,15 +64,7 @@ namespace Repository
         }
         public bool UserExists(string username)
         {
-            if (_repoContext.Users.Any(x => x.Username == username))
-            {
-                return true;
-            }
-            return false;
-        }
-        public bool EmailExists(string email)
-        {
-            if (_repoContext.Users.Any(x => x.Email == email))
+            if (_repoContext.User.Any(x => x.Username == username))
             {
                 return true;
             }

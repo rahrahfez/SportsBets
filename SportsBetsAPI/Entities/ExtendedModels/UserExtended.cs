@@ -16,7 +16,6 @@ namespace Entities.ExtendedModels
         {
             Id = user.Id;
             Username = user.Username;
-            Email = user.Email;
             AvailableBalance = user.AvailableBalance;
         }
     }

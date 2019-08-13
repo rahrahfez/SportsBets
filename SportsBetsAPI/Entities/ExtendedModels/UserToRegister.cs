@@ -23,8 +23,6 @@ namespace Entities.ExtendedModels
         public UserToRegister(User user)
         {
             Username = user.Username;
-            Email = user.Email;
-            DateOfBirth = user.DateOfBirth;
             DateCreated = user.DateCreated;
         }
     }

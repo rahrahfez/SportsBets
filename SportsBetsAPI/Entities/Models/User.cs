@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities.Models
 {
-    [Table("users")]
+    [Table("user")]
     public class User
     {
         [Key]
@@ -16,16 +16,9 @@ namespace Entities.Models
         public string Username { get; set; }
         [Required(ErrorMessage="Email is required")]
         [StringLength(60, ErrorMessage="Email cannot be longer than 60 characters")]
-        public string Email { get; set; }
         public int AvailableBalance { get; set; } = 100;
         public DateTime DateCreated { get; set; }
-        public DateTime DateOfBirth { get; set; }
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
-        [InverseProperty("CreatedBy")]
-        public virtual ICollection<Wager> CreatedWagers { get; set; }
-        [InverseProperty("AcceptedBy")]
-
-        public virtual ICollection<Wager> AcceptedWagers { get; set; }
     }
 }

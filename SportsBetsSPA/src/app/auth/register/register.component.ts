@@ -17,10 +17,8 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
     this.registrationForm = this.fb.group({
         Username: this.fb.control(''),
-        Email: this.fb.control(''),
         Password: this.fb.control(''),
-        PasswordConfirmation: this.fb.control(''),
-        DateOfBirth: this.fb.control('')
+        PasswordConfirmation: this.fb.control('')
       });
   }
 
