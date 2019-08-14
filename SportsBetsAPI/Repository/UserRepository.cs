@@ -41,6 +41,7 @@ namespace Repository
         public async Task CreateUserAsync(User user)
         {
             user.Id = Guid.NewGuid();
+            user.DateCreated = DateTime.Now;
             Create(user);
             await SaveAsync();
         }

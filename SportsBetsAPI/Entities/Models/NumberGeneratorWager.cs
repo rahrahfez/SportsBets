@@ -9,7 +9,6 @@ namespace Entities.Models
     {
         [Key]
         public Guid Id { get; set; }
-        public User User { get; set; }
         public Wager Wager { get; set; }
         public int AmountWagered { get; set; }
         public bool IsGreaterThan { get; set; }

@@ -9,14 +9,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SportsBetsServer.Controllers
 {
-    [Route("api/users")]
+    [Route("api/user")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class UserController : ControllerBase
     {
         private readonly IRepositoryWrapper _repo;    
         private readonly ILoggerManager _logger;
         private readonly IAuthService _authService;
-        public UsersController(IRepositoryWrapper repo, ILoggerManager logger, IAuthService authService)
+        public UserController(IRepositoryWrapper repo, ILoggerManager logger, IAuthService authService)
         {
             _authService = authService;
             _logger = logger;

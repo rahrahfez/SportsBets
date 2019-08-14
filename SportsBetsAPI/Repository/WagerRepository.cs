@@ -22,7 +22,7 @@ namespace Repository
       return await FindAll().ToListAsync();
     }
 
-    public async Task<Wager> GetWagerAsync(Guid id)
+    public async Task<Wager> GetWagerByIdAsync(Guid id)
     {
       return await FindByCondition(wager => wager.Id.Equals(id))
         .AsNoTracking()
@@ -31,6 +31,7 @@ namespace Repository
     public async Task CreateWagerAsync(Wager wager)
     {
       wager.Id = Guid.NewGuid();
+      wager.CreatedAt = DateTime.Now;
       Create(wager);
       await SaveAsync();
     }

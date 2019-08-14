@@ -25,9 +25,10 @@ namespace SportsBetsServer.Controllers
             try
             {   
                 var wagers = await _repo.Wager.GetAllWagersAsync();
-                _logger.LogInfo("Successfully retrieved all wagers");
-                return Ok(wagers);
 
+                _logger.LogInfo("Successfully retrieved all wagers");
+
+                return Ok(wagers);
             }
             catch (Exception ex)
             {
@@ -36,11 +37,11 @@ namespace SportsBetsServer.Controllers
             }
         }
         [HttpGet("{id}", Name = "WagerById")]
-        public async Task<IActionResult> GetWagerAsync(Guid id) 
+        public async Task<IActionResult> GetWagerByIdAsync(Guid id) 
         {
             try
             {
-                var wager = await _repo.Wager.GetWagerAsync(id);
+                var wager = await _repo.Wager.GetWagerByIdAsync(id);
                 _logger.LogInfo($"Successfully retrieved wager with id {id}");
                 return Ok(wager);
             }
@@ -53,11 +54,14 @@ namespace SportsBetsServer.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateWager([FromBody]Wager wager)
         {
+            /*
+            * Wager will be created
+            */
             try
             {
                 await _repo.Wager.CreateWagerAsync(wager);
                 _logger.LogInfo($"Successfully created wager with id {wager.Id}");
-                return CreatedAtRoute("WagerById", new { AcceptedById = Guid.Empty }, wager);
+                return CreatedAtRoute("WagerById", wager);
             }
             catch (Exception ex)
             {
@@ -74,7 +78,7 @@ namespace SportsBetsServer.Controllers
                 {
                     return NotFound();
                 }
-                var wagerToBeUpdated = await _repo.Wager.GetWagerAsync(id);
+                var wagerToBeUpdated = await _repo.Wager.GetWagerByIdAsync(id);
 
                 await _repo.Wager.UpdateWagerAsync(wagerToBeUpdated, wager);
 
@@ -95,7 +99,7 @@ namespace SportsBetsServer.Controllers
             }
             try
             {
-                var wagerToBeDeleted = await _repo.Wager.GetWagerAsync(wager.Id);
+                var wagerToBeDeleted = await _repo.Wager.GetWagerByIdAsync(wager.Id);
                 await _repo.Wager.DeleteWagerAsync(wagerToBeDeleted);
                 _logger.LogInfo($"Successfully deleted wager with id {wager.Id}");
                 return NoContent();
