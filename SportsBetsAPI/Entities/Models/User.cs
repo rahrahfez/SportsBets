@@ -14,8 +14,6 @@ namespace Entities.Models
         [Required(ErrorMessage="Username is required")]
         [StringLength(30, ErrorMessage="Username cannot be longer than 30 characters")]
         public string Username { get; set; }
-        [Required(ErrorMessage="Email is required")]
-        [StringLength(60, ErrorMessage="Email cannot be longer than 60 characters")]
         public int AvailableBalance { get; set; } = 100;
         public DateTime DateCreated { get; set; }
         public byte[] PasswordHash { get; set; }
