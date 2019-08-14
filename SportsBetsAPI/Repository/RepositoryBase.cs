@@ -4,6 +4,7 @@ using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using Contracts;
 using Entities;
+using System.Threading.Tasks;
 
 namespace Repository
 
@@ -17,11 +18,12 @@ namespace Repository
         }
         public IQueryable<T> FindAll()
         {
-            return this.RepositoryContext.Set<T>().AsNoTracking();
+            return this.RepositoryContext.Set<T>();
         }
         public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression)
         {
-            return this.RepositoryContext.Set<T>().Where(expression).AsNoTracking();
+            return this.RepositoryContext.Set<T>()
+                .Where(expression);
         }
         public void Create(T entity)
         {
@@ -34,6 +36,10 @@ namespace Repository
         public void Delete(T entity)
         {
             this.RepositoryContext.Set<T>().Remove(entity);
+        }
+        public async Task SaveAsync() 
+        {
+            await this.RepositoryContext.SaveChangesAsync();
         }
     }
 }

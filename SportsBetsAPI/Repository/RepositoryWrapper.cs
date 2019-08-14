@@ -9,6 +9,7 @@ namespace Repository
         private IUserRepository _user;
         private IWagerRepository _wager;
         private IAuthRepository _auth;
+        private INumberGeneratorWagerRepository _numberGeneratorWager;
         public RepositoryWrapper(RepositoryContext repositoryContext) 
         {
             _repoContext = repositoryContext;
@@ -47,6 +48,17 @@ namespace Repository
                 }
                 
                 return _auth;
+            }
+        }
+        public INumberGeneratorWagerRepository NumberGeneratorWager
+        {
+            get
+            {
+                if (_numberGeneratorWager == null)
+                {
+                    _numberGeneratorWager = new NumberGeneratorWagerRepository(_repoContext);
+                }
+                return _numberGeneratorWager;
             }
         }
         public void Save()

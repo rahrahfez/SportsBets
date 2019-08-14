@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Linq.Expressions;
 
 namespace Contracts
@@ -11,5 +12,6 @@ namespace Contracts
         void Create(T entity);
         void Update(T entity);
         void Delete(T entity);
+        Task SaveAsync();
     }
 }

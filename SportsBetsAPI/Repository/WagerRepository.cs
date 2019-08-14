@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Contracts;
 using Entities;
 using Entities.Models;
+using Entities.Extensions;
+using Microsoft.EntityFrameworkCore;
 
 namespace Repository
 {
@@ -14,28 +17,34 @@ namespace Repository
             {
 
             }
+    public async Task<IEnumerable<Wager>> GetAllWagersAsync()
+    {
+      return await FindAll().ToListAsync();
+    }
 
-    public void CreateWager(Wager wager)
+    public async Task<Wager> GetWagerByIdAsync(Guid id)
+    {
+      return await FindByCondition(wager => wager.Id.Equals(id))
+        .AsNoTracking()
+        .SingleOrDefaultAsync();
+    }
+    public async Task CreateWagerAsync(Wager wager)
     {
       wager.Id = Guid.NewGuid();
+      wager.CreatedAt = DateTime.Now;
       Create(wager);
+      await SaveAsync();
     }
-
-    public void DeleteWager(Guid id)
+    public async Task UpdateWagerAsync(Wager dbWager, Wager wager)
     {
-      var wager = FindByCondition(w => w.Id.Equals(id)).FirstOrDefault();
+      dbWager.Map(wager);
+      Update(dbWager);
+      await SaveAsync();
+    }
+    public async Task DeleteWagerAsync(Wager wager)
+    {
       Delete(wager);
-    }
-
-    public IEnumerable<Wager> GetAllWagers()
-    {
-      return FindAll().ToList();
-    }
-
-    public Wager GetWager(Guid id)
-    {
-      return FindByCondition(wager => wager.Id.Equals(id))
-        .FirstOrDefault();
+      await SaveAsync();
     }
   }
 }

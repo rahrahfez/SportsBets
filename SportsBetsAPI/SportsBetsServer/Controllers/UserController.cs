@@ -9,25 +9,25 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SportsBetsServer.Controllers
 {
-    [Route("api/users")]
+    [Route("api/user")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class UserController : ControllerBase
     {
         private readonly IRepositoryWrapper _repo;    
         private readonly ILoggerManager _logger;
         private readonly IAuthService _authService;
-        public UsersController(IRepositoryWrapper repo, ILoggerManager logger, IAuthService authService)
+        public UserController(IRepositoryWrapper repo, ILoggerManager logger, IAuthService authService)
         {
             _authService = authService;
             _logger = logger;
             _repo = repo;
         }
         [HttpGet]
-        public IActionResult GetAllUsers()
+        public async Task<IActionResult> GetAllUsers()
         {
             try
             {
-                var users = _repo.User.GetAllUsers();
+                var users = await _repo.User.GetAllUsersAsync();
 
                 _logger.LogInfo($"Returned all users from database.");
 
@@ -40,11 +40,11 @@ namespace SportsBetsServer.Controllers
             }
         }
         [HttpGet("{id}", Name = "UserById")]
-        public IActionResult GetUserById(Guid id) 
+        public async Task<IActionResult> GetUserById(Guid id) 
         {
             try
             {
-                var user = _repo.User.GetUserById(id);
+                var user = await _repo.User.GetUserByIdAsync(id);
                 
                 if (user.Id.Equals(Guid.Empty)) 
                 {
@@ -63,12 +63,13 @@ namespace SportsBetsServer.Controllers
                 return StatusCode(500, "Internal server error");
             }
         }
+        
         [HttpGet("{id}/wagers")]
-        public IActionResult GetOwnerWithDetails(Guid id)
+        public async Task<IActionResult> GetOwnerWithDetails(Guid id)
         {
             try
             {
-                var user = _repo.User.GetUserWithDetails(id);
+                var user = await _repo.User.GetUserWithDetailsAsync(id);
 
                 if (user.Id.Equals(Guid.Empty))
                 {
@@ -88,7 +89,7 @@ namespace SportsBetsServer.Controllers
             }
         }
         [HttpPost]
-        public IActionResult CreateUser([FromBody]UserToRegister user)
+        public async Task<IActionResult> CreateUser([FromBody]UserToRegister user)
         {
             try
             {
@@ -104,16 +105,10 @@ namespace SportsBetsServer.Controllers
                     _logger.LogError("Username already exists.");
                     return BadRequest("Username already exists.");
                 }
-                if (_repo.Auth.EmailExists(user.Email))
-                {
-                    _logger.LogError("Email already exists.");
-                    return BadRequest("Email already exists.");
-                }
                 
                 var registeredUser = _authService.RegisterNewUser(user);
 
-                _repo.User.CreateUser(registeredUser);
-                _repo.Save();
+                await _repo.User.CreateUserAsync(registeredUser);
 
                 return CreatedAtRoute("UserById", new { id = registeredUser.Id }, registeredUser);
             }

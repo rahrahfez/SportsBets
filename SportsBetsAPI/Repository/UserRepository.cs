@@ -5,6 +5,8 @@ using Contracts;
 using Entities;
 using Entities.Models;
 using Entities.ExtendedModels;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Repository
 {
@@ -15,27 +17,44 @@ namespace Repository
             {
                 
             }
-        public IEnumerable<User> GetAllUsers()
+        public async Task<IEnumerable<User>> GetAllUsersAsync()
         {
-            return FindAll().ToList();
+            return await FindAll().ToListAsync();
         }
-        public User GetUserById(Guid id)
+        public async Task<User> GetUserByIdAsync(Guid id)
         {
-            return FindByCondition(user => user.Id.Equals(id))
+            return await FindByCondition(user => user.Id.Equals(id))
             .DefaultIfEmpty(new User())
-            .FirstOrDefault();
+            .SingleOrDefaultAsync();
         }
-        public UserExtended GetUserWithDetails(Guid id)
+        public async Task<UserExtended> GetUserWithDetailsAsync(Guid id)
         {
-            return new UserExtended(GetUserById(id))
+            return await FindByCondition(u => u.Id.Equals(id))
+            .Select(user => new UserExtended(user)
             {
-                Wagers = RepositoryContext.Wagers.Where(wager => wager.Id == id)
-            };
+                Wagers = RepositoryContext.Wager
+                    .Where(wager => wager.Id == id)
+                    .ToList()
+            })
+            .SingleOrDefaultAsync();
         }
-        public void CreateUser(User user)
+        public async Task CreateUserAsync(User user)
         {
             user.Id = Guid.NewGuid();
+            user.DateCreated = DateTime.Now;
             Create(user);
+            await SaveAsync();
+        }
+        public async Task UpdateUserAsync(User dbUser, User user)
+        {
+            // dbUser.Map(user);
+            Update(user);
+            await SaveAsync();
+        }
+        public async Task DeleteUserAsync(User user)
+        {
+            Delete(user);
+            await SaveAsync();
         }
     }
 }

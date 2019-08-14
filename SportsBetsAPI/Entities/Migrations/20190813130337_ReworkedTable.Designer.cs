@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Entities.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20190725175426_FixedPK_FK")]
-    partial class FixedPK_FK
+    [Migration("20190813130337_ReworkedTable")]
+    partial class ReworkedTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -19,21 +19,38 @@ namespace Entities.Migrations
                 .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
+            modelBuilder.Entity("Entities.Models.NumberGeneratorWager", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("AmountWagered");
+
+                    b.Property<bool>("IsGreaterThan");
+
+                    b.Property<Guid?>("UserId");
+
+                    b.Property<Guid?>("WagerId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.HasIndex("WagerId");
+
+                    b.ToTable("number_generator_wager");
+                });
+
             modelBuilder.Entity("Entities.Models.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnName("UserId");
 
-                    b.Property<int>("AvailableBalance");
+                    b.Property<int>("AvailableBalance")
+                        .HasMaxLength(60);
 
                     b.Property<DateTime>("DateCreated");
-
-                    b.Property<DateTime>("DateOfBirth");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(60);
 
                     b.Property<byte[]>("PasswordHash");
 
@@ -45,7 +62,7 @@ namespace Entities.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("users");
+                    b.ToTable("user");
                 });
 
             modelBuilder.Entity("Entities.Models.Wager", b =>
@@ -54,34 +71,22 @@ namespace Entities.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnName("WagerId");
 
-                    b.Property<Guid>("AcceptedById");
-
                     b.Property<DateTime>("CreatedAt");
-
-                    b.Property<Guid>("CreatedById");
-
-                    b.Property<int>("WagerAmount");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AcceptedById");
-
-                    b.HasIndex("CreatedById");
-
-                    b.ToTable("wagers");
+                    b.ToTable("wager");
                 });
 
-            modelBuilder.Entity("Entities.Models.Wager", b =>
+            modelBuilder.Entity("Entities.Models.NumberGeneratorWager", b =>
                 {
-                    b.HasOne("Entities.Models.User", "AcceptedBy")
+                    b.HasOne("Entities.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("AcceptedById")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .HasForeignKey("UserId");
 
-                    b.HasOne("Entities.Models.User", "CreatedBy")
+                    b.HasOne("Entities.Models.Wager", "Wager")
                         .WithMany()
-                        .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("WagerId");
                 });
 #pragma warning restore 612, 618
         }
