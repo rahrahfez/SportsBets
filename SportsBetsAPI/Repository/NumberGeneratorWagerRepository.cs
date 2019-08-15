@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Contracts;
 using Entities;
@@ -16,12 +17,11 @@ namespace Repository
         }
         public async Task<NumberGeneratorWager> GetNumberGeneratorWagerByIdAsync(Guid id)
         {
-            return await FindByCondition(x => x.Id.Equals(id))
+            return await FindByCondition(ng => ng.Id.Equals(id))
                 .SingleOrDefaultAsync();
         }
         public async Task CreateNumberGeneratorWagerAsync(NumberGeneratorWager ngWager)
         {   
-            ngWager.Id = Guid.NewGuid();
             Create(ngWager);
             await SaveAsync();
         }

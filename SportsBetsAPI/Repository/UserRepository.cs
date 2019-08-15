@@ -41,13 +41,11 @@ namespace Repository
         public async Task CreateUserAsync(User user)
         {
             user.Id = Guid.NewGuid();
-            user.DateCreated = DateTime.Now;
             Create(user);
             await SaveAsync();
         }
         public async Task UpdateUserAsync(User dbUser, User user)
         {
-            // dbUser.Map(user);
             Update(user);
             await SaveAsync();
         }

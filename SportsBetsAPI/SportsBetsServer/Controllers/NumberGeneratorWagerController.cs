@@ -6,7 +6,7 @@ using Entities.Models;
 
 namespace SportsBetsServer.Controllers
 {
-    [Route("api/numbergeneratorcontroller")]
+    [Route("api/numbergenerator")]
     [ApiController]
     public class NumberGeneratorWagerController : ControllerBase
     {
@@ -37,12 +37,16 @@ namespace SportsBetsServer.Controllers
                 return StatusCode(500, "Internal Server Error");
             }
         }
-        [HttpPost("{id}")]
+        [HttpPost("create")]
         public async Task<IActionResult> CreateNumberGeneratorWager([FromBody]NumberGeneratorWager ngWager)
         {
             try
             {
-                var wager = new Wager();
+                var wager = new Wager
+                { 
+                    Id = Guid.NewGuid(),
+                    CreatedAt = DateTime.Now 
+                };
 
                 await _repo.Wager.CreateWagerAsync(wager);
 
@@ -57,9 +61,7 @@ namespace SportsBetsServer.Controllers
                 _logger.LogError($"Something went wrong in CreateNumberGeneratorWager(): { ex.Message }");
                 return StatusCode(500, "Internal Server Error");
             }
-        }
-        [HttpPost("{id}")]
-        
+        }        
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteNumberGeneratedWager(Guid id)
         {
