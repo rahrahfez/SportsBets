@@ -16,7 +16,10 @@ namespace SportsBetsServer.Controllers
         private readonly IRepositoryWrapper _repo;    
         private readonly ILoggerManager _logger;
         private readonly IAuthService _authService;
-        public UserController(IRepositoryWrapper repo, ILoggerManager logger, IAuthService authService)
+        public UserController(
+            IRepositoryWrapper repo, 
+            ILoggerManager logger, 
+            IAuthService authService)
         {
             _authService = authService;
             _logger = logger;
@@ -35,7 +38,7 @@ namespace SportsBetsServer.Controllers
             }
             catch(Exception ex)
             {
-                _logger.LogError($"Something went wrong inside GetAllUsers() action: {ex.Message}");
+                _logger.LogError($"Something went wrong inside GetAllUsers() action: { ex.Message }");
                 return StatusCode(500, "Internal Server Error");
             }
         }
@@ -48,18 +51,18 @@ namespace SportsBetsServer.Controllers
                 
                 if (user.Id.Equals(Guid.Empty)) 
                 {
-                    _logger.LogError($"User with id: {id} was not found in db.");
+                    _logger.LogError($"User with id: { id } was not found in db.");
                     return NotFound();
                 }
                 else
                 {
-                    _logger.LogInfo($"Returned user with id: {id}");
+                    _logger.LogInfo($"Returned user with id: { id }");
                     return Ok(user);
                 }
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Something went wrong inside GetOwnerById() action {ex.Message}");
+                _logger.LogError($"Something went wrong inside GetOwnerById() action { ex.Message }");
                 return StatusCode(500, "Internal server error");
             }
         }
@@ -73,27 +76,28 @@ namespace SportsBetsServer.Controllers
 
                 if (user.Id.Equals(Guid.Empty))
                 {
-                    _logger.LogError($"User with id {id} was not found.");
+                    _logger.LogError($"User with id { id } was not found.");
                     return NotFound();
                 }
                 else
                 {
-                    _logger.LogInfo($"Returned user with details for id: {id}");
+                    _logger.LogInfo($"Returned user with details for id: { id }");
                     return Ok(user);
                 }
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Something went wrong inside GetOwnerWithDetails action: {ex.Message}");
+                _logger.LogError($"Something went wrong inside GetOwnerWithDetails action: { ex.Message }");
                 return StatusCode(500, "Internal server error");
             }
         }
-        [HttpPost]
+        [HttpPost("register")]
         public async Task<IActionResult> CreateUser([FromBody]UserToRegister user)
         {
             try
             {
                 user.Username = user.Username.ToLower();
+                user.DateCreated = DateTime.Now;
 
                 if (user == null)
                 {
@@ -114,8 +118,32 @@ namespace SportsBetsServer.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Something went wrong inside CreateUser action: {ex.Message}");
+                _logger.LogError($"Something went wrong inside CreateUser action: { ex.Message }");
                 return StatusCode(500, "Internal server error");
+            }
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteUser(Guid id)
+        {
+            try
+            {
+                var userToBeDeleted = await _repo.User.GetUserByIdAsync(id);
+
+                if (userToBeDeleted == null)
+                {
+                    _logger.LogError($"User with id: { id } was not found");
+                    return NotFound();
+                }
+
+                await _repo.User.DeleteUserAsync(userToBeDeleted);
+                _logger.LogInfo($"User with id: { id } successfully deleted.");
+
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong inside DeleteUser(): { ex.Message }");
+                return StatusCode(500, "Internal Server Error");
             }
         }
     }

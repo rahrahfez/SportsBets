@@ -30,8 +30,7 @@ namespace SportsBetsServer.Controllers
         {
             /*
             * Only returns token.
-            * Token is then stored into local storage,
-            * then user information is retrieved in separate http call.
+            * Token contains user credentials.
             */
             var user = _repo.Auth.Login(userToLogin.Username.ToLower(), userToLogin.Password);
 
@@ -65,7 +64,6 @@ namespace SportsBetsServer.Controllers
                 var token = tokenHandler.CreateToken(tokenDescriptor);
 
                 var signedAndEncodedToken = tokenHandler.WriteToken(token);
-
 
                 _logger.LogInfo($"{token} successfully created. Encoded as {signedAndEncodedToken}");
                 return Ok(signedAndEncodedToken);

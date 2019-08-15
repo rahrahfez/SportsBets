@@ -6,7 +6,7 @@ using Entities.Models;
 
 namespace SportsBetsServer.Controllers
 {
-    [Route("api/numbergeneratorcontroller")]
+    [Route("api/numbergenerator")]
     [ApiController]
     public class NumberGeneratorWagerController : ControllerBase
     {
@@ -37,7 +37,7 @@ namespace SportsBetsServer.Controllers
                 return StatusCode(500, "Internal Server Error");
             }
         }
-        [HttpPost]
+        [HttpPost("create")]
         public async Task<IActionResult> CreateNumberGeneratorWager([FromBody]NumberGeneratorWager ngWager)
         {
             try

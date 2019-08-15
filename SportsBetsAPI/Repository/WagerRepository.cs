@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Contracts;
 using Entities;
 using Entities.Models;
-using Entities.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace Repository
@@ -37,7 +36,6 @@ namespace Repository
     }
     public async Task UpdateWagerAsync(Wager dbWager, Wager wager)
     {
-      dbWager.Map(wager);
       Update(dbWager);
       await SaveAsync();
     }

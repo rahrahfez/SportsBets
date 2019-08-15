@@ -15,13 +15,7 @@ namespace SportsBetsServer.Services
         }
         public User RegisterNewUser(UserToRegister user)
         {
-            var creationTime = _dateTime.Now;
-            
-            var userToBeCreated = new User {
-                Username = user.Username,
-                DateCreated = creationTime
-            };
-            var registeredUser = _repo.Auth.Register(userToBeCreated, user.Password);
+            var registeredUser = _repo.Auth.Register(new User { Username = user.Username, DateCreated = _dateTime.Now }, user.Password);
   
             return registeredUser;
 
