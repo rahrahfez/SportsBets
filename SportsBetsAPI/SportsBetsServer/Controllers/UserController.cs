@@ -97,7 +97,6 @@ namespace SportsBetsServer.Controllers
             try
             {
                 user.Username = user.Username.ToLower();
-                user.DateCreated = DateTime.Now;
 
                 if (user == null)
                 {
@@ -113,6 +112,8 @@ namespace SportsBetsServer.Controllers
                 var registeredUser = _authService.RegisterNewUser(user);
 
                 await _repo.User.CreateUserAsync(registeredUser);
+
+                _logger.LogInfo($"Successfully registered { registeredUser.Username }.");
 
                 return CreatedAtRoute("UserById", new { id = registeredUser.Id }, registeredUser);
             }

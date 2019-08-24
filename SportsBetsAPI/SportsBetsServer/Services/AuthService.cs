@@ -18,7 +18,6 @@ namespace SportsBetsServer.Services
             var registeredUser = _repo.Auth.Register(new User { Username = user.Username, DateCreated = _dateTime.Now }, user.Password);
   
             return registeredUser;
-
         }
     }
 }
