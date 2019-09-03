@@ -3,5 +3,5 @@ export interface Wager {
   CreatedAt: Date;
   BetAmount: number;
   CreatedBy: string;
-  AcceptedBy: string;
+  AcceptedBy?: string;
 }
