@@ -21,9 +21,8 @@ describe('LoginComponent', () => {
   const initialState = { loggedIn: false };
   const user$: Observable<User> = of({
     Username: 'test',
-    Email: 'test@test.com',
+    UserId: '12345',
     AvailableBalance: 100,
-    Token: '12345'
   });
 
   beforeEach(async(() => {

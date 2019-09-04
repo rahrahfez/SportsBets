@@ -27,4 +27,8 @@ export class MockDatabaseService {
      * @params(): id is of the wagerId to be deleted.
      */
   }
+
+  getAllWagers(): Wager[] {
+    return this.mockWagers;
+  }
 }

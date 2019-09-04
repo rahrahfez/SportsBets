@@ -1,6 +1,6 @@
 export interface Wager {
   WagerId: string;
-  CreatedAt: Date;
+  CreatedAt: string;
   BetAmount: number;
   CreatedBy: string;
   AcceptedBy?: string;
