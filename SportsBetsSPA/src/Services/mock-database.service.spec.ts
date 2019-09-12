@@ -15,7 +15,7 @@ describe('MockDatabaseService', () => {
     const service: MockDatabaseService = TestBed.get(MockDatabaseService);
 
     const wager: Wager = {
-      WagerId: '1GO3',
+      Id: '1GO3',
       CreatedAt: '12/01/19',
       BetAmount: 50,
       CreatedBy: 'User'

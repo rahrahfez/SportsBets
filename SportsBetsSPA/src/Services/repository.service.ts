@@ -15,6 +15,9 @@ export class RepositoryService {
   create(endpoint: string, body: any) {
     return this.http.post(this.url + endpoint, body, this.generateHeaders());
   }
+  getDataById(endpoint: string, id: string) {
+    return this.http.get(this.url +  endpoint + '/' + id);
+  }
   generateHeaders() {
     return {
       headers: new HttpHeaders({'Content-Type': 'application/json'})

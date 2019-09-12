@@ -1,25 +1,17 @@
 import { Injectable } from '@angular/core';
 
 import { Wager } from '../Models/wager.model';
+import { RepositoryService } from './repository.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MockDatabaseService {
 
-  mockWagers: Wager[] = [];
-
-  constructor() { }
+  constructor(private repo: RepositoryService) { }
 
   createWager(wager: Wager) {
-    this.mockWagers.push(wager);
-  }
-
-  acceptWager(wager: Wager, acceptedBy: string) {
-    /*
-     * @params(): wager is the current wager, acceptedBy is current UserId.
-     * Takes the current wagerid, replace previous UserId with current UserId(acceptedBy)
-     */
+    this.repo.create('wagers', wager);
   }
 
   deleteWager(id: string) {
@@ -28,7 +20,11 @@ export class MockDatabaseService {
      */
   }
 
-  getAllWagers(): Wager[] {
-    return this.mockWagers;
+  getAllWagers() {
+    return this.repo.getData('wagers');
+  }
+
+  getWagerById(id: string) {
+    return this.repo.getDataById('wagers', id);
   }
 }

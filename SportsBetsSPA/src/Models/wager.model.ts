@@ -1,7 +1,8 @@
 export interface Wager {
-  WagerId: string;
+  Id: string;
   CreatedAt: string;
   BetAmount: number;
   CreatedBy: string;
+  BetCondition: string;
   AcceptedBy?: string;
 }

@@ -1,8 +1,9 @@
-<mat-card class="welcome-card" fxLayout="column">
-    <mat-card-header>
-      <mat-card-title><span><img class="profile-pic" src="../../assets/no-profile-pic-icon-12.png"></span>Welcome, David</mat-card-title>
-    </mat-card-header>
+<mat-card class="welcome-card" fxLayout="column" fxLayoutAlign="center center">
+  <mat-card-header>
+    <mat-card-title><img class="profile-pic" src="../../assets/no-profile-pic-icon-12.png"></mat-card-title>
+  </mat-card-header>
     <mat-card-content>
-      <p class="balance">Available Balace: 100 pts</p>
+      <h1>Welcome {{ username }}</h1>
+      <p class="balance">Available Balace:{{ availableBalance }} pts</p>
     </mat-card-content>
   </mat-card>
