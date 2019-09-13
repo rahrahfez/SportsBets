@@ -1,7 +1,15 @@
 <app-header></app-header>
 <app-nav-toolbar></app-nav-toolbar>
-
 <div class="home-content">
-  <app-welcome-card></app-welcome-card>
+  <div class="home-header" fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="10px">
+    <mat-card class="wager-card"  fxFlex="auto">
+      <div class="wager-tabs-container">
+          <app-recent-wagers></app-recent-wagers>
+      </div>
+    </mat-card>
+    <div class="welcome-card-container" fxFlex="30">
+        <app-welcome-card></app-welcome-card>
+    </div>
+  </div>
   <router-outlet></router-outlet>
 </div>

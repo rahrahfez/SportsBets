@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { RepositoryService } from 'src/Services/repository.service';
-import { Wager } from 'src/Models/wager.model';
-import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
-
+import { MockDatabaseService } from 'src/Services/mock-database.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,17 +9,14 @@ import { Observable } from 'rxjs';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  displayedColumns: string[] = ['date', 'amount', 'bettor', 'timeLeft'];
-  dataSource: any;
-  wagers$: any;
+  displayedColumns: string[] = ['createdBy', 'condition', 'amount', 'accept'];
+  dsWagers: any;
 
-  constructor(private repo: RepositoryService) { }
+  constructor(private wagerService: MockDatabaseService) { }
 
   ngOnInit() {
-    this.repo.getData('wagers')
-      .subscribe((wager) => {
-
-      });
+    this.wagerService.getAllWagers()
+      .pipe(map(res => this.dsWagers = res))
+      .subscribe();
   }
-
 }

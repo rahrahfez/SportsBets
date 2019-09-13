@@ -9,6 +9,7 @@ import { WelcomeCardComponent } from './welcome-card/welcome-card.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home.component';
 import { HomeRoutesModule } from './home.routes.module';
+import { RecentWagersComponent } from './recent-wagers/recent-wagers.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { HomeRoutesModule } from './home.routes.module';
     ViewBetsComponent,
     WelcomeCardComponent,
     HeaderComponent,
-    HomeComponent
+    HomeComponent,
+    RecentWagersComponent
   ],
   imports: [
     SharedModule,

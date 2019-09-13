@@ -29,7 +29,7 @@ import { InMemoryWagerService } from 'src/Services/in-memory-wager.service';
     BrowserAnimationsModule,
     HttpClientModule,
     environment.production ?
-      HttpClientInMemoryWebApiModule.forRoot(InMemoryWagerService, { delay: 100 }) : [],
+      [] : HttpClientInMemoryWebApiModule.forFeature(InMemoryWagerService, { delay: 100 }),
     AppRoutesModule,
     AuthModule,
     StoreModule.forRoot(reducers, {}),
