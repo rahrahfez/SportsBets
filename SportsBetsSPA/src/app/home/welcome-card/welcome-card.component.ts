@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./welcome-card.component.scss']
 })
 export class WelcomeCardComponent implements OnInit {
-
+  availableBalance = 1000;
+  username = 'user1';
   constructor() { }
 
   ngOnInit() {

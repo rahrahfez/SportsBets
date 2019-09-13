@@ -1,12 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { map } from 'rxjs/operators';
 
-export interface Wager {
-  date: Date;
-  amount: number;
-  bettor: string;
-}
-
-const WAGER_DATA: Wager[] = [];
+import { MockDatabaseService } from 'src/Services/mock-database.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,12 +9,14 @@ const WAGER_DATA: Wager[] = [];
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  displayedColumns: string[] = ['date', 'amount', 'bettor', 'timeLeft'];
-  dataSource = WAGER_DATA;
+  displayedColumns: string[] = ['createdBy', 'condition', 'amount', 'accept'];
+  dsWagers: any;
 
-  constructor() { }
+  constructor(private wagerService: MockDatabaseService) { }
 
   ngOnInit() {
+    this.wagerService.getAllWagers()
+      .pipe(map(res => this.dsWagers = res))
+      .subscribe();
   }
-
 }

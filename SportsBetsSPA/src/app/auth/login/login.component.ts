@@ -39,20 +39,22 @@ export class LoginComponent implements OnInit {
       Username: this.loginForm.controls.Username.value,
       Password: this.loginForm.controls.Password.value
     };
-    this.authService.login(credentials).subscribe((val: string) => {
-      console.log(val);
-      this.tokenService.setTokenKey('token', val);
-      const token = this.tokenService.getDecodedToken(this.tokenService.getTokenKey('token'));
-      console.log(token);
-      const user: User = {
-        UserId: token.nameid,
-        Username: token.unique_name
-      };
-      this.store.dispatch(new Login({ user }));
-    },
-    err => {
-      console.log(err);
-    });
+    this.authService.login(credentials)
+      .subscribe((val: string) => {
+        this.tokenService.setTokenKey('token', val);
+
+        const token = this.tokenService.getDecodedToken(this.tokenService.getTokenKey('token'));
+
+        const user: User = {
+          UserId: token.nameid,
+          Username: token.unique_name
+        };
+
+        this.store.dispatch(new Login({ user }));
+      },
+      err => {
+        console.log(err);
+      });
   }
 
   openRegistrationForm() {

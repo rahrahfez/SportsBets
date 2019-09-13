@@ -17,8 +17,8 @@
         type="submit"
         (click)="onLogin()"
         class="login-btn"
-        color="primary">Login</button>
-      <p class="forgot-password-link">Forgot Password?</p>
+        color="primary"
+        [disabled]="loginForm.invalid">Login</button>
       <div class="line-break"></div>
       <p>Don't have an account?</p>
       <button

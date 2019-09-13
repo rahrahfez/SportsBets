@@ -17,7 +17,7 @@ export class NavToolbarComponent implements OnInit {
     this.router.navigate(['dashboard']);
   }
   toView() {
-    this.router.navigate(['view'], { relativeTo: this.route });
+    this.router.navigate(['select'], { relativeTo: this.route });
   }
   toCreate() {
     this.router.navigate(['create'], { relativeTo: this.route });

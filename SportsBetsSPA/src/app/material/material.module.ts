@@ -10,9 +10,11 @@ import {
   MatTableModule,
   MatCardModule,
   MatSidenavModule,
-  MatSelectModule
+  MatSelectModule,
+  MatSnackBarModule,
+  MatProgressSpinnerModule,
+  MatTabsModule
  } from '@angular/material';
-
 
 @NgModule({
   declarations: [],
@@ -27,7 +29,10 @@ import {
     MatTableModule,
     MatCardModule,
     MatSidenavModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule,
+    MatTabsModule
   ],
   exports: [
     MatToolbarModule,
@@ -39,7 +44,10 @@ import {
     MatTableModule,
     MatCardModule,
     MatSidenavModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule,
+    MatTabsModule
   ]
 })
 export class MaterialModule { }

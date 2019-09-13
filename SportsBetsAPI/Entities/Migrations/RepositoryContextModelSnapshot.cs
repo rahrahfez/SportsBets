@@ -24,6 +24,8 @@ namespace Entities.Migrations
 
                     b.Property<int>("AmountWagered");
 
+                    b.Property<bool>("IsAccepted");
+
                     b.Property<bool>("IsGreaterThan");
 
                     b.Property<Guid?>("WagerId");

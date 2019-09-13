@@ -7,10 +7,6 @@ export interface BetCondition {
   viewValue: string;
 }
 
-export interface Wager {
-  CreatedById: string;
-  Amount: number;
-}
 
 @Component({
   selector: 'app-create-bets',
@@ -29,12 +25,5 @@ export class CreateBetsComponent implements OnInit {
     this.createBetForm = this.fb.group({
       Amount: this.fb.control('')
     });
-  }
-
-  CreateBet() {
-    let wagerToBeCreated: Wager = {
-      CreatedById: '',
-      Amount: this.createBetForm.controls.Amount.value,
-    };
   }
 }

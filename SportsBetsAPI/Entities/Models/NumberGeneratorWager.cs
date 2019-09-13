@@ -12,5 +12,6 @@ namespace Entities.Models
         public Wager Wager { get; set; }
         public int AmountWagered { get; set; }
         public bool IsGreaterThan { get; set; }
+        public bool IsAccepted { get; set; } 
     }
 }

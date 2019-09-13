@@ -1,26 +1,22 @@
-  <app-welcome-card></app-welcome-card>
-  <h3 class="current-wagers-header">Current Wagers</h3>
-  <mat-table [dataSource]="dataSource" class="mat-elevation-z2">
-    <!-- Position Column -->
-    <ng-container matColumnDef="date">
-      <mat-header-cell *matHeaderCellDef>Date Created.</mat-header-cell>
-      <mat-cell *matCellDef="let wager"> {{ wager.date }}</mat-cell>
-    </ng-container>
-    <!-- Amount Column -->
-    <ng-container matColumnDef="amount">
-      <mat-header-cell *matHeaderCellDef>Amount</mat-header-cell>
-      <mat-cell *matCellDef="let wager"> {{ wager.amount }}</mat-cell>
-    </ng-container>
-    <!-- Bettor Column -->
-    <ng-container matColumnDef="bettor">
-      <mat-header-cell *matHeaderCellDef>Bettor</mat-header-cell>
-      <mat-cell *matCellDef="let wager"> {{ wager.bettor }}</mat-cell>
-    </ng-container>
-    <!-- Time Remaining Column -->
-    <ng-container matColumnDef="timeLeft">
-      <mat-header-cell *matHeaderCellDef>Time Remaining</mat-header-cell>
-      <mat-cell *matCellDef="let wager"> {{ wager.timeLeft }}</mat-cell>
-    </ng-container>
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
-  </mat-table>
+<table mat-table class="mat-elevation-z8 select-wager-table" [dataSource]="dsWagers">
+  <ng-container matColumnDef="createdBy">
+    <th mat-header-cell *matHeaderCellDef>Bookmaker</th>
+    <td mat-cell *matCellDef="let wager"> {{ wager.createdBy }}</td>
+  </ng-container>
+  <ng-container matColumnDef="condition">
+    <th mat-header-cell *matHeaderCellDef>Condition</th>
+    <td mat-cell *matCellDef="let wager"> {{ wager.condition }}</td>
+  </ng-container>
+  <ng-container matColumnDef="amount">
+    <th mat-header-cell *matHeaderCellDef>Amount</th>
+    <td mat-cell *matCellDef="let wager"> {{ wager.amount }}</td>
+  </ng-container>
+  <ng-container matColumnDef="accept" class="accept-btn">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let wager">
+      <button mat-raised-button color="accent">Accept</button>
+    </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
