@@ -1,8 +1,6 @@
-export interface Wager {
+export interface IWager {
   Id: string;
   CreatedAt: string;
   BetAmount: number;
   CreatedBy: string;
-  BetCondition: string;
-  AcceptedBy?: string;
 }

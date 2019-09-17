@@ -1,9 +1,9 @@
-import { Wager } from './wager.model';
+import { RandomNumGenWager } from './rand-num-gen-wager.model';
 
-export interface User {
-  UserId: string;
-  Username: string;
-  Email?: string;
-  AvailableBalance?: number;
-  Wager?: Wager[];
+export class User {
+  constructor(
+      public Id: string,
+      public Username: string,
+      public AvailableBalance: number,
+      public RandomNumGenWagers?: RandomNumGenWager[]) {}
 }
