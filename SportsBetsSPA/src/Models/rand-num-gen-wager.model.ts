@@ -1,6 +1,6 @@
-import { Wager } from './wager.model';
+import { IWager } from './wager.model';
 
-export class RandomNumGenWager implements Wager {
+export class RandomNumGenWager implements IWager {
   Id: string;
   CreatedAt: string;
   CreatedBy: string;

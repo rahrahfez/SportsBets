@@ -3,7 +3,6 @@ import { SharedModule } from '../shared/shared.module';
 
 import { NavToolbarComponent } from './nav-toolbar/nav-toolbar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { ViewBetsComponent } from './view-bets/view-bets.component';
 import { WelcomeCardComponent } from './welcome-card/welcome-card.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home.component';
@@ -14,7 +13,6 @@ import { RecentWagersComponent } from './recent-wagers/recent-wagers.component';
   declarations: [
     NavToolbarComponent,
     DashboardComponent,
-    ViewBetsComponent,
     WelcomeCardComponent,
     HeaderComponent,
     HomeComponent,

@@ -1,4 +1,4 @@
-export interface Wager {
+export interface IWager {
   Id: string;
   CreatedAt: string;
   BetAmount: number;
