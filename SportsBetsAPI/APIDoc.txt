@@ -1,0 +1,21 @@
+USER API
+  - api/users
+    - GET all users
+
+  - api/users/:id
+    - GET user by id
+
+  - api/users/:id/getbalance
+    - GET available balance of user
+
+WAGER API
+  - api/numbergenerator/create
+    - POST a new wager
+
+  - api/numbergenerator/update
+    - PUT a wager to allow user to accept wager
+
+AUTH API  
+  - api/auth/login
+    - POST login user, returns Unauthorized(401) if user is not found
+    - returns response with encoded jwt that gets decoded on the front end

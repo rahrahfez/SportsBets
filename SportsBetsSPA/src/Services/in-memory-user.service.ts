@@ -10,8 +10,7 @@ export class InMemoryUserService implements InMemoryDbService {
   constructor() { }
 
   createDb() {
-    let user = new User('1234-1234-1234', 'user1', 100);
-
+    const user = new User('1234-1234-1234', 'user1', 100);
     return user;
   }
 }

@@ -3,10 +3,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Contracts;
 using Entities.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SportsBetsServer.Controllers
 {
     [Route("api/numbergenerator")]
+    [Authorize]
     [ApiController]
     public class NumberGeneratorWagerController : ControllerBase
     {

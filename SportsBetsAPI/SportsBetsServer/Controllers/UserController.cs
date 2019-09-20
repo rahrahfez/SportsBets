@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SportsBetsServer.Controllers
 {
-    [Route("api/user")]
+    [Route("api/users")]
     [ApiController]
     public class UserController : ControllerBase
     {
