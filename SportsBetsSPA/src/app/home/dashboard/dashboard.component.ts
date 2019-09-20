@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs/operators';
-
-import { MockDatabaseService } from 'src/Services/mock-database.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,11 +9,7 @@ export class DashboardComponent implements OnInit {
   displayedColumns: string[] = ['createdBy', 'condition', 'amount', 'accept'];
   dsWagers: any;
 
-  constructor(private wagerService: MockDatabaseService) { }
+  constructor() { }
 
-  ngOnInit() {
-    this.wagerService.getAllWagers()
-      .pipe(map(res => this.dsWagers = res))
-      .subscribe();
-  }
+  ngOnInit() {}
 }

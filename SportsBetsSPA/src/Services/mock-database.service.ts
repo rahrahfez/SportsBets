@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Wager } from '../Models/wager.model';
+import { IWager } from '../Models/wager.model';
 import { RepositoryService } from './repository.service';
 
 @Injectable({
@@ -10,7 +10,7 @@ export class MockDatabaseService {
 
   constructor(private repo: RepositoryService) { }
 
-  createWager(wager: Wager) {
+  createWager(wager: IWager) {
     this.repo.create('wagers', wager);
   }
 

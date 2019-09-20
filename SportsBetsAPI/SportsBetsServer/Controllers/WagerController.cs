@@ -3,11 +3,13 @@ using System.Threading.Tasks;
 using Contracts;
 using Entities.ExtendedModels;
 using Entities.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace SportsBetsServer.Controllers
 {
     [Route("api/wager")]
+    [Authorize]
     [ApiController]
     public class WagerController : ControllerBase
     {

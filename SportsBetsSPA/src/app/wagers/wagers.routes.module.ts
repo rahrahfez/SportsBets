@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { SelectWagerComponent } from './select-wager/select-wager.component';
 import { WagersComponent } from './wagers.component';
-import { ViewBetsComponent } from '../home/view-bets/view-bets.component';
 import { CreateWagerComponent } from './create-wager/create-wager.component';
 
 const routes: Routes = [

@@ -12,8 +12,7 @@ export class AuthEffects {
   login$ = this.action$.pipe(
     ofType<Login>(AuthActions.LOGIN),
     tap(action => {
-      this.tokenService.setTokenKey('user', JSON.stringify(action.payload));
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['/home']);
     })
   );
 
@@ -22,6 +21,7 @@ export class AuthEffects {
     ofType<Logout>(AuthActions.LOGOUT),
     tap(() => {
       this.tokenService.removeTokenKey('token');
+      this.tokenService.removeTokenKey('user');
       this.router.navigate(['/login']);
     })
   );

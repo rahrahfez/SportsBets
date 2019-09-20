@@ -43,11 +43,18 @@ export class LoginComponent implements OnInit {
       .subscribe((val: string) => {
         this.tokenService.setTokenKey('token', val);
 
-        const token = this.tokenService.getDecodedToken(this.tokenService.getTokenKey('token'));
+        const token = this.tokenService.getTokenKey('token');
+
+        const decodedToken = this.tokenService.getDecodedToken(token);
+
+        this.tokenService.setTokenKey('user', JSON.stringify(decodedToken));
+
+        const userToken = JSON.parse(this.tokenService.getTokenKey('user'));
 
         const user: User = {
-          UserId: token.nameid,
-          Username: token.unique_name
+          Id: userToken['nameid'],
+          Username: userToken['unique_name'],
+          AvailableBalance: 0
         };
 
         this.store.dispatch(new Login({ user }));
