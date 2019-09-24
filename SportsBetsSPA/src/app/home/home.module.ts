@@ -8,6 +8,8 @@ import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home.component';
 import { HomeRoutesModule } from './home.routes.module';
 import { RecentWagersComponent } from './recent-wagers/recent-wagers.component';
+import { EffectsModule } from '@ngrx/effects';
+import { UserEffects } from './store/home.effect';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { RecentWagersComponent } from './recent-wagers/recent-wagers.component';
   ],
   imports: [
     SharedModule,
-    HomeRoutesModule
+    HomeRoutesModule,
+    EffectsModule.forFeature([UserEffects])
   ]
 })
 export class HomeModule { }

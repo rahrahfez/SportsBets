@@ -1,13 +1,13 @@
-import { User } from '../../../Models/user.model';
+import { Token } from '../../../Models/token.model';
 
 export interface AuthState {
-  user: User | null;
+  token: Token | null;
   isLoggedIn: boolean;
   errorMessage: string;
 }
 
 export const initialAuthState: AuthState = {
-  user: null,
+  token: null,
   isLoggedIn: false,
   errorMessage: null
 };

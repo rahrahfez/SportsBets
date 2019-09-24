@@ -5,6 +5,6 @@
     <mat-card-content fxLayout="column" fxLayoutAlign="space-evenly">
       <h1 class="welcome-user-header">Welcome {{ username$ | async }}</h1>
       <p class="balance-header">Available Balance:</p>
-      <p class="balance">{{ availableBalance | number }} points</p>
+      <p class="balance">{{ availableBalance$ | async | number }} points</p>
     </mat-card-content>
   </mat-card>

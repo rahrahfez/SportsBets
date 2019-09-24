@@ -6,13 +6,14 @@ export enum UserActions {
   LOGOUT = '[USER] Logout'
 }
 
-export class Login implements Action {
+export class UserLogin implements Action {
   readonly type = UserActions.LOGIN;
+
   constructor(public payload: { user: User }) {}
 }
 
-export class Logout implements Action {
+export class UserLogout implements Action {
   readonly type = UserActions.LOGOUT;
 }
 
-export type UserActionTypes = Login | Logout;
+export type UserActionTypes = UserLogin | UserLogout;

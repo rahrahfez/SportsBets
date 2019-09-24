@@ -9,6 +9,8 @@ import { AppState } from '../../store/app.state';
 import { Login } from '../store/auth.action';
 import { User } from '../../../Models/user.model';
 import { TokenService } from 'src/Services/token.service';
+import { Token } from 'src/Models/token.model';
+import { UserLogin } from 'src/app/home/store/home.action';
 
 @Component({
   selector: 'app-login',
@@ -43,9 +45,9 @@ export class LoginComponent implements OnInit {
       .subscribe((val: string) => {
         this.tokenService.setTokenKey('token', val);
 
-        const token = this.tokenService.getTokenKey('token');
+        const token$ = this.tokenService.getTokenKey('token');
 
-        const decodedToken = this.tokenService.getDecodedToken(token);
+        const decodedToken = this.tokenService.getDecodedToken(token$);
 
         this.tokenService.setTokenKey('user', JSON.stringify(decodedToken));
 
@@ -53,11 +55,16 @@ export class LoginComponent implements OnInit {
 
         const user: User = {
           Id: userToken['nameid'],
-          Username: userToken['unique_name'],
-          AvailableBalance: 0
+          Username: userToken['unique_name']
         };
 
-        this.store.dispatch(new Login({ user }));
+        const token: Token = {
+          iat: userToken['iat'],
+          exp: userToken['exp']
+        };
+
+        this.store.dispatch(new Login({ token }));
+        this.store.dispatch(new UserLogin({ user }));
       },
       err => {
         console.log(err);
