@@ -38,6 +38,12 @@ namespace Repository
             })
             .SingleOrDefaultAsync();
         }
+        public async Task<int> GetUserAvailableBalance(Guid id)
+        {
+            return await FindByCondition(u => u.Id.Equals(id))
+            .Select(user => user.AvailableBalance)
+            .FirstOrDefaultAsync();
+        }
         public async Task CreateUserAsync(User user)
         {
             user.Id = Guid.NewGuid();
