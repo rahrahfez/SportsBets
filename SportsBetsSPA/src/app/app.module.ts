@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutesModule } from './app.routes.module';
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 
 import { AppComponent } from './app.component';
 import { RepositoryService } from 'src/Services/repository.service';
@@ -17,8 +16,6 @@ import { AuthGuard } from 'src/app/auth/auth.guard';
 import { TokenService } from 'src/Services/token.service';
 import { RegisterComponent } from './auth/register/register.component';
 import { AuthModule } from './auth/auth.module';
-import { environment } from 'src/environments/environment';
-import { InMemoryWagerService } from 'src/Services/in-memory-wager.service';
 
 @NgModule({
   declarations: [
@@ -28,8 +25,6 @@ import { InMemoryWagerService } from 'src/Services/in-memory-wager.service';
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    // environment.production ?
-    //   [] : HttpClientInMemoryWebApiModule.forFeature(InMemoryWagerService, { delay: 100 }),
     AppRoutesModule,
     AuthModule,
     StoreModule.forRoot(reducers, {}),

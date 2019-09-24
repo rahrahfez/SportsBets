@@ -26,7 +26,7 @@ export class AuthGuard implements CanActivate, CanLoad {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): Observable<boolean> {
+  ): Observable<boolean> | Promise<boolean> | boolean {
     return this.store.pipe(
       select(loggedIn),
       tap(isLoggedIn => {
@@ -36,7 +36,7 @@ export class AuthGuard implements CanActivate, CanLoad {
       })
     );
   }
-  canLoad(route: Route): boolean {
+  canLoad(route: Route): Observable<boolean> | Promise<boolean> | boolean {
     return true;
   }
 }

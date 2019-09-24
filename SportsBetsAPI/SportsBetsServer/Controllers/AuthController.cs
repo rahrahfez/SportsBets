@@ -55,7 +55,7 @@ namespace SportsBetsServer.Controllers
                 {
                     Subject = new ClaimsIdentity(claims),
                     NotBefore = DateTime.UtcNow,
-                    Expires = DateTime.UtcNow.AddMinutes(10),
+                    Expires = DateTime.UtcNow.AddMinutes(1),
                     SigningCredentials = creds
                 };
 
