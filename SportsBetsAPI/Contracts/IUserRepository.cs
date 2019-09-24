@@ -11,6 +11,7 @@ namespace Contracts
     {
         Task<IEnumerable<User>> GetAllUsersAsync();
         Task<User> GetUserByIdAsync(Guid id);
+        Task<int> GetUserAvailableBalance(Guid id);
         Task<UserExtended> GetUserWithDetailsAsync(Guid id);
         Task CreateUserAsync(User user);
         Task UpdateUserAsync(User dbUser, User user);

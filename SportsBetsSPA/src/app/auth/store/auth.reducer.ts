@@ -7,7 +7,6 @@ export function authReducer(state = initialAuthState, action: AuthActionTypes)
     case AuthActions.LOGIN: {
       return {
         ...state,
-        user: action.payload.user,
         isLoggedIn: true,
         errorMessage: null
       };

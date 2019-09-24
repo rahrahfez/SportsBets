@@ -1,4 +1,4 @@
-import { IWager } from './wager.model';
+import { IWager } from './Iwager.model';
 
 export class RandomNumGenWager implements IWager {
   Id: string;

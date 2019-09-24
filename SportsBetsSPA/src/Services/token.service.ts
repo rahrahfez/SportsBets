@@ -16,15 +16,19 @@ export class TokenService {
       return null;
     }
   }
+
   setTokenKey(key: string, value: string) {
     localStorage.setItem(key, value);
   }
+
   getTokenKey(key: string): string {
     return localStorage.getItem(key);
   }
+
   removeTokenKey(key: string) {
     localStorage.removeItem(key);
   }
+
   isAuthenticated(): boolean {
     const token = this.getTokenKey('token');
     return !this.jwt.isTokenExpired(token);

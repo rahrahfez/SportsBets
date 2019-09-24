@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { IWager } from 'src/Models/wager.model';
+import { IWager } from 'src/Models/Iwager.model';
 
 @Injectable({
   providedIn: 'root'

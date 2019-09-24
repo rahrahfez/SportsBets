@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { User } from 'src/Models/user.model';
+import { Token } from 'src/Models/token.model';
 
 export enum AuthActions {
   LOGIN = '[AUTH] Login',
@@ -9,7 +9,7 @@ export enum AuthActions {
 export class Login implements Action {
   readonly type = AuthActions.LOGIN;
 
-  constructor(public payload: { user: User }) {}
+  constructor(private payload: { token: Token }) {}
 }
 
 export class Logout implements Action {

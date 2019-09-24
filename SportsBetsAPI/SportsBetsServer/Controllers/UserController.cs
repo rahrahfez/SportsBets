@@ -66,7 +66,20 @@ namespace SportsBetsServer.Controllers
                 return StatusCode(500, "Internal server error");
             }
         }
-        
+        [HttpGet("{id}/availablebalance")]
+        public async Task<IActionResult> GetUserAvailableBalanceById(Guid id)
+        {
+            try
+            {
+                var availablebalance = await _repo.User.GetUserAvailableBalance(id);
+                return Ok(availablebalance);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Unable to retrieve available balance from GetUserAvailableBalance() { ex.Message }");
+                return StatusCode(500, "Internal server error");
+            }
+        }
         [HttpGet("{id}/wagers")]
         public async Task<IActionResult> GetOwnerWithDetails(Guid id)
         {
