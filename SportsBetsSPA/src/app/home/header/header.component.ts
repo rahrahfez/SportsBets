@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 
-import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/store/app.state';
-import { Logout } from 'src/app/auth/store/auth.action';
-import { Router } from '@angular/router';
+import { MatIconRegistry } from '@angular/material/icon';
 import { AuthService } from 'src/Services/auth.service';
 
 @Component({
@@ -13,7 +11,8 @@ import { AuthService } from 'src/Services/auth.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
+   }
 
   ngOnInit() {
   }

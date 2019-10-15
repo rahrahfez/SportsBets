@@ -14,12 +14,12 @@ export class NavToolbarComponent implements OnInit {
   }
 
   toDashboard() {
-    this.router.navigate(['dashboard']);
+    this.router.navigate(['home']);
   }
   toView() {
     this.router.navigate(['select'], { relativeTo: this.route });
   }
   toCreate() {
-    this.router.navigate(['create'], { relativeTo: this.route });
+    this.router.navigate(['wagers'], { relativeTo: this.route });
   }
 }

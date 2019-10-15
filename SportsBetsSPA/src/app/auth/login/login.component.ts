@@ -7,9 +7,9 @@ import { RegisterComponent } from '../register/register.component';
 import { AuthService } from 'src/Services/auth.service';
 import { AppState } from '../../store/app.state';
 import { Login } from '../store/auth.action';
-import { User } from '../../../Models/user.model';
-import { TokenService } from 'src/Services/token.service';
+import { User } from 'src/Models/user.model';
 import { Token } from 'src/Models/token.model';
+import { TokenService } from 'src/Services/token.service';
 import { UserLogin } from 'src/app/home/store/home.action';
 
 @Component({
@@ -57,13 +57,7 @@ export class LoginComponent implements OnInit {
           Id: userToken['nameid'],
           Username: userToken['unique_name']
         };
-
-        const token: Token = {
-          iat: userToken['iat'],
-          exp: userToken['exp']
-        };
-
-        this.store.dispatch(new Login({ token }));
+        this.store.dispatch(new Login());
         this.store.dispatch(new UserLogin({ user }));
       },
       err => {

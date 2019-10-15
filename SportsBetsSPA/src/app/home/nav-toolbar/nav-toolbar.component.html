@@ -1,4 +1,8 @@
 <div class="nav-links-container" fxLayout="row" fxLayoutGap="auto">
-  <button mat-raised-button class="search-wagers-btn">Search For A Wager</button>
-  <button mat-stroked-button class="create-wagers-btn">Create A Wager</button>
+  <!-- <button mat-raised-button class="search-wagers-btn">Search For A Wager</button> -->
+  <button
+    mat-stroked-button
+    (click)="toCreate()"
+    class="create-wager-btn"
+    color="accent">Create A Wager</button>
 </div>
