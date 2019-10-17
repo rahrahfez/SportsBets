@@ -13,7 +13,7 @@ namespace Entities.Models
         public Guid Id { get; set; }
         public DateTime CreatedAt { get; set; }
         [ForeignKey("UserId")]
-        public User User { get; set; }
+        public Guid UserId { get; set; }
         public ICollection<NumberGeneratorWager> NumberGeneratorWagers { get; set; }
     }
 }

@@ -9,7 +9,7 @@ export enum AuthActions {
 export class Login implements Action {
   readonly type = AuthActions.LOGIN;
 
-  constructor(public payload: { token: Token }) {}
+  constructor() {}
 }
 
 export class Logout implements Action {

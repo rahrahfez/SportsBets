@@ -128,7 +128,7 @@ namespace SportsBetsServer.Controllers
 
                 _logger.LogInfo($"Successfully registered { registeredUser.Username }.");
 
-                return CreatedAtRoute("UserById", new { id = registeredUser.Id }, registeredUser);
+                return CreatedAtRoute(routeName: "UserById", routeValues: new { id = registeredUser.Id }, value: registeredUser);
             }
             catch (Exception ex)
             {

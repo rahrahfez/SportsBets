@@ -5,7 +5,7 @@ import { HomeComponent } from './home.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, children: [
-    { path: 'select', loadChildren: () => import('../wagers/wagers.module').then(m => m.WagerModule) }
+    { path: 'wagers', loadChildren: () => import('../wagers/wagers.module').then(m => m.WagerModule) }
   ]},
 ];
 
