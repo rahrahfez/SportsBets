@@ -9,6 +9,7 @@ namespace Contracts
     {
          Task<Wager> GetWagerByIdAsync(Guid id);
          Task<IEnumerable<Wager>> GetAllWagersAsync();
+         Task<IEnumerable<Wager>> GetAllWagersByUserIdAsync(Guid id);
          Task CreateWagerAsync(Wager wager);
          Task UpdateWagerAsync(Wager dbWager, Wager wager);
          Task DeleteWagerAsync(Wager wager);

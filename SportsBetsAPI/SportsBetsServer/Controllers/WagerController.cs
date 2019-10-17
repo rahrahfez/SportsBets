@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace SportsBetsServer.Controllers
 {
     [Route("api/wager")]
-    [Authorize]
+    // [Authorize]
     [ApiController]
     public class WagerController : ControllerBase
     {
@@ -53,14 +53,36 @@ namespace SportsBetsServer.Controllers
                 return StatusCode(500, "Internal Server Error");
             }
         }
-        [HttpPost]
-        public async Task<IActionResult> CreateWager([FromBody]Wager wager)
+        [HttpGet("user/{id}")]
+        public async Task<IActionResult> GetWagersByUserId(Guid id)
+        {
+            try
+            {
+                _logger.LogInfo($"Successfully returned wagers of user id { id }");
+                var wagers = await _repo.Wager.GetAllWagersByUserIdAsync(id);
+                return Ok(wagers);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error in GetWagersByUserId(): { ex.Message }");
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+        [HttpPost("create")]
+        public async Task<IActionResult> CreateWager([FromBody]Wager wagers)
         {
             /*
             * Wager will be created
             */
             try
             {
+                var wager = new Wager
+                {
+                    Id = Guid.NewGuid(),
+                    CreatedAt = DateTime.Now,
+                    UserId = wagers.UserId
+                };
+
                 await _repo.Wager.CreateWagerAsync(wager);
                 _logger.LogInfo($"Successfully created wager with id {wager.Id}");
                 return CreatedAtRoute("WagerById", wager);

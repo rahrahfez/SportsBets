@@ -27,10 +27,14 @@ namespace Repository
         .AsNoTracking()
         .SingleOrDefaultAsync();
     }
+    public async Task<IEnumerable<Wager>> GetAllWagersByUserIdAsync(Guid id)
+    {
+      return await FindAll()
+        .Where(wager => wager.UserId.Equals(id))
+        .ToListAsync();
+    }
     public async Task CreateWagerAsync(Wager wager)
     {
-      wager.Id = Guid.NewGuid();
-      wager.CreatedAt = DateTime.Now;
       Create(wager);
       await SaveAsync();
     }

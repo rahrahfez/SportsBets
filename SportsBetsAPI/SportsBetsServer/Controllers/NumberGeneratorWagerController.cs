@@ -4,11 +4,12 @@ using Microsoft.AspNetCore.Mvc;
 using Contracts;
 using Entities.Models;
 using Microsoft.AspNetCore.Authorization;
+using Entities.ExtendedModels;
 
 namespace SportsBetsServer.Controllers
 {
     [Route("api/numbergenerator")]
-    [Authorize]
+    // [Authorize]
     [ApiController]
     public class NumberGeneratorWagerController : ControllerBase
     {
@@ -40,23 +41,33 @@ namespace SportsBetsServer.Controllers
             }
         }
         [HttpPost("create")]
-        public async Task<IActionResult> CreateNumberGeneratorWager([FromBody]NumberGeneratorWager ngWager)
+        public async Task<IActionResult> CreateNumberGeneratorWager([FromBody]NumGenWagerExtended ngWager)
         {
             try
             {
                 var wager = new Wager
                 { 
                     Id = Guid.NewGuid(),
-                    CreatedAt = DateTime.Now 
+                    CreatedAt = DateTime.Now,
+                    UserId = ngWager.UserId
                 };
 
                 await _repo.Wager.CreateWagerAsync(wager);
 
-                await _repo.NumberGeneratorWager.CreateNumberGeneratorWagerAsync(ngWager);
+                var ngWagerToBeCreated = new NumberGeneratorWager
+                {
+                    Id = Guid.NewGuid(),
+                    WagerId = wager.Id,
+                    AmountWagered = ngWager.AmountWagered,
+                    IsGreaterThan = ngWager.IsGreaterThan,
+                    IsAccepted = false
+                };
 
-                _logger.LogInfo($"Successfully created NumberGeneratorWager with id { ngWager.Id }");
+                await _repo.NumberGeneratorWager.CreateNumberGeneratorWagerAsync(ngWagerToBeCreated);
 
-                return CreatedAtRoute("GetNumberGeneratorWagerById", ngWager);
+                _logger.LogInfo($"Successfully created NumberGeneratorWager with id { ngWagerToBeCreated.Id }");
+
+                return CreatedAtRoute(routeName: "GetNumberGeneratorWagerById", routeValues: new NumberGeneratorWager{ Id = ngWagerToBeCreated.Id }, value: ngWagerToBeCreated);
             }
             catch (Exception ex)
             {
