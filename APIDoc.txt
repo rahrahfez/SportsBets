@@ -10,13 +10,13 @@ USER API
     - GET available balance of user
 
 WAGER API
-  - api/wagers
+  - api/wager
     - GET all wagers
 
-  - api/wagers/:userid // NOT IMPLEMENTED
+  - api/wager/:userid // NOT IMPLEMENTED
     -GET all wagers by user id
 
-  - api/numbergenerator/create // NOT IMPLEMENTED
+  - api/numbergenerator/create
     - POST a new wager
 
   - api/numbergenerator/update

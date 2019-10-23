@@ -5,6 +5,8 @@ import { TokenService } from './token.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.state';
 import { Logout } from 'src/app/auth/store/auth.action';
+import { mapTo, catchError, tap } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,12 +18,14 @@ export class AuthService {
               private tokenService: TokenService,
               private store: Store<AppState>) {}
 
-  isAuthenticated(): boolean {
-    return this.tokenService.isAuthenticated();
+  isLoggedIn(): boolean {
+    return this.tokenService.isTokenExpired();
   }
 
   login(credentials: any) {
-    return this.http.post(this.url + 'login', credentials, { responseType: 'text' });
+    return this.http.post(this.url + 'login', credentials, { responseType: 'text' }).pipe(
+      tap((token: string) => this.tokenService.setTokenKey('token', token))
+    );
   }
 
   logout() {
