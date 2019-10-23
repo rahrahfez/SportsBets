@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { User } from 'src/Models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -25,12 +26,16 @@ export class TokenService {
     return localStorage.getItem(key);
   }
 
+  getUsernameFromToken(): string {
+    const token = this.getTokenKey((this.getDecodedToken('token')));
+    return token['unique_name'];
+  }
+
   removeTokenKey(key: string) {
     localStorage.removeItem(key);
   }
 
-  isAuthenticated(): boolean {
-    const token = this.getTokenKey('token');
-    return !this.jwt.isTokenExpired(token);
+  isTokenExpired(): boolean {
+    return !this.jwt.isTokenExpired(this.getTokenKey('token'));
   }
 }

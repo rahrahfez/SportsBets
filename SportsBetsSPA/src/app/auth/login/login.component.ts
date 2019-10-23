@@ -7,10 +7,9 @@ import { RegisterComponent } from '../register/register.component';
 import { AuthService } from 'src/Services/auth.service';
 import { AppState } from '../../store/app.state';
 import { Login } from '../store/auth.action';
-import { User } from 'src/Models/user.model';
-import { Token } from 'src/Models/token.model';
 import { TokenService } from 'src/Services/token.service';
-import { UserLogin } from 'src/app/home/store/home.action';
+import { tap } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-login',
@@ -42,24 +41,11 @@ export class LoginComponent implements OnInit {
       Password: this.loginForm.controls.Password.value
     };
     this.authService.login(credentials)
-      .subscribe((val: string) => {
-        this.tokenService.setTokenKey('token', val);
-
-        const token$ = this.tokenService.getTokenKey('token');
-
-        const decodedToken = this.tokenService.getDecodedToken(token$);
-
-        this.tokenService.setTokenKey('user', JSON.stringify(decodedToken));
-
-        const userToken = JSON.parse(this.tokenService.getTokenKey('user'));
-
-        const user: User = {
-          Id: userToken['nameid'],
-          Username: userToken['unique_name']
-        };
-        this.store.dispatch(new Login());
-        this.store.dispatch(new UserLogin({ user }));
-      },
+      .pipe(
+        tap(() =>
+          this.store.dispatch(new Login()))
+      )
+      .subscribe(() => {},
       err => {
         console.log(err);
       });

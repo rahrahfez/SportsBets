@@ -11,8 +11,8 @@ export class AuthEffects {
   @Effect({ dispatch: false }) login$ = this.action$
   .pipe(
     ofType<Login>(AuthActions.LOGIN),
-    tap((val) => {
-      console.log(val);
+    tap(() => {
+      console.log('Login Successful');
       this.router.navigate(['/home']);
     })
   );

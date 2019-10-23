@@ -9,8 +9,9 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'home', loadChildren: () => import('./home/home.module')
     .then(m => m.HomeModule),
-    canActivate: [AuthGuard],
-    canLoad: [AuthGuard] },
+    // canLoad: [AuthGuard],
+    // canActivate: [AuthGuard]
+  },
   { path: '**', redirectTo: '/login'}
 ];
 

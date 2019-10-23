@@ -8,17 +8,13 @@ import {
   Route
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { select, Store } from '@ngrx/store';
-import { tap } from 'rxjs/operators';
 
 import { AppState } from 'src/app/store/app.state';
-import { loggedIn } from './store/auth.selector';
 import { AuthService } from 'src/Services/auth.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate, CanLoad {
   constructor(
-    private store: Store<AppState>,
     private router: Router,
     private authService: AuthService
   ) {}
@@ -27,25 +23,19 @@ export class AuthGuard implements CanActivate, CanLoad {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot)
       : Observable<boolean> | Promise<boolean> | boolean {
-      return this.store.pipe(
-        select(loggedIn),
-        tap(isLoggedIn => {
-          if (!isLoggedIn || !this.authService.isAuthenticated()) {
-            this.router.navigate(['/login']);
-          }
-        })
-      );
+        if (this.authService.isLoggedIn()) {
+          console.log('CanActivate()');
+          return !this.authService.isLoggedIn();
+        }
+        return false;
   }
   canLoad(route: Route)
     : Observable<boolean> | Promise<boolean> | boolean {
-    // return this.store.pipe(
-    //   select(loggedIn),
-    //   tap(isLoggedIn => {
-    //     if (!isLoggedIn || !this.authService.isAuthenticated()) {
-    //       this.router.navigate(['/login']);
-    //     }
-    //   })
-    // );
-    return true;
+      if (this.authService.isLoggedIn()) {
+        console.log('CanLoad()');
+        this.router.navigate(['/home']);
+        return !this.authService.isLoggedIn();
+      }
+      return false;
   }
 }
