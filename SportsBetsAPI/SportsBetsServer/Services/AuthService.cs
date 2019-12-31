@@ -1,6 +1,5 @@
 using Contracts;
 using Entities.Models;
-using Entities.ExtendedModels;
 
 namespace SportsBetsServer.Services
 {
@@ -13,7 +12,7 @@ namespace SportsBetsServer.Services
             _dateTime = dateTime;
             _repo = repo;
         }
-        public User RegisterNewUser(UserToRegister user)
+        public User RegisterNewUser(User user)
         {
             var registeredUser = _repo.Auth.Register(new User { Username = user.Username, DateCreated = _dateTime.Now }, user.Password);
   

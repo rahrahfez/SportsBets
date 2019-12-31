@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Contracts;
 using Entities.Models;
-using Entities.ExtendedModels;
 using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -26,7 +25,7 @@ namespace SportsBetsServer.Controllers
             _config = config;
         }
         [HttpPost("login")]
-        public IActionResult Login([FromBody]UserToLogin userToLogin)
+        public IActionResult Login([FromBody]User userToLogin)
         {
             /*
             * Only returns token.

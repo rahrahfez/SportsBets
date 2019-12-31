@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Contracts;
 using Entities.Models;
-using Entities.ExtendedModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace SportsBetsServer.Controllers
@@ -105,7 +104,7 @@ namespace SportsBetsServer.Controllers
             }
         }
         [HttpPost("register")]
-        public async Task<IActionResult> CreateUser([FromBody]UserToRegister user)
+        public async Task<IActionResult> CreateUser([FromBody]User user)
         {
             try
             {

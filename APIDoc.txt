@@ -1,3 +1,8 @@
+AUTH API  
+  - api/auth/login
+    - POST login user, returns Unauthorized(401) if user is not found
+    - returns response with encoded jwt that gets decoded on the front end
+
 USER API
   - api/users
     - GET all users
@@ -6,6 +11,9 @@ USER API
     - GET user by id
     - Includes intial information such as available balance, and current/accepted wagers.
 
+  - api/users/wagers
+    -GET all wagers that belong to the user
+
   - api/users/:id/getbalance
     - GET available balance of user
 
@@ -13,8 +21,11 @@ WAGER API
   - api/wager
     - GET all wagers
 
-  - api/wager/:userid // NOT IMPLEMENTED
+  - api/wager/:userid 
     -GET all wagers by user id
+
+  - api/wager/:id
+    -GET all wagers by id
 
   - api/numbergenerator/create
     - POST a new wager
@@ -22,7 +33,3 @@ WAGER API
   - api/numbergenerator/update
     - PUT a wager to allow user to accept wager
 
-AUTH API  
-  - api/auth/login
-    - POST login user, returns Unauthorized(401) if user is not found
-    - returns response with encoded jwt that gets decoded on the front end

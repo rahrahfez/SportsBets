@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Contracts;
 using Entities.Models;
 using Microsoft.AspNetCore.Authorization;
-using Entities.ExtendedModels;
 
 namespace SportsBetsServer.Controllers
 {
