@@ -1,14 +1,14 @@
 using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Contracts;
-using Entities.Models;
+using Contracts.Repository;
 using Entities.ExtendedModels;
 using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.Extensions.Configuration;
 using System.IdentityModel.Tokens.Jwt;
+using LoggerService;
 
 namespace SportsBetsServer.Controllers
 {
@@ -26,12 +26,8 @@ namespace SportsBetsServer.Controllers
             _config = config;
         }
         [HttpPost("login")]
-        public IActionResult Login([FromBody]UserToLogin userToLogin)
+        public IActionResult Login([FromBody]UserToRegister userToLogin)
         {
-            /*
-            * Only returns token.
-            * Token contains user credentials.
-            */
             var user = _repo.Auth.Login(userToLogin.Username.ToLower(), userToLogin.Password);
 
             if (user == null)
@@ -43,7 +39,7 @@ namespace SportsBetsServer.Controllers
             {
                 var claims = new[]
                 {
-                    new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                    new Claim(ClaimTypes.NameIdentifier, user.Credential.Id.ToString()),
                     new Claim(ClaimTypes.Name, user.Username)
                 };
 

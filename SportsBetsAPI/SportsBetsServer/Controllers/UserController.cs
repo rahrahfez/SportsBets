@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Contracts;
+using Contracts.Repository;
+using Contracts.Services;
+using LoggerService;
 using Entities.Models;
 using Entities.ExtendedModels;
 using Microsoft.AspNetCore.Mvc;
@@ -49,7 +51,7 @@ namespace SportsBetsServer.Controllers
             {
                 var user = await _repo.User.GetUserByIdAsync(id);
                 
-                if (user.Id.Equals(Guid.Empty)) 
+                if (user.Credential.Id.Equals(Guid.Empty)) 
                 {
                     _logger.LogError($"User with id: { id } was not found in db.");
                     return NotFound();
@@ -80,55 +82,30 @@ namespace SportsBetsServer.Controllers
                 return StatusCode(500, "Internal server error");
             }
         }
-        [HttpGet("{id}/wagers")]
-        public async Task<IActionResult> GetOwnerWithDetails(Guid id)
-        {
-            try
-            {
-                var user = await _repo.User.GetUserWithDetailsAsync(id);
-
-                if (user.Id.Equals(Guid.Empty))
-                {
-                    _logger.LogError($"User with id { id } was not found.");
-                    return NotFound();
-                }
-                else
-                {
-                    _logger.LogInfo($"Returned user with details for id: { id }");
-                    return Ok(user);
-                }
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Something went wrong inside GetOwnerWithDetails action: { ex.Message }");
-                return StatusCode(500, "Internal server error");
-            }
-        }
         [HttpPost("register")]
-        public async Task<IActionResult> CreateUser([FromBody]UserToRegister user)
+        public async Task<IActionResult> CreateUser([FromBody]User user)
         {
             try
             {
-                user.Username = user.Username.ToLower();
+                user.Username = user.Username;
 
+                if (_repo.Auth.UserExists(user.Username))
+                {
+                    user = null;
+                    _logger.LogError("Username already exists.");
+                    return BadRequest("Username already exists.");
+                }             
                 if (user == null)
                 {
                     _logger.LogError("User is null.");
                     return BadRequest("User object is null");
                 }
-                if (_repo.Auth.UserExists(user.Username))
-                {
-                    _logger.LogError("Username already exists.");
-                    return BadRequest("Username already exists.");
-                }
-                
-                var registeredUser = _authService.RegisterNewUser(user);
 
-                await _repo.User.CreateUserAsync(registeredUser);
+                await _repo.User.CreateUserAsync(user);
 
-                _logger.LogInfo($"Successfully registered { registeredUser.Username }.");
+                _logger.LogInfo($"Successfully registered { user.Username }.");
 
-                return CreatedAtRoute(routeName: "UserById", routeValues: new { id = registeredUser.Id }, value: registeredUser);
+                return CreatedAtRoute(routeName: "UserById", routeValues: new { id = user.Credential.Id }, value: user);
             }
             catch (Exception ex)
             {
