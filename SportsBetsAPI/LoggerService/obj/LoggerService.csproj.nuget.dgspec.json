@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\david\\Documents\\Projects\\SportsBets\\SportsBetsAPI\\LoggerService\\LoggerService.csproj": {}
+    "C:\\Users\\david\\Documents\\Projects\\SportsBets\\SportsBetsAPI\\LoggerService\\LoggerService.csproj": {}
   },
   "projects": {
-    "c:\\Users\\david\\Documents\\Projects\\SportsBets\\SportsBetsAPI\\LoggerService\\LoggerService.csproj": {
+    "C:\\Users\\david\\Documents\\Projects\\SportsBets\\SportsBetsAPI\\LoggerService\\LoggerService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\david\\Documents\\Projects\\SportsBets\\SportsBetsAPI\\LoggerService\\LoggerService.csproj",
+        "projectUniqueName": "C:\\Users\\david\\Documents\\Projects\\SportsBets\\SportsBetsAPI\\LoggerService\\LoggerService.csproj",
         "projectName": "LoggerService",
-        "projectPath": "c:\\Users\\david\\Documents\\Projects\\SportsBets\\SportsBetsAPI\\LoggerService\\LoggerService.csproj",
+        "projectPath": "C:\\Users\\david\\Documents\\Projects\\SportsBets\\SportsBetsAPI\\LoggerService\\LoggerService.csproj",
         "packagesPath": "C:\\Users\\david\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\david\\Documents\\Projects\\SportsBets\\SportsBetsAPI\\LoggerService\\obj\\",
+        "outputPath": "C:\\Users\\david\\Documents\\Projects\\SportsBets\\SportsBetsAPI\\LoggerService\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

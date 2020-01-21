@@ -11798,11 +11798,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\david\\Documents\\Projects\\SportsBets\\SportsBetsAPI\\SportsBetsServer\\SportsBetsServer.csproj",
+      "projectUniqueName": "C:\\Users\\david\\Documents\\Projects\\SportsBets\\SportsBetsAPI\\SportsBetsServer\\SportsBetsServer.csproj",
       "projectName": "SportsBetsServer",
-      "projectPath": "c:\\Users\\david\\Documents\\Projects\\SportsBets\\SportsBetsAPI\\SportsBetsServer\\SportsBetsServer.csproj",
+      "projectPath": "C:\\Users\\david\\Documents\\Projects\\SportsBets\\SportsBetsAPI\\SportsBetsServer\\SportsBetsServer.csproj",
       "packagesPath": "C:\\Users\\david\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\david\\Documents\\Projects\\SportsBets\\SportsBetsAPI\\SportsBetsServer\\obj\\",
+      "outputPath": "C:\\Users\\david\\Documents\\Projects\\SportsBets\\SportsBetsAPI\\SportsBetsServer\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -11821,8 +11821,8 @@
       "frameworks": {
         "netcoreapp2.2": {
           "projectReferences": {
-            "c:\\Users\\david\\Documents\\Projects\\SportsBets\\SportsBetsAPI\\LoggerService\\LoggerService.csproj": {
-              "projectPath": "c:\\Users\\david\\Documents\\Projects\\SportsBets\\SportsBetsAPI\\LoggerService\\LoggerService.csproj"
+            "C:\\Users\\david\\Documents\\Projects\\SportsBets\\SportsBetsAPI\\LoggerService\\LoggerService.csproj": {
+              "projectPath": "C:\\Users\\david\\Documents\\Projects\\SportsBets\\SportsBetsAPI\\LoggerService\\LoggerService.csproj"
             }
           }
         }
