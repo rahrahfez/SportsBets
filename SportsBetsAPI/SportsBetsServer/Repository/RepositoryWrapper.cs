@@ -1,17 +1,19 @@
-using Contracts;
+using Contracts.Repository;
+using Contracts.Services;
 using Entities;
 
 namespace Repository
 {
     public class RepositoryWrapper : IRepositoryWrapper
     {
-        private RepositoryContext _repoContext;
+        private readonly RepositoryContext _repoContext;
         private IUserRepository _user;
         private IWagerRepository _wager;
         private IAuthRepository _auth;
-        private INumberGeneratorWagerRepository _numberGeneratorWager;
-        public RepositoryWrapper(RepositoryContext repositoryContext) 
+        private IAuthService _authService;
+        public RepositoryWrapper(RepositoryContext repositoryContext, IAuthService authService) 
         {
+            _authService = authService;
             _repoContext = repositoryContext;
         }
         public IUserRepository User 
@@ -44,21 +46,10 @@ namespace Repository
             {
                 if (_auth == null)
                 {
-                    _auth = new AuthRepository(_repoContext);
+                    _auth = new AuthRepository(_repoContext, _authService);
                 }
                 
                 return _auth;
-            }
-        }
-        public INumberGeneratorWagerRepository NumberGeneratorWager
-        {
-            get
-            {
-                if (_numberGeneratorWager == null)
-                {
-                    _numberGeneratorWager = new NumberGeneratorWagerRepository(_repoContext);
-                }
-                return _numberGeneratorWager;
             }
         }
         public void Save()

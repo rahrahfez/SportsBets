@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
-using Contracts;
+using Contracts.Repository;
 using Entities;
 using System.Threading.Tasks;
 

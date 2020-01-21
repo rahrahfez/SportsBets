@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Entities.Models;
 
-namespace Contracts
+namespace Contracts.Repository
 {
     public interface IWagerRepository : IRepositoryBase<Wager>
     {

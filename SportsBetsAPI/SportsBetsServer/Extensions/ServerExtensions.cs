@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
-using Contracts;
+using Contracts.Repository;
+using Contracts.Services;
 using LoggerService;
 using Entities;
 using Repository;

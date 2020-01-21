@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Contracts;
+using Contracts.Repository;
 using Entities;
 using Entities.Models;
-using Entities.ExtendedModels;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,30 +22,19 @@ namespace Repository
         }
         public async Task<User> GetUserByIdAsync(Guid id)
         {
-            return await FindByCondition(user => user.Id.Equals(id))
+            return await FindByCondition(user => user.Credential.Id.Equals(id))
             .DefaultIfEmpty(new User())
-            .SingleOrDefaultAsync();
-        }
-        public async Task<UserExtended> GetUserWithDetailsAsync(Guid id)
-        {
-            return await FindByCondition(u => u.Id.Equals(id))
-            .Select(user => new UserExtended(user)
-            {
-                Wagers = RepositoryContext.Wager
-                    .Where(wager => wager.Id == id)
-                    .ToList()
-            })
             .SingleOrDefaultAsync();
         }
         public async Task<int> GetUserAvailableBalance(Guid id)
         {
-            return await FindByCondition(u => u.Id.Equals(id))
+            return await FindByCondition(u => u.Credential.Id.Equals(id))
             .Select(user => user.AvailableBalance)
             .FirstOrDefaultAsync();
         }
         public async Task CreateUserAsync(User user)
         {
-            user.Id = Guid.NewGuid();
+            user.Credential.Id = Guid.NewGuid();
             Create(user);
             await SaveAsync();
         }

@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
-using Contracts;
+using Contracts.Repository;
+using LoggerService;
 using Entities.ExtendedModels;
 using Entities.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -9,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace SportsBetsServer.Controllers
 {
     [Route("api/wager")]
-    // [Authorize]
+    [Authorize]
     [ApiController]
     public class WagerController : ControllerBase
     {
@@ -71,9 +72,6 @@ namespace SportsBetsServer.Controllers
         [HttpPost("create")]
         public async Task<IActionResult> CreateWager([FromBody]Wager wagers)
         {
-            /*
-            * Wager will be created
-            */
             try
             {
                 var wager = new Wager

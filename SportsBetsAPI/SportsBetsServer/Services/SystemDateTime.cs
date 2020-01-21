@@ -1,5 +1,5 @@
 using System;
-using Contracts;
+using Contracts.Services;
 
 namespace SportsBetsServer.Services
 {

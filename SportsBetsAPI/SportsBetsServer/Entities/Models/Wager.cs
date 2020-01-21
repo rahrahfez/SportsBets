@@ -14,6 +14,10 @@ namespace Entities.Models
         public DateTime CreatedAt { get; set; }
         [ForeignKey("UserId")]
         public Guid UserId { get; set; }
-        public ICollection<NumberGeneratorWager> NumberGeneratorWagers { get; set; }
+        [Required]
+        public string Type { get; set; }
+        public string WinCondition { get; set; }
+        public int Amount { get; set; }
+        //public ICollection<NumberGeneratorWager> NumberGeneratorWagers { get; set; }
     }
 }

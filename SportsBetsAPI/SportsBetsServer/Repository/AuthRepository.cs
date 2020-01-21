@@ -1,6 +1,7 @@
 using System;
 using Entities.Models;
-using Contracts;
+using Contracts.Services;
+using Contracts.Repository;
 using Entities;
 using System.Linq;
 
@@ -8,67 +9,43 @@ namespace Repository
 {
     public class AuthRepository : RepositoryBase<User>, IAuthRepository
     {
-        private RepositoryContext _repoContext;
-        public AuthRepository(RepositoryContext repositoryContext)
+        private readonly RepositoryContext _repoContext;
+        private readonly IAuthService _authService;
+        public AuthRepository(RepositoryContext repositoryContext, IAuthService authService)
             : base (repositoryContext)
         {
             _repoContext = repositoryContext;
-        }
-        public User Register(User user, string password)
-        {
-            byte[] passwordHash, passwordSalt;
-            CreatePasswordHash(password, out passwordHash, out passwordSalt);
-
-            user.PasswordHash = passwordHash;
-            user.PasswordSalt = passwordSalt;
-
-            return user;
-        }
-        private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
-        {
-            using (var hmac = new System.Security.Cryptography.HMACSHA512())
-            {
-                passwordSalt = hmac.Key;
-                passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-            }
+            _authService = authService;
         }
         public User Login(string username, string password)
         {
-            var user = _repoContext.User.FirstOrDefault(u => u.Username == username);
+            var user = GetUserByUsername(username);
+            var creds = new Credential();
 
-            if (user == null)
+            if (user != null)
             {
-                return null;
-            }
-            if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
-            {
-                return null;
-            }
-
-            return user;
-        }
-        public bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
-        {
-            using (var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt))
-            {
-                var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-                for (int i = 0; i < computedHash.Length; i++)
+                creds = _repoContext.Credential.SingleOrDefault(c => c.Id == user.Credential.Id);    
+                if (!_authService.VerifyPasswordHash(password, creds.PasswordHash, creds.PasswordSalt))
                 {
-                    if (computedHash[i] != passwordHash[i])
-                    {
-                        return false;
-                    }
+                    return null;
                 }
             }
-            return true;
+            return user;
         }
         public bool UserExists(string username)
         {
-            if (_repoContext.User.Any(x => x.Username == username))
+            return _repoContext.User.Any(x => x.Username.ToLower() == username.ToLower()) || false;
+        }
+        public User GetUserByUsername(string username)
+        {
+            if (UserExists(username))
             {
-                return true;
+                return _repoContext.User.Single(u => u.Username == username);
             }
-            return false;
+            else
+            {
+                return null;
+            }
         }
     }
 }

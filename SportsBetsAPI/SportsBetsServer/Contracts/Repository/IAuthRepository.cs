@@ -1,11 +1,11 @@
 using Entities.Models;
 
-namespace Contracts
+namespace Contracts.Repository
 {
     public interface IAuthRepository
     {
-        User Register(User user, string password);
         User Login(string username, string password);
         bool UserExists(string username);
+        User GetUserByUsername(string username);
     }
 }
