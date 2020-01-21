@@ -1,4 +1,5 @@
 **/bin/
 **/obj/
-SportsBetsAPI/SportsBetsServer/appsettings.json
-SportsBetsAPI/SportsBetsServer/appsettings.Development.json
+/SportsBetsAPI/SportsBetsServer/appsettings.json
+/SportsBetsAPI/SportsBetsServer/appsettings.Development.json
+**/.vs/
