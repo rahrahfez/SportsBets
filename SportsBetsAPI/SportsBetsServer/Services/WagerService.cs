@@ -5,12 +5,12 @@ namespace SportsBetsServer.Services
 {
     public class WagerService
     {
-        public Wager CreateNewWager()
+        public Wager CreateNewWager(Guid UserId)
         {
             return new Wager 
             {                
                 Id = Guid.NewGuid(),
-                CreatedAt = DateTime.Now
+                DateCreated = DateTime.Now,
             };
         }
     }

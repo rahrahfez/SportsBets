@@ -4,10 +4,9 @@ namespace SportsBetsServer.Services
 {
     public class AuthService : IAuthService
     {
-        private readonly IDateTime _dateTime;
-        public AuthService(IDateTime dateTime) 
+        public AuthService() 
         {
-            _dateTime = dateTime;
+
         }
         public void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {

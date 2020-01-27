@@ -11,7 +11,9 @@ namespace Entities.Models
         [Key]
         [Column("UserId")]
         public Guid Id { get; set; }
+        [Required]
         public byte[] PasswordHash { get; set; }
+        [Required]
         public byte[] PasswordSalt { get; set; }
     }
 }

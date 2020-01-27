@@ -11,13 +11,10 @@ namespace Entities.Models
         [Key]
         [Column("WagerId")]
         public Guid Id { get; set; }
-        public DateTime CreatedAt { get; set; }
         [ForeignKey("UserId")]
-        public Guid UserId { get; set; }
         [Required]
-        public string Type { get; set; }
-        public string WinCondition { get; set; }
-        public int Amount { get; set; }
-        //public ICollection<NumberGeneratorWager> NumberGeneratorWagers { get; set; }
+        public User User { get; set; }
+        [Required]
+        public DateTime DateCreated { get; set; }
     }
 }

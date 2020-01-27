@@ -20,14 +20,14 @@ namespace Repository
         public User Login(string username, string password)
         {
             var user = GetUserByUsername(username);
-            var creds = new Credential();
 
             if (user != null)
             {
-                creds = _repoContext.Credential.SingleOrDefault(c => c.Id == user.Credential.Id);    
+                var creds = _repoContext.Credential.SingleOrDefault(c => c.Id == user.Credential.Id);    
                 if (!_authService.VerifyPasswordHash(password, creds.PasswordHash, creds.PasswordSalt))
                 {
-                    return null;
+                    // TODO: Return a default User object instead of null
+                    user = null;
                 }
             }
             return user;
@@ -44,6 +44,7 @@ namespace Repository
             }
             else
             {
+                // should return empty new User object
                 return null;
             }
         }

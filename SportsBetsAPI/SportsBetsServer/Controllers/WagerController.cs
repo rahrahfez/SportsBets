@@ -2,7 +2,6 @@ using System;
 using System.Threading.Tasks;
 using Contracts.Repository;
 using LoggerService;
-using Entities.ExtendedModels;
 using Entities.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -70,15 +69,15 @@ namespace SportsBetsServer.Controllers
             }
         }
         [HttpPost("create")]
-        public async Task<IActionResult> CreateWager([FromBody]Wager wagers)
+        public async Task<IActionResult> CreateWager(Guid userId)
         {
             try
             {
                 var wager = new Wager
                 {
                     Id = Guid.NewGuid(),
-                    CreatedAt = DateTime.Now,
-                    UserId = wagers.UserId
+                    DateCreated = DateTime.Now,
+                    User = { Id = userId }
                 };
 
                 await _repo.Wager.CreateWagerAsync(wager);
