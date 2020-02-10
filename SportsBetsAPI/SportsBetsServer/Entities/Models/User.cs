@@ -9,18 +9,18 @@ namespace Entities.Models
     public class User 
     {
         [Key]
+        [Column("user")]
         public Guid Id { get; set; }
-        [Required(ErrorMessage="Username is required")]
-        [StringLength(30, ErrorMessage="Username cannot be longer than 30 characters")]
+        [Column("bet")]
+        public ICollection<Bet> Bet { get; set; }
+        [Required(ErrorMessage="Username is required.")]
+        [StringLength(30, ErrorMessage="Username cannot be longer than 30 characters.")]
+        [Column("username")]
         public string Username { get; set; }
-        [Required]
+        [Column("available_balance")]
         public int AvailableBalance { get; set; } 
-        [Required]
+        [Required(ErrorMessage="Date created is required.")]
+        [Column("date_created")]
         public DateTime DateCreated { get; set; }
-        [ForeignKey("UserId")]
-        [Column("Id")]
-        public Credential Credential { get; set; }
-        [ForeignKey("WagerId")]
-        public ICollection<Wager> Wagers { get; set; }
     }
 }

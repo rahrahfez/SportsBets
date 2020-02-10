@@ -1,12 +1,18 @@
 using Contracts.Services;
+using Contracts.Repository;
+using Entities.Models;
+using System.Linq;
+using System.Threading.Tasks;
+using System;
 
 namespace SportsBetsServer.Services
 {
     public class AuthService : IAuthService
     {
-        public AuthService() 
+        private IRepositoryWrapper _repo;
+        public AuthService(IRepositoryWrapper repo) 
         {
-
+            _repo = repo;
         }
         public void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
@@ -30,6 +36,26 @@ namespace SportsBetsServer.Services
                 }
             }
             return true;
+        }
+        public async Task<User> LoginUserAsync(string username, string password)
+        {
+            var user = await _repo.User.GetUserByUsernameAsync(username);
+            var creds = await _repo.Auth.GetCredentialByUserId(user.Id);
+
+            if(!VerifyPasswordHash(password, creds.PasswordHash, creds.PasswordSalt))
+            {
+                user = null;
+            }
+
+            return user;
+        }
+        public bool UserExists(string username)
+        {
+            return false;
+        }
+        public Task<User> RegisterUserAsync(Credential credential, User user)
+        {
+            throw new NotImplementedException();
         }
     }
 }

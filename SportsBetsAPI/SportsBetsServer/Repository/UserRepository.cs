@@ -22,19 +22,23 @@ namespace Repository
         }
         public async Task<User> GetUserByIdAsync(Guid id)
         {
-            return await FindByCondition(user => user.Credential.Id.Equals(id))
-            .DefaultIfEmpty(new User())
-            .SingleOrDefaultAsync();
+            return await FindByCondition(user => user.Id.Equals(id))
+                .DefaultIfEmpty(new User())
+                .SingleOrDefaultAsync();
         }
-        public async Task<int> GetUserAvailableBalance(Guid id)
+        public async Task<User> GetUserByUsernameAsync(string username)
         {
-            return await FindByCondition(u => u.Credential.Id.Equals(id))
-            .Select(user => user.AvailableBalance)
-            .FirstOrDefaultAsync();
+            return await FindByCondition(user => user.Username.Equals(username))
+                .SingleOrDefaultAsync();
+        }
+        public async Task<int> GetUserAvailableBalanceAsync(Guid id)
+        {
+            return await FindByCondition(u => u.Id.Equals(id))
+                .Select(user => user.AvailableBalance)
+                .FirstOrDefaultAsync();
         }
         public async Task CreateUserAsync(User user)
         {
-            user.Credential.Id = Guid.NewGuid();
             Create(user);
             await SaveAsync();
         }

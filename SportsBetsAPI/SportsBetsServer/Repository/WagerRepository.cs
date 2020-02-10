@@ -27,12 +27,6 @@ namespace Repository
         .AsNoTracking()
         .SingleOrDefaultAsync();
     }
-    public async Task<IEnumerable<Wager>> GetAllWagersByUserIdAsync(Guid id)
-    {
-      return await FindAll()
-        .Where(wager => wager.User.Id.Equals(id))
-        .ToListAsync();
-    }
     public async Task CreateWagerAsync(Wager wager)
     {
       Create(wager);

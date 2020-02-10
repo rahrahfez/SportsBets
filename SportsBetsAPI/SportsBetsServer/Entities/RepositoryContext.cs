@@ -13,13 +13,7 @@ namespace Entities
 
         public DbSet<User> User { get; set; } 
         public DbSet<Wager> Wager { get; set; }
+        public DbSet<Bet> Bet { get; set; }
         public DbSet<Credential> Credential { get; set; }
     }
 }
-
-/*
-*
-* REMINDER: Use -s flag to target ..\SportsBetsServer as startup-project during
-* migrations and database updates/remove
-*
-*/

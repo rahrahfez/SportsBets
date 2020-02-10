@@ -1,52 +1,42 @@
 using System;
+using System.Threading.Tasks;
 using Entities.Models;
 using Contracts.Services;
 using Contracts.Repository;
 using Entities;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Repository
 {
-    public class AuthRepository : RepositoryBase<User>, IAuthRepository
+    public class AuthRepository : RepositoryBase<Credential>, IAuthRepository
     {
         private readonly RepositoryContext _repoContext;
-        private readonly IAuthService _authService;
-        public AuthRepository(RepositoryContext repositoryContext, IAuthService authService)
+        public AuthRepository(RepositoryContext repositoryContext)
             : base (repositoryContext)
         {
             _repoContext = repositoryContext;
-            _authService = authService;
         }
-        public User Login(string username, string password)
+        public async Task<Credential> GetCredentialByUserId(Guid id)
         {
-            var user = GetUserByUsername(username);
-
-            if (user != null)
-            {
-                var creds = _repoContext.Credential.SingleOrDefault(c => c.Id == user.Credential.Id);    
-                if (!_authService.VerifyPasswordHash(password, creds.PasswordHash, creds.PasswordSalt))
-                {
-                    // TODO: Return a default User object instead of null
-                    user = null;
-                }
-            }
-            return user;
+            return await FindByCondition(c => c.User.Id.Equals(id))
+                .AsNoTracking()
+                .SingleOrDefaultAsync();
         }
-        public bool UserExists(string username)
+        public async Task CreateCredentialAsync(Credential cred)
         {
-            return _repoContext.User.Any(x => x.Username.ToLower() == username.ToLower()) || false;
+            Create(cred);
+            await SaveAsync();
         }
-        public User GetUserByUsername(string username)
+        public async Task UpdateCredentialAsync(Credential credToUpdate, Credential updatedCred)
         {
-            if (UserExists(username))
-            {
-                return _repoContext.User.Single(u => u.Username == username);
-            }
-            else
-            {
-                // should return empty new User object
-                return null;
-            }
+            Update(updatedCred);
+            await SaveAsync();
+        }
+        public async Task DeleteCredentialAsync(Credential cred)
+        {
+            Delete(cred);
+            await SaveAsync();
         }
     }
 }

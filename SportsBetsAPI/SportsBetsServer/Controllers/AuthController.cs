@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Contracts.Repository;
+using Contracts.Services;
 using Entities.ExtendedModels;
 using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
@@ -17,18 +18,21 @@ namespace SportsBetsServer.Controllers
     public class AuthController : ControllerBase
     {
         private readonly ILoggerManager _logger;
-        private readonly IRepositoryWrapper _repo;
+        private readonly IAuthService _authService;
         private readonly IConfiguration _config;
-        public AuthController(IRepositoryWrapper repo, ILoggerManager logger, IConfiguration config)
+        public AuthController(
+            ILoggerManager logger, 
+            IConfiguration config,
+            IAuthService authService)
         {
             _logger = logger;
-            _repo = repo;
             _config = config;
+            _authService = authService;
         }
         [HttpPost("login")]
-        public IActionResult Login([FromBody]UserToRegister userToLogin)
+        public async Task<IActionResult> Login([FromBody]UserToRegister userToLogin)
         {
-            var user = _repo.Auth.Login(userToLogin.Username.ToLower(), userToLogin.Password);
+            var user = await _authService.LoginUserAsync(userToLogin.Username.ToLower(), userToLogin.Password);
 
             if (user == null)
             {
@@ -39,7 +43,7 @@ namespace SportsBetsServer.Controllers
             {
                 var claims = new[]
                 {
-                    new Claim(ClaimTypes.NameIdentifier, user.Credential.Id.ToString()),
+                    new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                     new Claim(ClaimTypes.Name, user.Username)
                 };
 

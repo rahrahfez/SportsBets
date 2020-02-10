@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SportsBetsServer.Controllers
 {
-    [Route("api/users")]
+    [Route("api/user")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -27,7 +27,7 @@ namespace SportsBetsServer.Controllers
             _logger = logger;
             _repo = repo;
         }
-        [HttpGet]
+        [HttpGet("users")]
         public async Task<IActionResult> GetAllUsers()
         {
             try
@@ -51,7 +51,7 @@ namespace SportsBetsServer.Controllers
             {
                 var user = await _repo.User.GetUserByIdAsync(id);
                 
-                if (user.Credential.Id.Equals(Guid.Empty)) 
+                if (user.Id.Equals(Guid.Empty)) 
                 {
                     _logger.LogError($"User with id: { id } was not found in db.");
                     return NotFound();
@@ -68,28 +68,12 @@ namespace SportsBetsServer.Controllers
                 return StatusCode(500, "Internal server error");
             }
         }
-        [HttpGet("{id}/availablebalance")]
-        public async Task<IActionResult> GetUserAvailableBalanceById(Guid id)
-        {
-            try
-            {
-                var availablebalance = await _repo.User.GetUserAvailableBalance(id);
-                return Ok(availablebalance);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Unable to retrieve available balance from GetUserAvailableBalance() { ex.Message }");
-                return StatusCode(500, "Internal server error");
-            }
-        }
         [HttpPost("register")]
-        public async Task<IActionResult> CreateUser([FromBody]User user)
+        public async Task<IActionResult> RegisterUser([FromBody]User user)
         {
             try
             {
-                user.Username = user.Username;
-
-                if (_repo.Auth.UserExists(user.Username))
+                if (_authService.UserExists(user.Username))
                 {
                     user = null;
                     _logger.LogError("Username already exists.");
@@ -101,15 +85,33 @@ namespace SportsBetsServer.Controllers
                     return BadRequest("User object is null");
                 }
 
+                user.Id = Guid.NewGuid();
+                user.AvailableBalance = 100;
+                user.DateCreated = DateTime.Now;
+
                 await _repo.User.CreateUserAsync(user);
 
                 _logger.LogInfo($"Successfully registered { user.Username }.");
 
-                return CreatedAtRoute(routeName: "UserById", routeValues: new { id = user.Credential.Id }, value: user);
+                return CreatedAtRoute(routeName: "UserById", routeValues: new { id = user.Id }, value: user);
             }
             catch (Exception ex)
             {
                 _logger.LogError($"Something went wrong inside CreateUser action: { ex.Message }");
+                return StatusCode(500, "Internal server error");
+            }
+        }
+        [HttpGet("{id}/balance")]
+        public async Task<IActionResult> GetUserAvailableBalanceById(Guid id)
+        {
+            try
+            {
+                var availablebalance = await _repo.User.GetUserAvailableBalanceAsync(id);
+                return Ok(availablebalance);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Unable to retrieve available balance from GetUserAvailableBalance() { ex.Message }");
                 return StatusCode(500, "Internal server error");
             }
         }

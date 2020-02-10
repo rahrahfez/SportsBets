@@ -1,5 +1,4 @@
 using Contracts.Repository;
-using Contracts.Services;
 using Entities;
 
 namespace Repository
@@ -10,10 +9,8 @@ namespace Repository
         private IUserRepository _user;
         private IWagerRepository _wager;
         private IAuthRepository _auth;
-        private IAuthService _authService;
-        public RepositoryWrapper(RepositoryContext repositoryContext, IAuthService authService) 
+        public RepositoryWrapper(RepositoryContext repositoryContext) 
         {
-            _authService = authService;
             _repoContext = repositoryContext;
         }
         public IUserRepository User 
@@ -46,7 +43,7 @@ namespace Repository
             {
                 if (_auth == null)
                 {
-                    _auth = new AuthRepository(_repoContext, _authService);
+                    _auth = new AuthRepository(_repoContext);
                 }
                 
                 return _auth;

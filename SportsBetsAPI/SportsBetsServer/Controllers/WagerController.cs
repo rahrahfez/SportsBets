@@ -21,7 +21,7 @@ namespace SportsBetsServer.Controllers
             _repo = repo;
             _logger = logger;
         }
-        [HttpGet]
+        [HttpGet("wagers")]
         public async Task<IActionResult> GetAllWagers()
         {   
             try
@@ -53,21 +53,6 @@ namespace SportsBetsServer.Controllers
                 return StatusCode(500, "Internal Server Error");
             }
         }
-        [HttpGet("user/{id}")]
-        public async Task<IActionResult> GetWagersByUserId(Guid id)
-        {
-            try
-            {
-                _logger.LogInfo($"Successfully returned wagers of user id { id }");
-                var wagers = await _repo.Wager.GetAllWagersByUserIdAsync(id);
-                return Ok(wagers);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Error in GetWagersByUserId(): { ex.Message }");
-                return StatusCode(500, "Internal Server Error");
-            }
-        }
         [HttpPost("create")]
         public async Task<IActionResult> CreateWager(Guid userId)
         {
@@ -77,7 +62,6 @@ namespace SportsBetsServer.Controllers
                 {
                     Id = Guid.NewGuid(),
                     DateCreated = DateTime.Now,
-                    User = { Id = userId }
                 };
 
                 await _repo.Wager.CreateWagerAsync(wager);
