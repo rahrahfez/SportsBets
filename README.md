@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # SportsBetsSPA
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.6.
@@ -41,4 +40,4 @@ A project that allows peer to peer sports wagering.
 
 - Future implementation will allow wagers to be placed on live sporting events.
 - Will use an API that recieves live Vegas odds that can be wagered upon or used as reference for a new bet.
->>>>>>> d588910f29297edea831fc0ef023e639a0d837b7
+
