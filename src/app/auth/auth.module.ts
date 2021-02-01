@@ -14,9 +14,9 @@ import { SharedModule } from '../shared/shared.module';
     SharedModule,
     JwtModule.forRoot({
       config: {
-        tokenGetter: () => {
-          return localStorage.getItem('token');
-        },
+        // tokenGetter: () => {
+        //   return localStorage.getItem('token');
+        // },
         whitelistedDomains: ['localhost:5000'],
         blacklistedRoutes: []
       }

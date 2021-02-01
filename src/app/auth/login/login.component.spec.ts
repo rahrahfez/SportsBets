@@ -19,11 +19,11 @@ describe('LoginComponent', () => {
   let service: AuthService;
   let store: MockStore<{ loggedIn: boolean }>;
   const initialState = { loggedIn: false };
-  const user$: Observable<User> = of({
-    Username: 'test',
-    UserId: '12345',
-    AvailableBalance: 100,
-  });
+  // const user$: Observable<User> = of({
+  //   Username: 'test',
+  //   UserId: '12345',
+  //   AvailableBalance: 100,
+  // });
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
