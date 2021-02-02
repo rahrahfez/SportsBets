@@ -16,7 +16,7 @@
       placeholder="Verify Password"
       formControlName="PasswordConfirmation"
       type="password"
-      [errorStateMatcher]="CrossFieldErrorMatcher">
+      [errorStateMatcher]="matcher">
     <mat-error *ngIf="registrationForm.hasError('passwordsDoNotMatch')">
       Passwords do not match!
     </mat-error>

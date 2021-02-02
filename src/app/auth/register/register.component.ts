@@ -7,7 +7,6 @@ import {
   NgForm,
   FormGroupDirective
 } from '@angular/forms';
-
 import { RepositoryService } from 'src/Services/repository.service';
 import { TokenService } from 'src/Services/token.service';
 import { ErrorStateMatcher, MatSnackBar } from '@angular/material';
@@ -15,6 +14,12 @@ import { User } from 'src/Models/user.model';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.state';
 import { Login } from '../store/auth.action';
+
+export class CrossFieldErrorMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    return control.dirty && form.invalid;
+  }
+}
 
 @Component({
   selector: 'app-register',
@@ -25,6 +30,7 @@ import { Login } from '../store/auth.action';
 export class RegisterComponent implements OnInit {
 
   registrationForm: FormGroup;
+  matcher = new CrossFieldErrorMatcher();
 
   constructor(
     private fb: FormBuilder,
@@ -64,8 +70,5 @@ export class RegisterComponent implements OnInit {
   }
 }
 
-export class CrossFieldErrorMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    return control.dirty && form.invalid;
-  }
-}
+
+
