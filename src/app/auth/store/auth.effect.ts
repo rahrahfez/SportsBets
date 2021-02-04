@@ -12,7 +12,6 @@ export class AuthEffects {
   .pipe(
     ofType<Login>(AuthActions.LOGIN),
     tap(() => {
-      console.log('Login Successful');
       this.router.navigate(['/home']);
     })
   );

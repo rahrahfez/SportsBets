@@ -1,14 +1,14 @@
 <mat-toolbar color="primary" class="mat-elevation-z5 nav-toolbar" fxFill>
     <mat-toolbar-row class="header-brand">
       <span class="header-brand-logo">SportsBets</span>
-      <span><mat-icon>home</mat-icon></span>
       <span fxFlex></span>
       <button
         fxLayout="row"
         fxLayoutAlign="center center"
         class="header-logout-btn"
         (click)="onLogout()"
-        mat-stroked-button>
+        color="warn"
+        mat-raised-button>
         <mat-icon>exit_to_app</mat-icon>Logout
       </button>
     </mat-toolbar-row>

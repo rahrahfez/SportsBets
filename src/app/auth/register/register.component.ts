@@ -50,6 +50,7 @@ export class RegisterComponent implements OnInit {
   initForm() {
     this.registrationForm = this.fb.group({
       Username: this.fb.control('', Validators.required),
+      Email: this.fb.control(''),
       Password: this.fb.control('', Validators.required),
       PasswordConfirmation: this.fb.control('', Validators.required)
     }, {
@@ -66,7 +67,7 @@ export class RegisterComponent implements OnInit {
   onSubmitForm() {
     this.repository.create('user/register', this.registrationForm.value)
       .subscribe();
-    this.registrationSuccessSnackbar('Registration Successful!');
+    this.registrationSuccessSnackbar('Please check your email to complete verification.');
   }
 }
 
