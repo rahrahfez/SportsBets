@@ -12,11 +12,11 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from './auth/store/auth.effect';
 import { reducers } from './store/app.state';
+
 import { AuthGuard } from 'src/app/guards/auth.guard';
 import { TokenService } from 'src/Services/token.service';
-import { RegisterComponent } from './auth/register-modal/register.component';
 import { AuthModule } from './auth/auth.module';
-import { UserAdapter } from 'src/Models/user.model';
+import { RegisterComponent } from './auth/register-modal/register.component';
 
 @NgModule({
   declarations: [
@@ -38,8 +38,7 @@ import { UserAdapter } from 'src/Models/user.model';
     RepositoryService,
     AuthService,
     AuthGuard,
-    TokenService,
-    UserAdapter
+    TokenService
   ],
   bootstrap: [AppComponent],
   entryComponents: [

@@ -3,6 +3,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 import { MatIconRegistry } from '@angular/material/icon';
 import { AuthService } from 'src/Services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +12,11 @@ import { AuthService } from 'src/Services/auth.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private authService: AuthService, iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
+  constructor(
+    private authService: AuthService, 
+    private router: Router,
+    iconRegistry: MatIconRegistry, 
+    sanitizer: DomSanitizer) {
    }
 
   ngOnInit() {
@@ -19,5 +24,13 @@ export class HeaderComponent implements OnInit {
 
   onLogout() {
     this.authService.logout();
+  }
+
+  onLogin() {
+    this.router.navigate(['login']);
+  }
+
+  onSignUp() {
+    this.router.navigate(['login']);
   }
 }

@@ -10,6 +10,8 @@ import { HomeRoutesModule } from './home.routes.module';
 import { RecentWagersComponent } from './recent-wagers/recent-wagers.component';
 import { EffectsModule } from '@ngrx/effects';
 import { UserEffects } from './store/home.effect';
+import { AuthModule } from '../auth/auth.module';
+import { TopNavbarComponent } from './top-navbar/top-navbar.component';
 
 @NgModule({
   declarations: [
@@ -18,11 +20,13 @@ import { UserEffects } from './store/home.effect';
     WelcomeCardComponent,
     HeaderComponent,
     HomeComponent,
-    RecentWagersComponent
+    RecentWagersComponent,
+    TopNavbarComponent,
   ],
   imports: [
     SharedModule,
     HomeRoutesModule,
+    AuthModule,
     EffectsModule.forFeature([UserEffects])
   ]
 })

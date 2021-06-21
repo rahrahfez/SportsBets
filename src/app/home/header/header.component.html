@@ -2,14 +2,23 @@
     <mat-toolbar-row class="header-brand">
       <span class="header-brand-logo">SportsBets</span>
       <span fxFlex></span>
-      <!-- <button
+      <button
         fxLayout="row"
         fxLayoutAlign="center center"
         class="header-logout-btn"
-        (click)="onLogout()"
-        color="warn"
-        mat-raised-button>
-        <mat-icon>exit_to_app</mat-icon>Logout
-      </button> -->
+        (click)="onLogin()"
+        color="basic"
+        mat-stroked-button>
+        Log In
+      </button>
+      <button
+      fxLayout="row"
+      fxLayoutAlign="center center"
+      class="header-logout-btn"
+      (click)="onSignUp()"
+      color="basic"
+      mat-stroked-button>
+      Sign Up
+    </button>
     </mat-toolbar-row>
   </mat-toolbar>

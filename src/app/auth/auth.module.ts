@@ -4,11 +4,13 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register-modal/register.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { SharedModule } from '../shared/shared.module';
+import { AuthComponent } from './auth.component';
 
 @NgModule({
   declarations: [
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    AuthComponent
   ],
   imports: [
     SharedModule,
