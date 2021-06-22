@@ -3,12 +3,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { HttpClient, HttpHeaders, JsonpClientBackend } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { tap, map } from 'rxjs/operators';
 
 import { RegisterComponent } from '../register-modal/register.component';
-import { AuthService } from 'src/Services/auth.service';
 import { AppState } from '../../store/app.state';
 import { Login } from '../store/auth.action';
 import { TokenService } from 'src/Services/token.service';
@@ -26,11 +24,9 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private dialog: MatDialog,
-    private authService: AuthService,
     private store: Store<AppState>,
     private tokenService: TokenService,
-    private http: HttpClient,
-    private router: Router
+    private http: HttpClient
   ) {}
 
   ngOnInit() {

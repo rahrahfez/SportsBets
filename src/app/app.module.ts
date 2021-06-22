@@ -1,22 +1,16 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AppRoutesModule } from './app.routes.module';
-
-import { AppComponent } from './app.component';
-import { RepositoryService } from 'src/Services/repository.service';
-import { AuthService } from 'src/Services/auth.service';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
+
+import { CoreModule } from './core/core.module';
+import { AppRoutesModule } from './app.routes.module';
+import { AppComponent } from './app.component';
 import { AuthEffects } from './auth/store/auth.effect';
 import { reducers } from './store/app.state';
-
-import { AuthGuard } from 'src/app/guards/auth.guard';
-import { TokenService } from 'src/Services/token.service';
-import { AuthModule } from './auth/auth.module';
 import { RegisterComponent } from './auth/register-modal/register.component';
-import { CoreModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -27,19 +21,13 @@ import { CoreModule } from '@angular/flex-layout';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutesModule,
-    AuthModule,
     StoreModule.forRoot(reducers, {}),
     StoreDevtoolsModule.instrument({
       maxAge: 25
     }),
     EffectsModule.forRoot([AuthEffects])
   ],
-  providers: [
-    RepositoryService,
-    AuthService,
-    AuthGuard,
-    TokenService
-  ],
+  providers: [],
   bootstrap: [AppComponent],
   entryComponents: [
     RegisterComponent
