@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutesModule } from './app.routes.module';
 
@@ -17,15 +16,16 @@ import { AuthGuard } from 'src/app/guards/auth.guard';
 import { TokenService } from 'src/Services/token.service';
 import { AuthModule } from './auth/auth.module';
 import { RegisterComponent } from './auth/register-modal/register.component';
+import { CoreModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
+    CoreModule,
     BrowserModule,
     BrowserAnimationsModule,
-    HttpClientModule,
     AppRoutesModule,
     AuthModule,
     StoreModule.forRoot(reducers, {}),
