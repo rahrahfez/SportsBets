@@ -23,6 +23,9 @@ import { AuthComponent } from './auth.component';
         blacklistedRoutes: []
       }
     }),
+  ], 
+  entryComponents: [
+    RegisterComponent
   ]
 })
 export class AuthModule {}

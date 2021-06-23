@@ -1,1 +1,16 @@
-<p>top-navbar works!</p>
+<mat-toolbar color="basic" class="mat-elevation-z5 nav-toolbar" fxFill>
+    <mat-toolbar-row class="header-brand">
+      <span class="header-brand-logo">SportsBets</span>
+      <span fxFlex></span>
+      <button
+        fxLayout="row"
+        fxLayoutAlign="center center"
+        class="top-navbar-login-btn"
+        (click)="onClick()"
+        color="primary"
+        mat-raised-button>
+        Log In
+      </button>
+      <button class="github-button" type="button"><img src="../../../assets/GitHub-Mark/PNG/GitHub-Mark-32px.png"><img class="github-icon" src="../../../assets/GitHub-Logos/GitHub_Logo.png"></button>
+    </mat-toolbar-row>
+  </mat-toolbar>

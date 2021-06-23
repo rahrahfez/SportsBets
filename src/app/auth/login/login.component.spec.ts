@@ -7,16 +7,12 @@ import { MaterialModule } from '../../material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { AuthService } from 'src/Services/auth.service';
 import { JwtModule } from '@auth0/angular-jwt';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { User } from 'src/Models/user.model';
-import { Observable, of } from 'rxjs';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
-  let service: AuthService;
   let store: MockStore<{ loggedIn: boolean }>;
   const initialState = { loggedIn: false };
   // const user$: Observable<User> = of({
@@ -45,7 +41,6 @@ describe('LoginComponent', () => {
         NoopAnimationsModule
        ],
        providers: [
-         AuthService,
          provideMockStore({ initialState })
        ]
     })
@@ -56,13 +51,10 @@ describe('LoginComponent', () => {
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
 
-    service = TestBed.get<AuthService>(AuthService);
     store = TestBed.get(Store);
 
     fixture.detectChanges();
   });
-
-
 
   it('should create', () => {
     expect(component).toBeDefined();

@@ -12,4 +12,8 @@ export class TopNavbarComponent implements OnInit {
   ngOnInit() {
   }
 
+  onClick() {
+    console.log("button is clicked");
+  }
+
 }

@@ -9,7 +9,8 @@ import {
 } from '@angular/forms';
 import { RepositoryService } from 'src/Services/repository.service';
 import { TokenService } from 'src/Services/token.service';
-import { ErrorStateMatcher, MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ErrorStateMatcher } from '@angular/material/core';
 import { User } from 'src/Models/user.model';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.state';

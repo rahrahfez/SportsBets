@@ -10,15 +10,14 @@ import { AppRoutesModule } from './app.routes.module';
 import { AppComponent } from './app.component';
 import { AuthEffects } from './auth/store/auth.effect';
 import { reducers } from './store/app.state';
-import { RegisterComponent } from './auth/register-modal/register.component';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    CoreModule,
     BrowserModule,
+    CoreModule,
     BrowserAnimationsModule,
     AppRoutesModule,
     StoreModule.forRoot(reducers, {}),
@@ -29,8 +28,6 @@ import { RegisterComponent } from './auth/register-modal/register.component';
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [
-    RegisterComponent
-  ]
+  entryComponents: []
 })
 export class AppModule { }
