@@ -4,12 +4,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
+import { JwtModule } from '@auth0/angular-jwt';
 
 import { CoreModule } from './core/core.module';
 import { AppRoutesModule } from './app.routes.module';
 import { AppComponent } from './app.component';
 import { AuthEffects } from './auth/store/auth.effect';
 import { reducers } from './store/app.state';
+import { HomeModule } from './home/home.module';
 
 @NgModule({
   declarations: [
@@ -18,13 +20,23 @@ import { reducers } from './store/app.state';
   imports: [
     BrowserModule,
     CoreModule,
+    HomeModule,
     BrowserAnimationsModule,
     AppRoutesModule,
     StoreModule.forRoot(reducers, {}),
     StoreDevtoolsModule.instrument({
       maxAge: 25
     }),
-    EffectsModule.forRoot([AuthEffects])
+    EffectsModule.forRoot([AuthEffects]),
+    JwtModule.forRoot({
+      config: {
+         tokenGetter: () => {
+           return localStorage.getItem('token');
+         },
+        whitelistedDomains: ['localhost:5000'],
+        blacklistedRoutes: []
+      }
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -8,13 +8,8 @@ import {
   FormGroupDirective
 } from '@angular/forms';
 import { RepositoryService } from 'src/Services/repository.service';
-import { TokenService } from 'src/Services/token.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { User } from 'src/Models/user.model';
-import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/store/app.state';
-import { Login } from '../store/auth.action';
 
 export class CrossFieldErrorMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -44,14 +39,12 @@ export class RegisterComponent implements OnInit {
 
   passwordValidator(form: FormGroup) {
     const condition = form.get('Password').value !== form.get('PasswordConfirmation').value;
-
     return condition ? { passwordsDoNotMatch: true } : null;
   }
 
   initForm() {
     this.registrationForm = this.fb.group({
       Username: this.fb.control('', Validators.required),
-      Email: this.fb.control(''),
       Password: this.fb.control('', Validators.required),
       PasswordConfirmation: this.fb.control('', Validators.required)
     }, {
@@ -66,9 +59,9 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmitForm() {
-    this.repository.create('user/register', this.registrationForm.value)
+    this.repository.post('account/register', this.registrationForm.value)
       .subscribe();
-    this.registrationSuccessSnackbar('Please check your email to complete verification.');
+    this.registrationSuccessSnackbar('Registration successful.');
   }
 }
 

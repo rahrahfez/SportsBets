@@ -1,16 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MatDialog } from '@angular/material/dialog';
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { tap, map } from 'rxjs/operators';
 
 import { RegisterComponent } from '../register-modal/register.component';
-import { AppState } from '../../store/app.state';
-import { Login } from '../store/auth.action';
-import { TokenService } from 'src/Services/token.service';
-import { User } from 'src/models/user.model';
+import { RepositoryService } from 'src/Services/repository.service';
+import { UserCredentials } from 'src/Models/user-credentials.model';
+
 
 @Component({
   selector: 'app-login',
@@ -24,9 +19,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private dialog: MatDialog,
-    private store: Store<AppState>,
-    private tokenService: TokenService,
-    private http: HttpClient
+    private repository: RepositoryService
   ) {}
 
   ngOnInit() {
@@ -36,36 +29,14 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  // onLogin() {
-  //   const credentials = {
-  //     Username: this.loginForm.controls.Username.value,
-  //     Password: this.loginForm.controls.Password.value
-  //   };
-  //   this.authService.login(credentials)
-  //     .pipe(
-  //       tap(() =>
-  //         this.store.dispatch(new Login()))
-  //     )
-  //     .subscribe(() => {},
-  //     err => {
-  //       console.log(err);
-  //     });
-  // }
+  onLogin() {
+    const credentials = {
+      Username: this.loginForm.controls.Username.value, 
+      Password: this.loginForm.controls.Password.value
+    };
 
-onLogin() {
-  const credentials = {
-    Username: this.loginForm.controls.Username.value,
-    Password: this.loginForm.controls.Password.value
-  };
-  this.http.post("http://localhost:5000/api/account/login", credentials, {
-    headers: new HttpHeaders({
-      "Content-Type": "application/json"
-    })
-  }).pipe(
-    map(res => res as User)
-  );
-  console.log("login clicked");
-}
+    this.repository.post('account/login', credentials);
+  }
 
   openRegistrationForm() {
     this.registrationFormRef = this.dialog.open(RegisterComponent);
