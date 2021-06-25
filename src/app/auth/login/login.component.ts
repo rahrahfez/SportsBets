@@ -4,8 +4,6 @@ import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 
 import { RegisterComponent } from '../register-modal/register.component';
 import { RepositoryService } from 'src/Services/repository.service';
-import { UserCredentials } from 'src/Models/user-credentials.model';
-
 
 @Component({
   selector: 'app-login',

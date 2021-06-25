@@ -1,0 +1,8 @@
+2021-06-24 20:02:24.2631 ERROR Incorrect Username and/or Password.
+2021-06-24 20:04:43.4940 ERROR Sequence contains no elements
+2021-06-24 20:11:35.4598 ERROR Sequence contains no elements
+2021-06-24 20:15:18.1868 ERROR Exception of type 'SportsBetsServer.Helpers.NotFoundException' was thrown.
+2021-06-24 20:17:30.9217 ERROR Incorrect Username and/or Password.
+2021-06-24 20:18:01.8178 ERROR Incorrect Username and/or Password.
+2021-06-24 20:18:58.2243 ERROR Incorrect Username and/or Password.
+2021-06-24 20:19:33.0953 ERROR Incorrect Username and/or Password.

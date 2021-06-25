@@ -6,8 +6,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./auth.component.scss']
 })
 export class AuthComponent implements OnInit {
-  readonly url = 'http://localhost:5000/api/account';
-  
   constructor() { }
 
   ngOnInit() {

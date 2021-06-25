@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { UserCredentials } from 'src/Models/user-credentials.model';
 
 @Injectable({
   providedIn: 'root'
