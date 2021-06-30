@@ -9,8 +9,8 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { CoreModule } from './core/core.module';
 import { AppRoutesModule } from './app.routes.module';
 import { AppComponent } from './app.component';
-import { AuthEffects } from './auth/store/auth.effect';
-import { reducers } from './store/app.state';
+import { AuthEffects } from './auth/auth-store/auth.effect';
+import { reducers } from './root-store/root.state';
 import { HomeModule } from './home/home.module';
 
 @NgModule({

@@ -7,25 +7,26 @@ import {
   Router,
   Route
 } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable } from 'rxjs';
 
-import { AppState } from 'src/app/store/app.state';
+import { AppState } from 'src/app/root-store/root.state';
 
 
 @Injectable()
-export class AuthGuard implements CanActivate, CanLoad {
+export class AuthGuard implements CanActivate {
   constructor(
-    private router: Router
-  ) {}
+    private router: Router,
+    private jwt: JwtHelperService) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot)
       : Observable<boolean> | Promise<boolean> | boolean {
-        return true;
-  }
-  canLoad(route: Route)
-    : Observable<boolean> | Promise<boolean> | boolean {
-      return true;
+        const token = localStorage.getItem('token');
+
+        if (token && !this.jwt.isTokenExpired(token)) {
+          return true;
+        }
   }
 }

@@ -13,7 +13,7 @@ export class RepositoryService {
     return this.http.get(this.url + endpoint);
   }
   post(endpoint: string, body: any) {
-    return this.http.post(this.url + endpoint, body, this.generateHeaders());
+    return this.http.post(this.url + endpoint, body, { responseType: 'text' });
   }
   getDataById(endpoint: string, id: string) {
     return this.http.get(this.url +  endpoint + '/' + id);

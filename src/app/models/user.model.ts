@@ -5,7 +5,8 @@ export class User {
   constructor(
       public Id: string,
       public Username: string,
-      public AvailableBalance: number
+      public AvailableBalance: number,
+      public Token: string
       ) {}
 }
 
@@ -14,6 +15,6 @@ export class User {
 })
 export class UserAdapter implements Adapter<User> {
   adapt(item: any): User {
-    return new User(item.id, item.username, item.available_balance);
+    return new User(item.id, item.username, item.available_balance, item.token);
   } 
 }

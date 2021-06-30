@@ -2,8 +2,8 @@ import {
   ActionReducerMap,
   MetaReducer
 } from '@ngrx/store';
-import { AuthState } from '../auth/store/auth.state';
-import { authReducer } from '../auth/store/auth.reducer';
+import { AuthState } from '../auth/auth-store/auth.state';
+import { authReducer } from '../auth/auth-store/auth.reducer';
 import { environment } from '../../environments/environment';
 
 export interface AppState {

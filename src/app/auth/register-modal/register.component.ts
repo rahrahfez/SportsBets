@@ -7,7 +7,7 @@ import {
   NgForm,
   FormGroupDirective
 } from '@angular/forms';
-import { RepositoryService } from 'src/Services/repository.service';
+import { RepositoryService } from 'src/app/services/repository.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorStateMatcher } from '@angular/material/core';
 

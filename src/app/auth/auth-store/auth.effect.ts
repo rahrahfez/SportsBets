@@ -4,7 +4,7 @@ import { tap, pluck } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 import { Login, AuthActions, Logout } from './auth.action';
-import { TokenService } from 'src/Services/token.service';
+import { TokenService } from 'src/app/services/token.service';
 
 @Injectable()
 export class AuthEffects {
@@ -12,7 +12,7 @@ export class AuthEffects {
   .pipe(
     ofType<Login>(AuthActions.LOGIN),
     tap(() => {
-      this.router.navigate(['/home']);
+      this.router.navigate(['/']);
     })
   );
 
@@ -21,7 +21,7 @@ export class AuthEffects {
     ofType<Logout>(AuthActions.LOGOUT),
     tap(() => {
       this.tokenService.removeTokenKey('token');
-      this.router.navigate(['/login']);
+      this.router.navigate(['/']);
     })
   );
 
